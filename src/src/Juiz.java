@@ -1,29 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package src;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Bruno
  */
-public class Juiz {
+public class Juiz implements Serializable {
     
+    private int id;
     private String nome;
     private int idade;
     private int forca;
     private String nacionalidade;
 
     public Juiz(String nome, int idade, int forca, String nacionalidade) {
-        this.nome = nome;
-        this.idade = idade;
-        this.forca = forca;
-        this.nacionalidade = nacionalidade;
+        setNome(nome);
+        setIdade(idade);
+        setForca(forca);
+        setNacionalidade(nacionalidade);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
