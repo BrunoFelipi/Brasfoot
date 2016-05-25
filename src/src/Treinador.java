@@ -1,27 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package src;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Bruno
  */
-public class Treinador {
+public class Treinador implements Serializable {
     
+    private int id;
     private String nome;
     private int forca;
     private int idade;
+    private List<Titulo> titulos;
 
     public Treinador(String nome, int forca, int idade) {
-        this.nome = nome;
-        this.forca = forca;
-        this.idade = idade;
+        setNome(nome);
+        setForca(forca);
+        setIdade(idade);
+        this.titulos = new ArrayList<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -44,5 +53,17 @@ public class Treinador {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public List<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(List<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+        
+    public void addTitulo(Titulo t){
+        getTitulos().add(t);
     }
 }

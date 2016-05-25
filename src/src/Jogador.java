@@ -1,31 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package src;
+
+import src.enumeracao.EnumPosicao;
+import java.io.Serializable;
+import src.enumeracao.EnumHabilidade;
+import src.enumeracao.EnumStatus;
 
 /**
  *
  * @author Bruno
  */
-public class Jogador {
+public class Jogador implements Serializable{
     
+    private int id;
     // Número da camisa
     private int numero; 
     private String nome;    
     // GL - ZG - LT - MC - AT
-    private String posicao; 
+    private EnumPosicao posicao; 
     // 17 - 50
     private int idade;
     // 10 - 100
     private int forca;
-    // Armação - Cabeceio - Cruzamento - Desarme - Drible - Finalização - Marcação - Passe - Resistencia - Velocidade
-    private String habilidade1; 
-    private String habilidade2;
-    // Departamento Médico (DM), Lesão leve, Suspenso, Em alta 
-    private String status;    
+    // Armação - Cabeceio - Cruzamento - Desarme - Drible - Finalização - Marcação - Passe - Resistencia - Velocidade - Bola Parada - Defesa Penalti - Reflexo 
+    // - Saida Gol - Elasticidade
+    private EnumHabilidade habilidade1; 
+    private EnumHabilidade habilidade2;
+    // Departamento Médico (DM), Levemente Lesionado, Suspenso, Em alta 
+    private EnumStatus status;    
     // 0 - 100
     private int resistencia;
     // True ou False
@@ -34,25 +35,37 @@ public class Jogador {
     private int qtdCartaoVermelho;
     private int jogosDisputados;
     
-    public Jogador(int numero, String nome, String posicao, int idade, int forca, String habilidade1, 
-            String habilidade2, String status, boolean craque) {
-        this.numero = numero;
-        this.nome = nome;
-        this.idade = idade;
-        this.posicao = posicao;
-        this.forca = forca;
-        this.status = status;
-        this.craque = craque;  
-        this.habilidade1 = habilidade1;
-        this.habilidade2 = habilidade2;
+    public Jogador(int numero, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
+            EnumHabilidade habilidade2, EnumStatus status, boolean craque) {
+        setNumero(numero);
+        setNome(nome);
+        setIdade(idade);
+        setPosicao(posicao);
+        setForca(forca);
+        setStatus(status);
+        setCraque(craque);
+        setHabilidade1(habilidade1);
+        setHabilidade2(habilidade2);
+        setResistencia(100);
+        setQtdCartaoAmarelo(0);
+        setQtdCartaoVermelho(0);
+        setJogosDisputados(0);        
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getNumero() {
-        return numero;
+       return numero;
     }
 
     public void setNumero(int numero) {
-        if(numero > 0 && numero < 101){
+        if(numero > 0 && numero < Integer.MAX_VALUE){
             this.numero = numero;    
         }
     }
@@ -72,44 +85,31 @@ public class Jogador {
     }
 
     public void setIdade(int idade) {        
-        if(idade >= 17 && idade <= 51){
-            this.idade = idade;    
-        }
+        this.idade = idade;    
     }
 
-    public String getPosicao() {
+    public EnumPosicao getPosicao() {
         return posicao;
     }
 
-    public void setPosicao(String posicao) {
-        
-        switch(posicao){
-            case "GL":
-            case "ZG":
-            case "LT":
-            case "MC":
-            case "AT":
-                this.posicao = posicao;
-        }
-    }
+    public void setPosicao(EnumPosicao posicao) {
+        this.posicao = posicao;
+    }    
 
     public int getForca() {
-        return forc;
+        return forca;
     }
 
     public void setForca(int forca) {
-        
-        if(forca >= 10 && forca <= 100){
-            this.forca = forca;
-        }
+        this.forca = forca;        
     }
 
-    public String getStatus() {
+    public EnumStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(EnumStatus status) {
+        this.status = status;        
     }
 
     public boolean isCraque() {
@@ -120,20 +120,20 @@ public class Jogador {
         this.craque = craque;
     }    
 
-    public String getHabilidade1() {
+    public EnumHabilidade getHabilidade1() {
         return habilidade1;
     }
 
-    public void setHabilidade1(String habilidade1) {
-        this.habilidade1 = habilidade1;
+    public void setHabilidade1(EnumHabilidade habilidade1) {
+        this.habilidade1 = habilidade1;    
     }
 
-    public String getHabilidade2() {
+    public EnumHabilidade getHabilidade2() {
         return habilidade2;
     }
 
-    public void setHabilidade2(String habilidade2) {
-        this.habilidade2 = habilidade2;
+    public void setHabilidade2(EnumHabilidade habilidade2) {
+        this.habilidade2 = habilidade2;                
     }
 
     public int getQtdCartaoAmarelo() {
@@ -167,4 +167,17 @@ public class Jogador {
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
     }    
+
+    @Override
+    public String toString() {
+        return "Numero: " + getNumero() + 
+               "\nNome: " + getNome() + 
+                "\nPosicao: " + getPosicao() + 
+                "\nIdade: " + getIdade() + 
+                "\nForca: " + getForca() + 
+                "\nHabilidade1: " + getHabilidade1() + 
+                "\nHabilidade2: " + getHabilidade2() + 
+                "\nStatus: " + getStatus() + 
+                "\nCraque: " + isCraque();
+    }
 }
