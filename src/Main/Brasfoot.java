@@ -7,11 +7,11 @@
 package Main;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Entrada;
 import Frames.JanelaPrincipal;
 import Frames.Pesquisa.PesquisarJogador;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import teste.CargaJogadores;
 
 /**
  *
@@ -28,7 +28,9 @@ public class Brasfoot {
         
         BancoDeDados bd = new BancoDeDados();
         
-        PesquisarJogador p = new PesquisarJogador(new JanelaPrincipal(bd));
+        CargaJogadores c = new CargaJogadores(bd);
+        
+        PesquisarJogador p = new PesquisarJogador(new JanelaPrincipal(bd), bd);
         p.setVisible(true);
 //        Entrada e = new Entrada(bd);
 //        e.setVisible(true);

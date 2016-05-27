@@ -101,6 +101,23 @@ public class BancoDeDados implements Serializable{
         return jogador;        
     }
     
+    /**
+     * Buscar jogador pela Posição
+     * @param posicao
+     * @return 
+     */
+    public List<Jogador> buscarJogadorPosicao(String posicao){
+        
+        List<Jogador> jogador = new ArrayList<>();
+        
+        for(Jogador j : getJogadores()){
+            if(j.getPosicao().equals(posicao)){
+                jogador.add(j);
+            }
+        }
+        
+        return jogador;        
+    }
     
     
 }

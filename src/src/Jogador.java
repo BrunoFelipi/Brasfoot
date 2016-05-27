@@ -1,5 +1,6 @@
 package src;
 
+import BancoDeDados.BancoDeDados;
 import src.enumeracao.EnumPosicao;
 import java.io.Serializable;
 import src.enumeracao.EnumHabilidade;
@@ -31,25 +32,31 @@ public class Jogador implements Serializable{
     private int resistencia;
     // True ou False
     private boolean craque;
+    private Time time;
     private int qtdCartaoAmarelo;
     private int qtdCartaoVermelho;
     private int jogosDisputados;
     
+    private BancoDeDados bd;
+    
     public Jogador(int numero, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, boolean craque) {
+            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd) {
+        this.bd = bd;
+        setId(nextID());
         setNumero(numero);
         setNome(nome);
         setIdade(idade);
         setPosicao(posicao);
         setForca(forca);
         setStatus(status);
-        setCraque(craque);
+        setCraque(craque);        
         setHabilidade1(habilidade1);
         setHabilidade2(habilidade2);
         setResistencia(100);
         setQtdCartaoAmarelo(0);
         setQtdCartaoVermelho(0);
         setJogosDisputados(0);        
+        
     }
 
     public int getId() {
@@ -120,6 +127,14 @@ public class Jogador implements Serializable{
         this.craque = craque;
     }    
 
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+    
     public EnumHabilidade getHabilidade1() {
         return habilidade1;
     }
@@ -167,7 +182,16 @@ public class Jogador implements Serializable{
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
     }    
-
+    
+    private int nextID(){
+        
+        if(this.bd.getJogadores().isEmpty()){
+            return 1;
+        } else {
+            return this.bd.getJogadores().get(this.bd.getJogadores().size()-1).getId() +1;
+        }
+    }
+    
     @Override
     public String toString() {
         return "Numero: " + getNumero() + 
