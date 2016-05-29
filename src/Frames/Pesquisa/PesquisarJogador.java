@@ -1,16 +1,16 @@
 package Frames.Pesquisa;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Pesquisa.panel.PesquisaID;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.util.List;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import src.Jogador;
+import src.Time;
+import src.enumeracao.EnumHabilidade;
+import src.enumeracao.EnumPosicao;
+import src.enumeracao.EnumStatus;
 
 /**
  *
@@ -21,19 +21,19 @@ public class PesquisarJogador extends javax.swing.JDialog {
     private DefaultTableModel model = new DefaultTableModel();
     private BancoDeDados bd;
     private DefaultTableCellRenderer centerRenderer;
-    private PesquisaID pesquisaID;
     
     public PesquisarJogador(java.awt.Frame parent, BancoDeDados bd) {
         super(parent, true);
         initComponents();
+        
         this.bd = bd;
         this.model = (DefaultTableModel) this.tabela.getModel();  
         this.centerRenderer = new DefaultTableCellRenderer();
-        
-        this.pesquisaID = new PesquisaID();
-        this.painelPesquisa.setLayout(new FlowLayout());
-        
-        alignCenterRenderer(this.centerRenderer);
+        alignCenterRenderer(centerRenderer);
+        popularComboPosicao();
+        popularComboTime();
+        popularComboHabilidade();
+        popularComboStatus();
     }
 
     public BancoDeDados getBd() {
@@ -47,198 +47,231 @@ public class PesquisarJogador extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        radioID = new javax.swing.JRadioButton();
-        radioNome = new javax.swing.JRadioButton();
-        radioPosicao = new javax.swing.JRadioButton();
-        radioNumero = new javax.swing.JRadioButton();
-        radioTime = new javax.swing.JRadioButton();
-        btnPesquisar = new javax.swing.JButton();
-        radioHabilidade = new javax.swing.JRadioButton();
-        radioIdade = new javax.swing.JRadioButton();
-        radioForca = new javax.swing.JRadioButton();
-        radioStatus = new javax.swing.JRadioButton();
-        radioCraque = new javax.swing.JRadioButton();
-        radioTodos = new javax.swing.JRadioButton();
-        painelPesquisa = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        checkCraque = new javax.swing.JCheckBox();
+        checkTodos = new javax.swing.JCheckBox();
+        spinIdMin = new javax.swing.JSpinner();
+        campoNome = new javax.swing.JTextField();
+        comboPosicao = new javax.swing.JComboBox();
+        spinNumeroMin = new javax.swing.JSpinner();
+        comboTime = new javax.swing.JComboBox();
+        comboHabilidade = new javax.swing.JComboBox();
+        spinIdadeMin = new javax.swing.JSpinner();
+        spinForcaMin = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
+        spinForcaMax = new javax.swing.JSpinner();
+        comboStatus = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        spinIdadeMax = new javax.swing.JSpinner();
+        jLabel12 = new javax.swing.JLabel();
+        spinNumeroMax = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        spinIdMax = new javax.swing.JSpinner();
+        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonGroup1.add(radioID);
-        radioID.setSelected(true);
-        radioID.setText("ID");
-        radioID.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("ID:");
+
+        jLabel2.setText("Nome:");
+
+        jLabel3.setText("Posição:");
+
+        jLabel4.setText("Número:");
+
+        jLabel5.setText("Time:");
+
+        jLabel6.setText("Habilidade:");
+
+        jLabel7.setText("Idade:");
+
+        jLabel8.setText("Força:");
+
+        jLabel9.setText("Status:");
+
+        checkCraque.setBackground(new java.awt.Color(255, 255, 255));
+        checkCraque.setText("Craque");
+        checkCraque.setFocusable(false);
+        checkCraque.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        checkTodos.setBackground(new java.awt.Color(255, 255, 255));
+        checkTodos.setText("Todos");
+        checkTodos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        checkTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioIDActionPerformed(evt);
+                checkTodosActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(radioNome);
-        radioNome.setText("Nome");
-        radioNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioNomeActionPerformed(evt);
-            }
-        });
+        spinIdMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioPosicao);
-        radioPosicao.setText("Posição");
-        radioPosicao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioPosicaoActionPerformed(evt);
-            }
-        });
+        spinNumeroMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioNumero);
-        radioNumero.setText("Número");
-        radioNumero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioNumeroActionPerformed(evt);
-            }
-        });
+        spinIdadeMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioTime);
-        radioTime.setText("Time");
-        radioTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTimeActionPerformed(evt);
-            }
-        });
+        spinForcaMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        btnPesquisar.setText(">>");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
+        jLabel10.setText("até");
 
-        buttonGroup1.add(radioHabilidade);
-        radioHabilidade.setText("Habilidade");
-        radioHabilidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioHabilidadeActionPerformed(evt);
-            }
-        });
+        spinForcaMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioIdade);
-        radioIdade.setText("Idade");
-        radioIdade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioIdadeActionPerformed(evt);
-            }
-        });
+        jLabel11.setText("até");
 
-        buttonGroup1.add(radioForca);
-        radioForca.setText("Força");
-        radioForca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioForcaActionPerformed(evt);
-            }
-        });
+        spinIdadeMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioStatus);
-        radioStatus.setText("Status");
-        radioStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioStatusActionPerformed(evt);
-            }
-        });
+        jLabel12.setText("até");
 
-        buttonGroup1.add(radioCraque);
-        radioCraque.setText("Craque");
-        radioCraque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioCraqueActionPerformed(evt);
-            }
-        });
+        spinNumeroMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        buttonGroup1.add(radioTodos);
-        radioTodos.setText("Todos");
-        radioTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioTodosActionPerformed(evt);
-            }
-        });
+        jLabel13.setText("até");
 
-        painelPesquisa.setBackground(new java.awt.Color(204, 204, 204));
+        spinIdMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        javax.swing.GroupLayout painelPesquisaLayout = new javax.swing.GroupLayout(painelPesquisa);
-        painelPesquisa.setLayout(painelPesquisaLayout);
-        painelPesquisaLayout.setHorizontalGroup(
-            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-        painelPesquisaLayout.setVerticalGroup(
-            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(radioIdade)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(radioForca)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(radioStatus)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(radioCraque)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(radioTodos))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnPesquisar)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(radioID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(radioNome)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(radioPosicao)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(radioNumero)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(radioTime)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(radioHabilidade)))
-                    .addComponent(painelPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(campoNome)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(spinNumeroMin, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spinNumeroMax, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(spinIdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spinIdMax, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(comboTime, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboPosicao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboStatus, 0, 132, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(checkCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(spinForcaMin)
+                                    .addComponent(spinIdadeMin, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spinForcaMax, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spinIdadeMax, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboHabilidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
-                .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioID)
-                    .addComponent(radioNome)
-                    .addComponent(radioPosicao)
-                    .addComponent(radioNumero)
-                    .addComponent(radioTime)
-                    .addComponent(radioHabilidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioIdade)
-                    .addComponent(radioForca)
-                    .addComponent(radioStatus)
-                    .addComponent(radioCraque)
-                    .addComponent(radioTodos))
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(comboHabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(spinIdadeMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11)
+                                .addComponent(spinIdadeMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(spinForcaMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)
+                                .addComponent(spinForcaMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(checkCraque)
+                                .addComponent(checkTodos)))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(spinIdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)
+                                .addComponent(spinIdMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(comboPosicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(spinNumeroMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)
+                                .addComponent(spinNumeroMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(comboTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,32 +303,34 @@ public class PesquisarJogador extends javax.swing.JDialog {
         tabela.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabela);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        btnPesquisar.setText("Pesquisar >>");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -304,7 +339,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,76 +350,75 @@ public class PesquisarJogador extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radioIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIDActionPerformed
-        atualizarPainel(this.pesquisaID);            
-    }//GEN-LAST:event_radioIDActionPerformed
-
-    private void radioNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNomeActionPerformed
-        atualizaLabelPesquisa("Nome:");
-    }//GEN-LAST:event_radioNomeActionPerformed
-
-    private void radioPosicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPosicaoActionPerformed
-        atualizaLabelPesquisa("Posição:");
-    }//GEN-LAST:event_radioPosicaoActionPerformed
-
-    private void radioNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNumeroActionPerformed
-        atualizaLabelPesquisa("Número:");
-    }//GEN-LAST:event_radioNumeroActionPerformed
-
-    private void radioTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTimeActionPerformed
-        atualizaLabelPesquisa("Time:");
-    }//GEN-LAST:event_radioTimeActionPerformed
-
-    private void radioHabilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioHabilidadeActionPerformed
-        atualizaLabelPesquisa("Habilidade:");
-    }//GEN-LAST:event_radioHabilidadeActionPerformed
-
-    private void radioCraqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCraqueActionPerformed
-        atualizaLabelPesquisa("Craque:");
-    }//GEN-LAST:event_radioCraqueActionPerformed
-
-    private void radioIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioIdadeActionPerformed
-        atualizaLabelPesquisa("Idade:");
-    }//GEN-LAST:event_radioIdadeActionPerformed
-
-    private void radioStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioStatusActionPerformed
-        atualizaLabelPesquisa("Status:");
-    }//GEN-LAST:event_radioStatusActionPerformed
-
-    private void radioForcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioForcaActionPerformed
-        atualizaLabelPesquisa("Força:");
-    }//GEN-LAST:event_radioForcaActionPerformed
-
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-              
-        if(radioID.isSelected()){
-            popularTabela(getBd().buscarJogadorID((int) this.pesquisaID.getSpinnerID().getValue()));            
-        } else if(radioNome.isSelected()){
-            popularTabela(getBd().buscarJogadorNome(campoPesquisa.getText()));
-        } else if(radioPosicao.isSelected()){
-            popularTabela(getBd().buscarJogadorPosicao(campoPesquisa.getText()));
-        } else if(radioNumero.isSelected()){
-            
-        } else if(radioTime.isSelected()){
-            
-        } else if(radioHabilidade.isSelected()){
-            
-        } else if(radioIdade.isSelected()){
-            
-        } else if(radioForca.isSelected()){
-            
-        } else if(radioStatus.isSelected()){
-            
-        } else if(radioCraque.isSelected()){
-            
-        } else if(radioTodos.isSelected()){
-            popularTabela(getBd().getJogadores());
-        }
+
+        popularTabela(getBd().pesquisaJogador((int) spinIdMin.getValue(), (int) spinIdMax.getValue(), campoNome.getText(), 
+                comboPosicao.getSelectedItem() + "", (int) spinNumeroMin.getValue(), (int) spinNumeroMax.getValue(), 
+                comboTime.getSelectedItem() + "", comboHabilidade.getSelectedItem() + "", (int) spinIdadeMin.getValue(), 
+                (int) spinIdadeMax.getValue(), (int) spinForcaMin.getValue(), (int) spinForcaMax.getValue(), 
+                comboStatus.getSelectedItem() + "", checkCraque.isSelected(), checkTodos.isSelected()));
+        
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void radioTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTodosActionPerformed
-
-    }//GEN-LAST:event_radioTodosActionPerformed
+    private void checkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTodosActionPerformed
+        
+        if(checkTodos.isSelected()){
+            enableComponent(false);
+        } else {
+            enableComponent(true);
+        }
+    }//GEN-LAST:event_checkTodosActionPerformed
+    
+    private void enableComponent(boolean enable){        
+        spinIdMin.setEnabled(enable);
+        spinIdMax.setEnabled(enable);
+        campoNome.setEnabled(enable);
+        comboPosicao.setEnabled(enable);
+        spinNumeroMin.setEnabled(enable);
+        spinNumeroMax.setEnabled(enable);
+        comboTime.setEnabled(enable);
+        comboHabilidade.setEnabled(enable);        
+        spinIdadeMin.setEnabled(enable);
+        spinIdadeMax.setEnabled(enable);
+        spinForcaMin.setEnabled(enable);
+        spinForcaMax.setEnabled(enable);
+        comboStatus.setEnabled(enable);
+        checkCraque.setEnabled(enable);        
+    }
+    
+    private void popularComboPosicao(){
+        
+        EnumPosicao[] enumPosi = EnumPosicao.values();
+        
+        for(int i=0; i < enumPosi.length; i++){
+            comboPosicao.addItem(enumPosi[i]);            
+        }        
+    }
+    
+    private void popularComboHabilidade(){
+        
+        EnumHabilidade[] enumHabilidade = EnumHabilidade.values();
+        
+        for(int i=0; i < enumHabilidade.length; i++){
+            comboHabilidade.addItem(enumHabilidade[i]);
+        }
+    }
+    
+    private void popularComboStatus(){
+        
+        EnumStatus[] enumStatus = EnumStatus.values();
+        
+        for(int i=0; i < enumStatus.length; i++){
+            comboStatus.addItem(enumStatus[i]);
+        }
+    }
+    
+    private void popularComboTime(){
+        
+        for(Time ti : getBd().getTimes()){
+            comboTime.addItem(ti.getNome());            
+        }        
+    }
     
     private void popularTabela(List<Jogador> lista){
         
@@ -413,47 +447,44 @@ public class PesquisarJogador extends javax.swing.JDialog {
         
         for(int i=0; i < this.model.getColumnCount()-1; i++){
             tabela.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);    
-        }
-        
-        
-        TableCellRenderer t = new DefaultTableCellRenderer();        
-        
-        for(int i=0; i < this.model.getRowCount(); i++){
-            if(i % 2 == 0){
-                t.getTableCellRendererComponent(tabela, t, true, true, i, 0).setBackground(Color.red);
-                t.getTableCellRendererComponent(tabela, t, true, true, i, 1).setBackground(Color.red);
-            }
-        }
-        
-    }
-    
-    private void atualizarPainel(JPanel painel){        
-        
-        this.painelPesquisa.add(painel);
-        revalidate();        
-        repaint();
+        }        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JCheckBox checkCraque;
+    private javax.swing.JCheckBox checkTodos;
+    private javax.swing.JComboBox comboHabilidade;
+    private javax.swing.JComboBox comboPosicao;
+    private javax.swing.JComboBox comboStatus;
+    private javax.swing.JComboBox comboTime;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JPanel painelPesquisa;
-    private javax.swing.JRadioButton radioCraque;
-    private javax.swing.JRadioButton radioForca;
-    private javax.swing.JRadioButton radioHabilidade;
-    private javax.swing.JRadioButton radioID;
-    private javax.swing.JRadioButton radioIdade;
-    private javax.swing.JRadioButton radioNome;
-    private javax.swing.JRadioButton radioNumero;
-    private javax.swing.JRadioButton radioPosicao;
-    private javax.swing.JRadioButton radioStatus;
-    private javax.swing.JRadioButton radioTime;
-    private javax.swing.JRadioButton radioTodos;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner spinForcaMax;
+    private javax.swing.JSpinner spinForcaMin;
+    private javax.swing.JSpinner spinIdMax;
+    private javax.swing.JSpinner spinIdMin;
+    private javax.swing.JSpinner spinIdadeMax;
+    private javax.swing.JSpinner spinIdadeMin;
+    private javax.swing.JSpinner spinNumeroMax;
+    private javax.swing.JSpinner spinNumeroMin;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

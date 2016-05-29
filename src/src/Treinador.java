@@ -1,5 +1,6 @@
 package src;
 
+import src.titulos.Titulo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

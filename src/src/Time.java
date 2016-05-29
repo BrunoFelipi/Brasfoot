@@ -1,5 +1,6 @@
 package src;
 
+import src.titulos.Titulo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,14 @@ public class Time implements Serializable {
     private int id;
     private String nome;
     private int forca;
+    private float caixa;
+    private String estado;
     private List<Jogador> jogadores;
     private List<Jogador> jogadoresTitular;
     private List<Jogador> jogadoresReserva;
+    private List<Titulo> titulos;
     private Treinador treinador;
-
+    
     public Time(String nome, int forca, Treinador treinador) {
         setNome(nome);
         setForca(forca);
@@ -25,6 +29,8 @@ public class Time implements Serializable {
         this.jogadores = new ArrayList<>();
         this.jogadoresReserva = new ArrayList<>();
         this.jogadoresTitular = new ArrayList<>();        
+        this.titulos = new ArrayList<>();
+        setCaixa(0);
     }
 
     public int getId() {
@@ -51,6 +57,22 @@ public class Time implements Serializable {
         this.forca = forca;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public List<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(List<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+    
     public List<Jogador> getJogadores() {
         return jogadores;
     }
@@ -67,6 +89,14 @@ public class Time implements Serializable {
         this.treinador = treinador;
     }
 
+    public float getCaixa() {
+        return caixa;
+    }
+
+    public void setCaixa(float caixa) {
+        this.caixa = caixa;
+    }
+
     public List<Jogador> getJogadoresTitular() {
         return jogadoresTitular;
     }
@@ -81,6 +111,10 @@ public class Time implements Serializable {
 
     public void setJogadoresReserva(List<Jogador> jogadoresReserva) {
         this.jogadoresReserva = jogadoresReserva;
+    }
+    
+    public void addTitulo(Titulo t){
+        getTitulos().add(t);
     }
     
     public void addJogador(Jogador j){

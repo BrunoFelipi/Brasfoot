@@ -36,6 +36,7 @@ public class Jogador implements Serializable{
     private int qtdCartaoAmarelo;
     private int qtdCartaoVermelho;
     private int jogosDisputados;
+    private double valor;
     
     private BancoDeDados bd;
     
@@ -55,8 +56,7 @@ public class Jogador implements Serializable{
         setResistencia(100);
         setQtdCartaoAmarelo(0);
         setQtdCartaoVermelho(0);
-        setJogosDisputados(0);        
-        
+        setJogosDisputados(0);
     }
 
     public int getId() {
@@ -182,6 +182,14 @@ public class Jogador implements Serializable{
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
     }    
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
     
     private int nextID(){
         
