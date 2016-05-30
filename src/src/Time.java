@@ -21,8 +21,14 @@ public class Time implements Serializable {
     private List<Jogador> jogadoresReserva;
     private List<Titulo> titulos;
     private Treinador treinador;
-    
-    public Time(String nome, int forca, Treinador treinador) {
+    private Estadio estadio;
+
+    public Time(String nome, int forca) {
+        setNome(nome);
+        setForca(forca);
+    }
+        
+    public Time(String nome, int forca, Treinador treinador, Estadio estadio) {
         setNome(nome);
         setForca(forca);
         setTreinador(treinador);
@@ -31,6 +37,7 @@ public class Time implements Serializable {
         this.jogadoresTitular = new ArrayList<>();        
         this.titulos = new ArrayList<>();
         setCaixa(0);
+        setEstadio(estadio);
     }
 
     public int getId() {
@@ -97,6 +104,14 @@ public class Time implements Serializable {
         this.caixa = caixa;
     }
 
+    public Estadio getEstadio() {
+        return estadio;
+    }
+
+    public void setEstadio(Estadio estadio) {
+        this.estadio = estadio;
+    }
+    
     public List<Jogador> getJogadoresTitular() {
         return jogadoresTitular;
     }

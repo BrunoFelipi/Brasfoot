@@ -8,13 +8,9 @@ import src.Juiz;
 import src.Partida;
 import src.Time;
 import src.Treinador;
-import src.enumeracao.EnumHabilidade;
-import src.enumeracao.EnumPosicao;
-import src.enumeracao.EnumStatus;
 import src.titulos.CopaBrasil;
 import src.titulos.Estadual;
 import src.titulos.Libertadores;
-import src.titulos.Titulo;
 
 /**
  *
@@ -97,7 +93,7 @@ public class BancoDeDados implements Serializable{
     public List<Jogador> pesquisaJogador(int idMin, int idMax, String nome, 
             String posicao, int numMin, int numMax, String time, 
             String habilidade, int idadeMin, int idadeMax, int forcaMin,
-            int forcaMax, String status, boolean craque, boolean todos){
+            int forcaMax, String status, int valorMin, int valorMax, String craque, boolean todos){
         
         List<Jogador> jogador = new ArrayList<>();
         
@@ -105,19 +101,74 @@ public class BancoDeDados implements Serializable{
             return getJogadores();
         }
         
-        for(Jogador j : getJogadores()){
+        String sNome = nome + "";
+        String sPosicao = posicao + "";        
+        String sTime = time + "";
+        String sHabilidade = habilidade + "";
+        String sStatus = status + "";
+        String sCraque = craque + "";        
         
-            if(j.isCraque() == craque){
-                jogador.add(j);
-            } else {
-                
+        for(Jogador j : getJogadores()){        
+            if(j.getId() >= idMin && j.getId() <= idMax){
+                if(j.getNumero() >= numMin && j.getNumero() <= numMax){
+                    if(j.getIdade() >= idadeMin && j.getIdade() <= idadeMax){
+                        if(j.getForca() >= forcaMin && j.getForca() <= forcaMax){
+                            if(j.getValor() >= valorMin && j.getValor() <= valorMax){
+                                
+                                if(!filtro(sCraque, j.getCraque())){
+                                    continue;
+                                } 
+
+                                if(!filtro(sNome, j.getNome() + "")){
+                                    continue;
+                                } 
+
+                                if(!filtro(sPosicao, j.getPosicao() + "")){
+                                    continue;
+                                } 
+
+                                if(!filtro(sTime, j.getTime().getNome())){
+                                    continue;
+                                }
+
+                                if(!filtro(sHabilidade, j.getHabilidade1() + "")){
+                                    continue;
+                                }
+                                
+                                if(!filtro(sHabilidade, j.getHabilidade2() + "")){
+                                    continue;
+                                }
+
+                                if(!filtro(sStatus, j.getStatus() + "")){
+                                    continue;
+                                }
+
+                                jogador.add(j);
+                            }
+                        }
+                    }
+                }
             }
-            
-            
         }
         
-        return jogador;
-        
+        return jogador;        
     }
     
+    private boolean filtro(String filtro, String vlr){
+        if(filtro.equals("") || filtro.equals("Todos") || filtro.equals("Todas") || filtro.equals("Ambos")){
+            return true;
+        }
+        return vlr.contains(filtro);
+    }
+    
+    public Jogador buscarJogador(int id){
+        
+        for(Jogador j : getJogadores()){
+            
+            if(j.getId() == id){
+                return j;
+            }
+        }
+        return null;
+    }
 }

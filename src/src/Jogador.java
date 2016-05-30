@@ -31,17 +31,17 @@ public class Jogador implements Serializable{
     // 0 - 100
     private int resistencia;
     // True ou False
-    private boolean craque;
+    private String craque;
     private Time time;
     private int qtdCartaoAmarelo;
     private int qtdCartaoVermelho;
     private int jogosDisputados;
-    private double valor;
+    private int valor;
     
     private BancoDeDados bd;
     
     public Jogador(int numero, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd) {
+            EnumHabilidade habilidade2, EnumStatus status, String craque, BancoDeDados bd, int valor) {
         this.bd = bd;
         setId(nextID());
         setNumero(numero);
@@ -57,6 +57,7 @@ public class Jogador implements Serializable{
         setQtdCartaoAmarelo(0);
         setQtdCartaoVermelho(0);
         setJogosDisputados(0);
+        setValor(valor);
     }
 
     public int getId() {
@@ -72,9 +73,7 @@ public class Jogador implements Serializable{
     }
 
     public void setNumero(int numero) {
-        if(numero > 0 && numero < Integer.MAX_VALUE){
-            this.numero = numero;    
-        }
+        this.numero = numero;            
     }
 
     public String getNome() {
@@ -82,9 +81,7 @@ public class Jogador implements Serializable{
     }
 
     public void setNome(String nome) {
-        if(!nome.trim().isEmpty()){
-            this.nome = nome;    
-        }
+        this.nome = nome;    
     }
 
     public int getIdade() {
@@ -119,13 +116,13 @@ public class Jogador implements Serializable{
         this.status = status;        
     }
 
-    public boolean isCraque() {
+    public String getCraque() {
         return craque;
     }
 
-    public void setCraque(boolean craque) {
+    public void setCraque(String craque) {
         this.craque = craque;
-    }    
+    }
 
     public Time getTime() {
         return time;
@@ -183,11 +180,11 @@ public class Jogador implements Serializable{
         this.resistencia = resistencia;
     }    
 
-    public double getValor() {
+    public int getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
     
@@ -198,18 +195,5 @@ public class Jogador implements Serializable{
         } else {
             return this.bd.getJogadores().get(this.bd.getJogadores().size()-1).getId() +1;
         }
-    }
-    
-    @Override
-    public String toString() {
-        return "Numero: " + getNumero() + 
-               "\nNome: " + getNome() + 
-                "\nPosicao: " + getPosicao() + 
-                "\nIdade: " + getIdade() + 
-                "\nForca: " + getForca() + 
-                "\nHabilidade1: " + getHabilidade1() + 
-                "\nHabilidade2: " + getHabilidade2() + 
-                "\nStatus: " + getStatus() + 
-                "\nCraque: " + isCraque();
     }
 }
