@@ -1,4 +1,4 @@
-package Frames.show;
+package Frames.Show;
 
 import src.Jogador;
 
@@ -15,8 +15,9 @@ public class ShowJogador extends javax.swing.JDialog {
         initComponents();
         this.j = j;
         preencherCampos();
-        //setTitle(this.j.getId() + " - " + j.getNome() + "(" + j.getNumero() + ")");
         setTitle(this.j.getId() + " - " + j.getNome());
+        this.lblID.setBackground(j.getTime().getCor1());
+        lbl.setIcon(j.getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -48,6 +49,7 @@ public class ShowJogador extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         campoValor = new javax.swing.JTextField();
+        lbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,9 +95,11 @@ public class ShowJogador extends javax.swing.JDialog {
 
         lblID.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblID.setOpaque(true);
 
         lblNome.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNome.setOpaque(true);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,18 +216,28 @@ public class ShowJogador extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,6 +283,7 @@ public class ShowJogador extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNome;
     // End of variables declaration//GEN-END:variables
