@@ -132,11 +132,9 @@ public class BancoDeDados implements Serializable{
                                 }
 
                                 if(!filtro(sHabilidade, j.getHabilidade1() + "")){
-                                    continue;
-                                }
-                                
-                                if(!filtro(sHabilidade, j.getHabilidade2() + "")){
-                                    continue;
+                                    if(!filtro(sHabilidade, j.getHabilidade2() + "")){
+                                        continue;
+                                    }
                                 }
 
                                 if(!filtro(sStatus, j.getStatus() + "")){
@@ -161,7 +159,40 @@ public class BancoDeDados implements Serializable{
         return vlr.contains(filtro);
     }
     
-    public Jogador buscarJogador(int id){
+    public Time buscarTimeId(int id){
+        
+        for(Time t : getTimes()){            
+            if(t.getId() == id){
+                return t;
+            }
+        }
+        
+        return null;        
+    }
+    
+    public Time buscarTimeNome(String nome){
+        
+        for(Time t : getTimes()){
+            
+            if(t.getNome().contains(nome)){
+                return t;
+            }
+        }
+        
+        return null;        
+    }
+    
+    public boolean existJogador(String nome){
+        
+        for(Jogador j : getJogadores()){
+            if(j.getNome().equalsIgnoreCase(nome)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Jogador buscarJogadorId(int id){
         
         for(Jogador j : getJogadores()){
             

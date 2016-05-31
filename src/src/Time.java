@@ -1,9 +1,12 @@
 package src;
 
+import BancoDeDados.BancoDeDados;
+import java.awt.Color;
 import src.titulos.Titulo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -12,8 +15,10 @@ import java.util.List;
 public class Time implements Serializable {
 
     private int id;
+    private ImageIcon escudo;
     private String nome;
     private int forca;
+    private int nivel;
     private float caixa;
     private String estado;
     private List<Jogador> jogadores;
@@ -22,15 +27,26 @@ public class Time implements Serializable {
     private List<Titulo> titulos;
     private Treinador treinador;
     private Estadio estadio;
+    private Color cor1;
+    private Color cor2;
+    private int qtdTorcedores;    
+    private BancoDeDados bd;
 
-    public Time(String nome, int forca) {
-        setNome(nome);
-        setForca(forca);
+    public Time(String nome) {
+        this.nome = nome;
     }
         
-    public Time(String nome, int forca, Treinador treinador, Estadio estadio) {
+    public Time(String nome, int nivel, BancoDeDados bd) {
         setNome(nome);
-        setForca(forca);
+        setNivel(nivel);
+        setBd(bd);
+        setId(nextID());
+    }
+        
+    public Time(ImageIcon escudo, String nome, int nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, BancoDeDados bd) {
+        setEscudo(escudo);
+        setNome(nome);
+        setNivel(nivel);
         setTreinador(treinador);
         this.jogadores = new ArrayList<>();
         this.jogadoresReserva = new ArrayList<>();
@@ -38,8 +54,61 @@ public class Time implements Serializable {
         this.titulos = new ArrayList<>();
         setCaixa(0);
         setEstadio(estadio);
+        setBd(bd);
+        setId(nextID());
+        setCor1(cor1);
+        setCor2(cor2);
+        setQtdTorcedores(0);
     }
 
+    public int getQtdTorcedores() {
+        return qtdTorcedores;
+    }
+
+    public void setQtdTorcedores(int qtdTorcedores) {
+        this.qtdTorcedores = qtdTorcedores;
+    }
+
+    public ImageIcon getEscudo() {
+        return escudo;
+    }
+
+    public void setEscudo(ImageIcon escudo) {
+        this.escudo = escudo;
+    }
+
+    public BancoDeDados getBd() {
+        return bd;
+    }
+
+    public void setBd(BancoDeDados bd) {
+        this.bd = bd;
+    }
+
+    public Color getCor1() {
+        return cor1;
+    }
+
+    public void setCor1(Color cor1) {
+        this.cor1 = cor1;
+    }
+
+    public Color getCor2() {
+        return cor2;
+    }
+
+    public void setCor2(Color cor2) {
+        this.cor2 = cor2;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+    
     public int getId() {
         return id;
     }
@@ -49,11 +118,11 @@ public class Time implements Serializable {
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome;       
     }
 
     public int getExperiencia() {
@@ -143,4 +212,14 @@ public class Time implements Serializable {
     public void addJogadorReserva(Jogador j){
         getJogadoresReserva().add(j);
     }
+    
+    private int nextID(){
+        
+        if(getBd().getTimes().isEmpty()){
+            return 1;
+        } else {
+            return getBd().getTimes().get(getBd().getTimes().size()-1).getId() +1;
+        }
+    }
+    
 }

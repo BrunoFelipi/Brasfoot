@@ -382,7 +382,7 @@
                     <Column editable="false" title="Idade" type="java.lang.Integer"/>
                     <Column editable="false" title="For&#xe7;a" type="java.lang.Integer"/>
                     <Column editable="false" title="Status" type="java.lang.String"/>
-                    <Column editable="false" title="Valor" type="java.lang.Float"/>
+                    <Column editable="false" title="Valor R$" type="java.lang.Float"/>
                     <Column editable="false" title="Craque" type="java.lang.Boolean"/>
                   </Table>
                 </Property>

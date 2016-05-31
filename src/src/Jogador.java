@@ -3,6 +3,7 @@ package src;
 import BancoDeDados.BancoDeDados;
 import src.enumeracao.EnumPosicao;
 import java.io.Serializable;
+import javax.swing.ImageIcon;
 import src.enumeracao.EnumHabilidade;
 import src.enumeracao.EnumStatus;
 
@@ -14,6 +15,7 @@ public class Jogador implements Serializable{
     
     private int id;
     // Número da camisa
+    private ImageIcon image;
     private int numero; 
     private String nome;    
     // GL - ZG - LT - MC - AT
@@ -36,13 +38,13 @@ public class Jogador implements Serializable{
     private int qtdCartaoAmarelo;
     private int qtdCartaoVermelho;
     private int jogosDisputados;
-    private int valor;
-    
+    private int valor;    
     private BancoDeDados bd;
     
-    public Jogador(int numero, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
+    public Jogador(int numero, ImageIcon image, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
             EnumHabilidade habilidade2, EnumStatus status, String craque, BancoDeDados bd, int valor) {
         this.bd = bd;
+        setImage(image);
         setId(nextID());
         setNumero(numero);
         setNome(nome);
@@ -58,6 +60,35 @@ public class Jogador implements Serializable{
         setQtdCartaoVermelho(0);
         setJogosDisputados(0);
         setValor(valor);
+    }
+
+    public Jogador(int id, ImageIcon image, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, String craque, Time time, BancoDeDados bd) {
+        setId(id);
+        setImage(image);
+        setNome(nome);
+        setPosicao(posicao);
+        setIdade(idade);
+        setHabilidade1(habilidade1);
+        setHabilidade2(habilidade2);
+        setCraque(craque);
+        setTime(time);
+        setBd(bd);
+    }
+
+    public ImageIcon getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIcon image) {
+        this.image = image;
+    }
+
+    public BancoDeDados getBd() {
+        return bd;
+    }
+
+    public void setBd(BancoDeDados bd) {
+        this.bd = bd;
     }
 
     public int getId() {

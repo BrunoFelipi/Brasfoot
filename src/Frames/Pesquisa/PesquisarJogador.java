@@ -1,7 +1,7 @@
 package Frames.Pesquisa;
 
 import BancoDeDados.BancoDeDados;
-import Frames.show.ShowJogador;
+import Frames.Show.ShowJogador;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.List;
@@ -43,6 +43,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
         popularComboStatus();        
         
         comboCraque.setRenderer(this.listRenderer);
+        this.spinIdMax.setValue(bd.getJogadores().get(bd.getJogadores().size() -1).getId());
     }
 
     public BancoDeDados getBd() {
@@ -209,7 +210,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Nome", "Posição", "Número", "Time", "Habilidade 1", "Habilidade 2", "Idade", "Força", "Status", "Valor", "Craque"
+                "ID", "Nome", "Posição", "Número", "Time", "Habilidade 1", "Habilidade 2", "Idade", "Força", "Status", "Valor R$", "Craque"
             }
         ) {
             Class[] types = new Class [] {
@@ -436,7 +437,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
             Point p = evt.getPoint();
             int row = tabela.rowAtPoint(p);  
             
-            new ShowJogador(null, getBd().buscarJogador((int) this.model.getValueAt(row, 0))).setVisible(true);           
+            new ShowJogador(null, getBd().buscarJogadorId((int) this.model.getValueAt(row, 0))).setVisible(true);           
         }  
         
     }//GEN-LAST:event_tabelaMouseClicked

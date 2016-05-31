@@ -1,8 +1,11 @@
 package Main;
 
 import BancoDeDados.BancoDeDados;
-import Frames.JanelaPrincipal;
+import Frames.Cadastro.CadastrarJogador;
+import Frames.EditarTimes;
 import Frames.Pesquisa.PesquisarJogador;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import teste.CargaJogadores;
@@ -25,8 +28,15 @@ public class Brasfoot {
         CargaTimes t = new CargaTimes(bd);
         t.inserirTimes();
         
-        PesquisarJogador p = new PesquisarJogador(new JanelaPrincipal(bd), bd);
-        p.setVisible(true);
+        CadastrarJogador cj = new CadastrarJogador(null, bd);
+        cj.setVisible(true);
+        
+//        
+//        PesquisarJogador p = new PesquisarJogador(null, bd);
+//        p.setVisible(true);
+//        EditarTimes et = new EditarTimes(null, bd);
+//        et.setVisible(true);
+        
 //        Entrada e = new Entrada(bd);
 //        e.setVisible(true);
     }
