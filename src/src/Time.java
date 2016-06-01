@@ -31,6 +31,7 @@ public class Time implements Serializable {
     private Color cor2;
     private int qtdTorcedores;    
     private BancoDeDados bd;
+    private int qtdMaxJogadores;
 
     public Time(String nome) {
         this.nome = nome;
@@ -41,6 +42,13 @@ public class Time implements Serializable {
         setNivel(nivel);
         setBd(bd);
         setId(nextID());
+        setQtdTorcedores(0);
+        setQtdMaxJogadores(25);
+        this.jogadores = new ArrayList<>();
+        this.jogadoresReserva = new ArrayList<>();
+        this.jogadoresTitular = new ArrayList<>();        
+        this.titulos = new ArrayList<>();
+        setCaixa(0);
     }
         
     public Time(ImageIcon escudo, String nome, int nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, BancoDeDados bd) {
@@ -59,6 +67,15 @@ public class Time implements Serializable {
         setCor1(cor1);
         setCor2(cor2);
         setQtdTorcedores(0);
+        setQtdMaxJogadores(25);
+    }
+
+    public int getQtdMaxJogadores() {
+        return qtdMaxJogadores;
+    }
+
+    public void setQtdMaxJogadores(int qtdMaxJogadores) {
+        this.qtdMaxJogadores = qtdMaxJogadores;
     }
 
     public int getQtdTorcedores() {
@@ -202,14 +219,32 @@ public class Time implements Serializable {
     }
     
     public void addJogador(Jogador j){
-        getJogadores().add(j);
+        
+        if(getJogadores().size() < this.qtdMaxJogadores){
+            getJogadores().add(j);    
+        } else {
+            throw new RuntimeException("");
+        }
+        
     }
     
     public void addJogadorTitular(Jogador j){
-        getJogadoresTitular().add(j);
+        
+        if(getJogadoresTitular().size() < 11){
+            getJogadores().add(j);    
+        } else {
+            throw new RuntimeException("");
+        }        
     }
     
     public void addJogadorReserva(Jogador j){
+        
+        if(getJogadoresReserva().size() <= this.qtdMaxJogadores - 11){
+            getJogadores().add(j);    
+        } else {
+            throw new RuntimeException("");
+        }
+        
         getJogadoresReserva().add(j);
     }
     
