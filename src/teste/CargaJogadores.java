@@ -25,47 +25,47 @@ public class CargaJogadores {
 
     public void inserirJogadores(){
         
-        Jogador j1 = new Jogador(1, new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")),"Teste 1", EnumPosicao.GL, 20, 1, EnumHabilidade.Reflexo, EnumHabilidade.DefesaPenalti, EnumStatus.EmAlta, "Não", this.bd, 5000);                
+        Jogador j1 = new Jogador(1, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 1", EnumPosicao.GL, 20, 1, EnumHabilidade.Reflexo, EnumHabilidade.DefesaPenalti, EnumStatus.EmAlta, "Não", this.bd, 5000);                
         j1.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 1", 50, new Treinador("Treinador 1", 50, 45), new Estadio("Estadio 1"), Color.BLUE, Color.GRAY, this.bd));
         this.bd.getJogadores().add(j1);
         
-        Jogador j2 = new Jogador(2, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 2", EnumPosicao.LT, 21, 2, EnumHabilidade.Cruzamento, EnumHabilidade.Passe, EnumStatus.EmAlta, "Não", this.bd, 5000);
+        Jogador j2 = new Jogador(2, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 2", EnumPosicao.LT, 21, 2, EnumHabilidade.Cruzamento, EnumHabilidade.Passe, EnumStatus.EmAlta, "Não", this.bd, 5000);
         j2.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 2", 50, new Treinador("Treinador 2", 50, 45), new Estadio("Estadio 2"), Color.ORANGE, Color.yellow, this.bd));
         this.bd.getJogadores().add(j2);
         
-        Jogador j3 = new Jogador(3, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 3", EnumPosicao.ZG, 21, 3, EnumHabilidade.Cabeceio, EnumHabilidade.Marcação, EnumStatus.LevementeLesionado, "Sim", this.bd, 5000);
+        Jogador j3 = new Jogador(3, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 3", EnumPosicao.ZG, 21, 3, EnumHabilidade.Cabeceio, EnumHabilidade.Marcação, EnumStatus.LevementeLesionado, "Sim", this.bd, 5000);
         j3.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 3", 50, new Treinador("Treinador 3", 50, 45), new Estadio("Estadio 3"), Color.CYAN, Color.BLACK, this.bd));
         this.bd.getJogadores().add(j3);
         
-        Jogador j4 = new Jogador(4, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 4", EnumPosicao.ZG, 22, 4, EnumHabilidade.Desarme, EnumHabilidade.Cabeceio, EnumStatus.DepartamentoMedico, "Não", this.bd, 5000);
+        Jogador j4 = new Jogador(4, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 4", EnumPosicao.ZG, 22, 4, EnumHabilidade.Desarme, EnumHabilidade.Cabeceio, EnumStatus.DepartamentoMedico, "Não", this.bd, 5000);
         j4.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 4", 50, new Treinador("Treinador 4", 50, 45), new Estadio("Estadio 4"), Color.green, Color.GRAY, this.bd));
         this.bd.getJogadores().add(j4);
                 
-        Jogador j5 = new Jogador(5, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 5", EnumPosicao.MC, 23, 5, EnumHabilidade.Passe, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Não", this.bd, 5000);
+        Jogador j5 = new Jogador(5, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 5", EnumPosicao.MC, 23, 5, EnumHabilidade.Passe, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Não", this.bd, 5000);
         j5.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 5", 50, new Treinador("Treinador 5", 50, 45), new Estadio("Estadio 5"), Color.DARK_GRAY, Color.BLACK, this.bd));        
         this.bd.getJogadores().add(j5);
         
-        Jogador j6 = new Jogador(6, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 6", EnumPosicao.LT, 24, 6, EnumHabilidade.Resistencia, EnumHabilidade.BolaParada, EnumStatus.EmAlta, "Sim", this.bd, 5000);
+        Jogador j6 = new Jogador(6, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 6", EnumPosicao.LT, 24, 6, EnumHabilidade.Resistencia, EnumHabilidade.BolaParada, EnumStatus.EmAlta, "Sim", this.bd, 5000);
         j6.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 1", 50, new Treinador("Treinador 1", 50, 45), new Estadio("Estadio 6"), Color.YELLOW, Color.WHITE, this.bd));
         this.bd.getJogadores().add(j6);
         
-        Jogador j7 = new Jogador(7, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 7", EnumPosicao.MC, 25, 7, EnumHabilidade.Armação, EnumHabilidade.Armação, EnumStatus.DepartamentoMedico, "Não", this.bd, 5000);
+        Jogador j7 = new Jogador(7, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 7", EnumPosicao.MC, 25, 7, EnumHabilidade.Armação, EnumHabilidade.Armação, EnumStatus.DepartamentoMedico, "Não", this.bd, 5000);
         j7.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 2", 50, new Treinador("Treinador 2", 50, 45), new Estadio("Estadio 7"), Color.PINK, Color.BLUE, this.bd));
         this.bd.getJogadores().add(j7);
         
-        Jogador j8 = new Jogador(8, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 8", EnumPosicao.MC, 26, 8, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Sim", this.bd, 5000);
+        Jogador j8 = new Jogador(8, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 8", EnumPosicao.MC, 26, 8, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Sim", this.bd, 5000);
         j8.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 3", 50, new Treinador("Treinador 3", 50, 45), new Estadio("Estadio 8"), Color.RED, Color.WHITE, this.bd));
         this.bd.getJogadores().add(j8);
         
-        Jogador j9 = new Jogador(9, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 9", EnumPosicao.AT, 27, 9, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Sim", this.bd, 5000);
+        Jogador j9 = new Jogador(9, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 9", EnumPosicao.AT, 27, 9, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Sim", this.bd, 5000);
         j9.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 4", 50, new Treinador("Treinador 4", 50, 45), new Estadio("Estadio 9"), Color.BLUE, Color.RED, this.bd));
         this.bd.getJogadores().add(j9);
         
-        Jogador j10 = new Jogador(10, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 10", EnumPosicao.MC, 28, 10, EnumHabilidade.Armação, EnumHabilidade.Velocidade, EnumStatus.EmAlta, "Sim", this.bd, 5000);
+        Jogador j10 = new Jogador(10, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 10", EnumPosicao.MC, 28, 10, EnumHabilidade.Armação, EnumHabilidade.Velocidade, EnumStatus.EmAlta, "Sim", this.bd, 5000);
         j10.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 5", 50, new Treinador("Treinador 5", 50, 45), new Estadio("Estadio 10"), Color.CYAN, Color.MAGENTA, this.bd));        
         this.bd.getJogadores().add(j10);
         
-        Jogador j11 = new Jogador(11, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 11", EnumPosicao.AT, 29, 11, EnumHabilidade.Drible, EnumHabilidade.Drible, EnumStatus.LevementeLesionado, "Não", this.bd, 5000);
+        Jogador j11 = new Jogador(11, new ImageIcon(getClass().getResource("/resources/diversos/24/10.png")),"Teste 11", EnumPosicao.AT, 29, 11, EnumHabilidade.Drible, EnumHabilidade.Drible, EnumStatus.LevementeLesionado, "Não", this.bd, 5000);
         j11.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 1", 50, new Treinador("Treinador 1", 50, 45), new Estadio("Estadio 11"), Color.yellow, Color.YELLOW, this.bd));
         this.bd.getJogadores().add(j11);
         
@@ -104,5 +104,21 @@ public class CargaJogadores {
         Jogador j20 = new Jogador(20, new ImageIcon(getClass().getResource("/resources/rostos/jogador/2.png")),"Teste 20", EnumPosicao.LT, 20, 20, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, "Sim", this.bd, 5000);
         j20.setTime(new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 5", 50, new Treinador("Treinador 5", 50, 45), new Estadio("Estadio 20"), Color.BLUE, Color.WHITE, this.bd));
         this.bd.getJogadores().add(j20);
+        
+        this.bd.getTimes().get(0).addJogadorReserva(j1);
+        this.bd.getTimes().get(0).addJogadorReserva(j2);
+        this.bd.getTimes().get(0).addJogadorReserva(j3);
+        this.bd.getTimes().get(0).addJogadorReserva(j4);
+        this.bd.getTimes().get(0).addJogadorReserva(j5);
+        this.bd.getTimes().get(0).addJogadorReserva(j6);
+        this.bd.getTimes().get(0).addJogadorReserva(j7);
+        this.bd.getTimes().get(0).addJogadorReserva(j8);
+        this.bd.getTimes().get(0).addJogadorReserva(j9);
+        this.bd.getTimes().get(0).addJogadorReserva(j10);
+        
+        this.bd.getTimes().get(0).addJogadorTitular(j1);
+        this.bd.getTimes().get(0).addJogadorTitular(j2);
+        this.bd.getTimes().get(0).addJogadorTitular(j3);
+        this.bd.getTimes().get(0).addJogadorTitular(j4);
     }    
 }

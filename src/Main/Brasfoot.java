@@ -23,19 +23,20 @@ public class Brasfoot {
         
         BancoDeDados bd = new BancoDeDados();
         
-        CargaJogadores c = new CargaJogadores(bd);
-        c.inserirJogadores();
         CargaTimes t = new CargaTimes(bd);
         t.inserirTimes();
+        CargaJogadores c = new CargaJogadores(bd);
+        c.inserirJogadores();
         
-        CadastrarJogador cj = new CadastrarJogador(null, bd, bd.getTimes().get(0));
-        cj.setVisible(true);
+        
+//        CadastrarJogador cj = new CadastrarJogador(null, bd, bd.getTimes().get(0));
+//        cj.setVisible(true);
         
 //        
 //        PesquisarJogador p = new PesquisarJogador(null, bd);
 //        p.setVisible(true);
-//        EditarTimes et = new EditarTimes(null, bd);
-//        et.setVisible(true);
+        EditarTimes et = new EditarTimes(null, bd);
+        et.setVisible(true);
         
 //        Entrada e = new Entrada(bd);
 //        e.setVisible(true);

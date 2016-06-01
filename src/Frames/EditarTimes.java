@@ -1,14 +1,19 @@
 package Frames;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Show.ShowJogador;
+import Frames.Cadastro.CadastrarJogador;
+import Frames.Cadastro.CadastrarTime;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.Point;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import src.Jogador;
 import src.Time;
 
@@ -26,7 +31,8 @@ public class EditarTimes extends javax.swing.JDialog {
         initComponents();
         this.bd = bd;
         this.listModel = new DefaultListModel();
-        this.listaTimes.setModel(this.listModel);
+        this.listaTimes.setModel(this.listModel);     
+        popularLista();
     }
     
     @SuppressWarnings("unchecked")
@@ -34,20 +40,18 @@ public class EditarTimes extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAddItem = new javax.swing.JButton();
-        btnRemoverItem = new javax.swing.JButton();
+        btnAddTime = new javax.swing.JButton();
+        btnRemoverTime = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaTimes = new javax.swing.JList();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        painelTitular = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        painelReservas = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        btnAddJogador = new javax.swing.JButton();
+        btnAlterarJogador = new javax.swing.JButton();
+        btnRemoverJogador = new javax.swing.JButton();
+        painelReserva = new javax.swing.JPanel();
+        btnAlterarTime = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,18 +62,18 @@ public class EditarTimes extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnAddItem.setText("Adicionar");
-        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
+        btnAddTime.setText("Adicionar T");
+        btnAddTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddItemActionPerformed(evt);
+                btnAddTimeActionPerformed(evt);
             }
         });
 
-        btnRemoverItem.setText("Remover");
-        btnRemoverItem.setEnabled(false);
-        btnRemoverItem.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoverTime.setText("Remover T");
+        btnRemoverTime.setEnabled(false);
+        btnRemoverTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverItemActionPerformed(evt);
+                btnRemoverTimeActionPerformed(evt);
             }
         });
 
@@ -84,94 +88,73 @@ public class EditarTimes extends javax.swing.JDialog {
                 listaTimesMouseClicked(evt);
             }
         });
+        listaTimes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaTimesValueChanged(evt);
+            }
+        });
+        listaTimes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listaTimesKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaTimes);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        painelTitular.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
+        btnAddJogador.setText("Adicionar J");
+        btnAddJogador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddJogadorActionPerformed(evt);
+            }
+        });
 
-        painelReservas.setBackground(new java.awt.Color(255, 255, 255));
+        btnAlterarJogador.setText("Alterar J");
 
-        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setOpaque(true);
+        btnRemoverJogador.setText("Remover J");
 
-        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setOpaque(true);
+        painelReserva.setBackground(new java.awt.Color(255, 255, 255));
+        painelReserva.setLayout(new javax.swing.BoxLayout(painelReserva, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setOpaque(true);
-
-        jLabel4.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setOpaque(true);
-
-        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setOpaque(true);
-
-        javax.swing.GroupLayout painelReservasLayout = new javax.swing.GroupLayout(painelReservas);
-        painelReservas.setLayout(painelReservasLayout);
-        painelReservasLayout.setHorizontalGroup(
-            painelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelReservasLayout.createSequentialGroup()
+        javax.swing.GroupLayout painelTitularLayout = new javax.swing.GroupLayout(painelTitular);
+        painelTitular.setLayout(painelTitularLayout);
+        painelTitularLayout.setHorizontalGroup(
+            painelTitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelTitularLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(497, Short.MAX_VALUE))
-        );
-        painelReservasLayout.setVerticalGroup(
-            painelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelReservasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelTitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(painelReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelTitularLayout.createSequentialGroup()
+                        .addComponent(painelReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelTitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAlterarJogador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddJogador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemoverJogador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
+        painelTitularLayout.setVerticalGroup(
+            painelTitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelTitularLayout.createSequentialGroup()
+                .addContainerGap(455, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelReservas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGroup(painelTitularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelTitularLayout.createSequentialGroup()
+                        .addComponent(btnAddJogador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAlterarJogador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoverJogador))
+                    .addComponent(painelReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
-        jSplitPane1.setRightComponent(jPanel3);
+        jSplitPane1.setRightComponent(painelTitular);
+
+        btnAlterarTime.setText("Alterar T");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,9 +164,11 @@ public class EditarTimes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAddItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnRemoverItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAlterarTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoverTime)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSplitPane1))
                 .addContainerGap())
@@ -193,11 +178,12 @@ public class EditarTimes extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSplitPane1)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddItem)
-                    .addComponent(btnRemoverItem))
-                .addContainerGap())
+                    .addComponent(btnAddTime)
+                    .addComponent(btnRemoverTime)
+                    .addComponent(btnAlterarTime))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,102 +201,158 @@ public class EditarTimes extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
+    private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
 
-        if(this.listModel.getSize() > 0){
-            btnRemoverItem.setEnabled(true);
-            this.listaTimes.setSelectionInterval(0, 0);
-        }
+        CadastrarTime ct = new CadastrarTime(null);
+        ct.setVisible(true);
         
-    }//GEN-LAST:event_btnAddItemActionPerformed
+        
+    }//GEN-LAST:event_btnAddTimeActionPerformed
 
-    private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
-
-        if(this.listModel.getSize() > 0){
-        
-            int idx = listaTimes.getSelectedIndex();
-        
-            this.listModel.removeElementAt(idx);
-            
-            if(idx == this.listModel.getSize()){
-                this.listaTimes.setSelectedIndex(this.listModel.getSize() -1);                
-            } else {
-                this.listaTimes.setSelectedIndex(idx);
-            }
-            
-            if(this.listModel.getSize() == 0){
-                btnRemoverItem.setEnabled(false);
-            }
-            
-        } else {
-            btnRemoverItem.setEnabled(false);
-        }
-    }//GEN-LAST:event_btnRemoverItemActionPerformed
+    private void btnRemoverTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTimeActionPerformed
+//
+//        if(this.listModel.getSize() > 0){
+//        
+//            int idx = listaTimes.getSelectedIndex();
+//        
+//            this.listModel.removeElementAt(idx);
+//            
+//            if(idx == this.listModel.getSize()){
+//                this.listaTimes.setSelectedIndex(this.listModel.getSize() -1);                
+//            } else {
+//                this.listaTimes.setSelectedIndex(idx);
+//            }
+//            
+//            if(this.listModel.getSize() == 0){
+//                btnRemoverItem.setEnabled(false);
+//            }
+//            
+//        } else {
+//            btnRemoverItem.setEnabled(false);
+//        }
+    }//GEN-LAST:event_btnRemoverTimeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
+        
         if(this.listModel.getSize() > 0){
-            this.listaTimes.setSelectionInterval(0, 0);
-        }
-        
-        popularLista();
-        
+            this.listaTimes.setSelectedIndex(0);
+        }        
     }//GEN-LAST:event_formWindowOpened
 
     private void listaTimesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTimesMouseClicked
 
-        String [] split = (listaTimes.getSelectedValue() + "").split("-");
-        System.out.println(this.bd.buscarTimeId(Integer.parseInt(split[0])).getNome());
-        carregarPanel(this.bd.buscarTimeId(Integer.parseInt(split[0])));
-                
     }//GEN-LAST:event_listaTimesMouseClicked
 
+    private void listaTimesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaTimesKeyPressed
+
+
+        
+    }//GEN-LAST:event_listaTimesKeyPressed
+
+    private void listaTimesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTimesValueChanged
+        
+        removerLabelsPainelReserva();
+        //carregarPanelTitular(this.bd.buscarTimeId(Integer.parseInt(split[0])));
+        carregarPainelReserva(this.bd.buscarTimeNome(listaTimes.getSelectedValue() + ""));
+        
+    }//GEN-LAST:event_listaTimesValueChanged
+
+    private void btnAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJogadorActionPerformed
+
+        CadastrarJogador cj = new CadastrarJogador(null, this.bd, this.bd.buscarTimeNome(listaTimes.getSelectedValue() + ""));
+        cj.setVisible(true);
+        
+    }//GEN-LAST:event_btnAddJogadorActionPerformed
+
+    private void removerLabelsPainelReserva(){        
+        painelReserva.removeAll();
+        painelReserva.repaint();
+        painelReserva.validate();       
+    }
+    
     private void popularLista(){
         
         for(Time t : this.bd.getTimes()){            
-            this.listModel.addElement(t.getId() + "- " + t.getNome()); 
+            this.listModel.addElement(t.getNome()); 
         }
     }
     
-    private void carregarPanel(Time t){
-        
-        Component[] comp = painelReservas.getComponents();
-        
-        for(int i=0; i < comp.length; i++){
+    private void carregarPainelReserva(Time t){        
+                
+        for(final Jogador jr : t.getJogadoresReserva()){            
+            JLabel lbl = new JLabel(jr.getImage(), JLabel.CENTER); 
+                        
+            String toolTip = "<html>Posição: " + jr.getPosicao() + "<br>" + "Nome: " + jr.getNome() + "</html>";
             
+            lbl.setToolTipText(toolTip);
+            
+            lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+            Dimension dMax = new Dimension(30, painelReserva.getHeight());
+            Dimension dMin = new Dimension(10, 10);
+            Dimension dPref = new Dimension(50, 50);
+
+            lbl.setMaximumSize(dMax);
+            lbl.setMinimumSize(dMin);
+            lbl.setPreferredSize(dPref);
+            lbl.setOpaque(true);
+            lbl.setBackground(Color.WHITE);
+            
+            this.painelReserva.add(lbl);
+            this.painelReserva.repaint();
+            this.painelReserva.revalidate();
+            
+            lbl.addMouseListener(new MouseAdapter(){  
+                public void mouseClicked(MouseEvent e){
+                    JOptionPane.showMessageDialog(null, "Nome: " + jr.getNome() + "\nPosicao: " + jr.getPosicao());
+                }  
+            }); 
+            
+        }
+        /*
+        Component[] comp = painelReserva.getComponents();        
+        for(int i=0; i < comp.length; i++){            
             if(comp[i] instanceof JLabel){
                 JLabel lbl = (JLabel) comp[i];
                 lbl.setText(t.getNome());
                 return;
-            }
+            }            
+        }*/
+    }
+    
+    private void carregarPanelTitular(Time t){        
+                
+        Component[] comp = painelTitular.getComponents();        
+        for(int i=0; i < comp.length; i++){
             
+            if(comp[i] instanceof JLabel){
+                
+                JLabel lbl = (JLabel) comp[i];
+                
+                lbl.setText(t.getNome());
+                return;
+            }
         }
         /*
-        for(Jogador jr : t.getJogadoresReserva()){
-            
-            
-            
+        for(Jogador jr : t.getJogadoresReserva()){            
         }
-        
         JOptionPane.showMessageDialog(null, t.getNome());
         */
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddItem;
-    private javax.swing.JButton btnRemoverItem;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnAddJogador;
+    private javax.swing.JButton btnAddTime;
+    private javax.swing.JButton btnAlterarJogador;
+    private javax.swing.JButton btnAlterarTime;
+    private javax.swing.JButton btnRemoverJogador;
+    private javax.swing.JButton btnRemoverTime;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JList listaTimes;
-    private javax.swing.JPanel painelReservas;
+    private javax.swing.JPanel painelReserva;
+    private javax.swing.JPanel painelTitular;
     // End of variables declaration//GEN-END:variables
 }
