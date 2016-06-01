@@ -28,7 +28,7 @@ public class Brasfoot {
         CargaTimes t = new CargaTimes(bd);
         t.inserirTimes();
         
-        CadastrarJogador cj = new CadastrarJogador(null, bd);
+        CadastrarJogador cj = new CadastrarJogador(null, bd, bd.getTimes().get(0));
         cj.setVisible(true);
         
 //        

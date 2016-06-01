@@ -20,7 +20,7 @@ public class CargaTimes {
     }
     
     public void inserirTimes(){        
-        Time t1 = new Time(new ImageIcon(getClass().getResource("/resources/escudo/16/1.png")), "Time 1", 30, new Treinador("Treinador 1", 50, 40), new Estadio("Estadio 1"), Color.BLUE, Color.GRAY, this.bd);
+        Time t1 = new Time(new ImageIcon(getClass().getResource("/resources/escudo/128/1.png")), "Time 1", 30, new Treinador("Treinador 1", 50, 40), new Estadio("Estadio 1"), Color.BLUE, Color.GRAY, this.bd);
         this.bd.getTimes().add(t1);
         Time t2 = new Time(new ImageIcon(getClass().getResource("/resources/camisa/x128/1.png")), "Time 2", 30, new Treinador("Treinador 2", 50, 40), new Estadio("Estadio 2"), Color.ORANGE, Color.yellow,this.bd);
         this.bd.getTimes().add(t2);
