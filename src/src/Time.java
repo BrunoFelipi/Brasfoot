@@ -15,7 +15,9 @@ import javax.swing.ImageIcon;
 public class Time implements Serializable {
 
     private int id;
-    private ImageIcon escudo;
+    private ImageIcon escudo24;
+    private ImageIcon escudo32;
+    private ImageIcon escudo128;
     private String nome;
     private int forca;
     private int nivel;
@@ -51,8 +53,11 @@ public class Time implements Serializable {
         setCaixa(0);
     }
         
-    public Time(ImageIcon escudo, String nome, int nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, BancoDeDados bd) {
-        setEscudo(escudo);
+    public Time(ImageIcon escudo24, ImageIcon escudo32, ImageIcon escudo128, String nome, int nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, 
+            BancoDeDados bd) {
+        setEscudo24(escudo24);
+        setEscudo32(escudo32);
+        setEscudo128(escudo128);
         setNome(nome);
         setNivel(nivel);
         setTreinador(treinador);
@@ -70,6 +75,30 @@ public class Time implements Serializable {
         setQtdMaxJogadores(25);
     }
 
+    public ImageIcon getEscudo24() {
+        return escudo24;
+    }
+
+    public void setEscudo24(ImageIcon escudo24) {
+        this.escudo24 = escudo24;
+    }
+
+    public ImageIcon getEscudo32() {
+        return escudo32;
+    }
+
+    public void setEscudo32(ImageIcon escudo32) {
+        this.escudo32 = escudo32;
+    }
+
+    public ImageIcon getEscudo128() {
+        return escudo128;
+    }
+
+    public void setEscudo128(ImageIcon escudo128) {
+        this.escudo128 = escudo128;
+    }
+
     public int getQtdMaxJogadores() {
         return qtdMaxJogadores;
     }
@@ -84,14 +113,6 @@ public class Time implements Serializable {
 
     public void setQtdTorcedores(int qtdTorcedores) {
         this.qtdTorcedores = qtdTorcedores;
-    }
-
-    public ImageIcon getEscudo() {
-        return escudo;
-    }
-
-    public void setEscudo(ImageIcon escudo) {
-        this.escudo = escudo;
     }
 
     public BancoDeDados getBd() {
