@@ -33,43 +33,43 @@ public class CargaJogadores {
         ImageIcon img24Jog = new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/4.png"));
         ImageIcon img128Jog = new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/4.png"));
         
-        Jogador j1 = new Jogador(1, img16Jog, img24Jog, img128Jog, "Teste 1", EnumPosicao.GL, 20, 1, EnumHabilidade.Reflexo, EnumHabilidade.DefesaPenalti, EnumStatus.EmAlta, false, this.bd, 5000, true);                
+        Jogador j1 = new Jogador(1, img16Jog, img24Jog, img128Jog, "Teste 1", EnumPosicao.GL, 20, 1, EnumHabilidade.Reflexo, EnumHabilidade.DefesaPenalti, EnumStatus.EmAlta, false, this.bd, 5000, false);                
         j1.setTime(new Time(img24Time, img32Time, img128Time, "Time 1", 50, new Treinador("Treinador 1", 50, 45), new Estadio("Estadio 1"), Color.BLUE, Color.GRAY, this.bd));
         this.bd.getJogadores().add(j1);
         
-        Jogador j2 = new Jogador(2, img16Jog, img24Jog, img128Jog, "Teste 2", EnumPosicao.LT, 21, 2, EnumHabilidade.Cruzamento, EnumHabilidade.Passe, EnumStatus.EmAlta, false, this.bd, 5000, true);
+        Jogador j2 = new Jogador(2, img16Jog, img24Jog, img128Jog, "Teste 2", EnumPosicao.LT, 21, 2, EnumHabilidade.Cruzamento, EnumHabilidade.Passe, EnumStatus.EmAlta, false, this.bd, 5000, false);
         j2.setTime(new Time(img24Time, img32Time, img128Time, "Time 2", 50, new Treinador("Treinador 2", 50, 45), new Estadio("Estadio 2"), Color.ORANGE, Color.yellow, this.bd));
         this.bd.getJogadores().add(j2);
         
-        Jogador j3 = new Jogador(3, img16Jog, img24Jog, img128Jog, "Teste 3", EnumPosicao.ZG, 21, 3, EnumHabilidade.Cabeceio, EnumHabilidade.Marcação, EnumStatus.LevementeLesionado, true, this.bd, 5000, true);
+        Jogador j3 = new Jogador(3, img16Jog, img24Jog, img128Jog, "Teste 3", EnumPosicao.ZG, 21, 3, EnumHabilidade.Cabeceio, EnumHabilidade.Marcação, EnumStatus.LevementeLesionado, true, this.bd, 5000, false);
         j3.setTime(new Time(img24Time, img32Time, img128Time, "Time 3", 50, new Treinador("Treinador 3", 50, 45), new Estadio("Estadio 3"), Color.CYAN, Color.BLACK, this.bd));
         this.bd.getJogadores().add(j3);
         
-        Jogador j4 = new Jogador(4, img16Jog, img24Jog, img128Jog, "Teste 4", EnumPosicao.ZG, 22, 4, EnumHabilidade.Desarme, EnumHabilidade.Cabeceio, EnumStatus.DepartamentoMedico, false, this.bd, 5000, true);
+        Jogador j4 = new Jogador(4, img16Jog, img24Jog, img128Jog, "Teste 4", EnumPosicao.ZG, 22, 4, EnumHabilidade.Desarme, EnumHabilidade.Cabeceio, EnumStatus.DepartamentoMedico, false, this.bd, 5000, false);
         j4.setTime(new Time(img24Time, img32Time, img128Time, "Time 4", 50, new Treinador("Treinador 4", 50, 45), new Estadio("Estadio 4"), Color.green, Color.GRAY, this.bd));
         this.bd.getJogadores().add(j4);
                 
-        Jogador j5 = new Jogador(5, img16Jog, img24Jog, img128Jog, "Teste 5", EnumPosicao.MC, 23, 5, EnumHabilidade.Passe, EnumHabilidade.Finalização, EnumStatus.EmAlta, false, this.bd, 5000, true);
+        Jogador j5 = new Jogador(5, img16Jog, img24Jog, img128Jog, "Teste 5", EnumPosicao.MC, 23, 5, EnumHabilidade.Passe, EnumHabilidade.Finalização, EnumStatus.EmAlta, false, this.bd, 5000, false);
         j5.setTime(new Time(img24Time, img32Time, img128Time, "Time 5", 50, new Treinador("Treinador 5", 50, 45), new Estadio("Estadio 5"), Color.DARK_GRAY, Color.BLACK, this.bd));        
         this.bd.getJogadores().add(j5);
         
-        Jogador j6 = new Jogador(6, img16Jog, img24Jog, img128Jog, "Teste 6", EnumPosicao.LT, 24, 6, EnumHabilidade.Resistencia, EnumHabilidade.BolaParada, EnumStatus.EmAlta, true, this.bd, 5000, true);
+        Jogador j6 = new Jogador(6, img16Jog, img24Jog, img128Jog, "Teste 6", EnumPosicao.LT, 24, 6, EnumHabilidade.Resistencia, EnumHabilidade.BolaParada, EnumStatus.EmAlta, true, this.bd, 5000, false);
         j6.setTime(new Time(img24Time, img32Time, img128Time, "Time 1", 50, new Treinador("Treinador 1", 50, 45), new Estadio("Estadio 6"), Color.YELLOW, Color.WHITE, this.bd));
         this.bd.getJogadores().add(j6);
         
-        Jogador j7 = new Jogador(7, img16Jog, img24Jog, img128Jog, "Teste 7", EnumPosicao.MC, 25, 7, EnumHabilidade.Armação, EnumHabilidade.Armação, EnumStatus.DepartamentoMedico, false, this.bd, 5000, true);
+        Jogador j7 = new Jogador(7, img16Jog, img24Jog, img128Jog, "Teste 7", EnumPosicao.MC, 25, 7, EnumHabilidade.Armação, EnumHabilidade.Armação, EnumStatus.DepartamentoMedico, false, this.bd, 5000, false);
         j7.setTime(new Time(img24Time, img32Time, img128Time, "Time 2", 50, new Treinador("Treinador 2", 50, 45), new Estadio("Estadio 7"), Color.PINK, Color.BLUE, this.bd));
         this.bd.getJogadores().add(j7);
         
-        Jogador j8 = new Jogador(8, img16Jog, img24Jog, img128Jog, "Teste 8", EnumPosicao.MC, 26, 8, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, true, this.bd, 5000, true);
+        Jogador j8 = new Jogador(8, img16Jog, img24Jog, img128Jog, "Teste 8", EnumPosicao.MC, 26, 8, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, true, this.bd, 5000, false);
         j8.setTime(new Time(img24Time, img32Time, img128Time, "Time 3", 50, new Treinador("Treinador 3", 50, 45), new Estadio("Estadio 8"), Color.RED, Color.WHITE, this.bd));
         this.bd.getJogadores().add(j8);
         
-        Jogador j9 = new Jogador(9, img16Jog, img24Jog, img128Jog, "Teste 9", EnumPosicao.AT, 27, 9, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, true, this.bd, 5000, true);
+        Jogador j9 = new Jogador(9, img16Jog, img24Jog, img128Jog, "Teste 9", EnumPosicao.AT, 27, 9, EnumHabilidade.Velocidade, EnumHabilidade.Finalização, EnumStatus.EmAlta, true, this.bd, 5000, false);
         j9.setTime(new Time(img24Time, img32Time, img128Time, "Time 4", 50, new Treinador("Treinador 4", 50, 45), new Estadio("Estadio 9"), Color.BLUE, Color.RED, this.bd));
         this.bd.getJogadores().add(j9);
         
-        Jogador j10 = new Jogador(10, img16Jog, img24Jog, img128Jog, "Teste 10", EnumPosicao.MC, 28, 10, EnumHabilidade.Armação, EnumHabilidade.Velocidade, EnumStatus.EmAlta, true, this.bd, 5000, true);
+        Jogador j10 = new Jogador(10, img16Jog, img24Jog, img128Jog, "Teste 10", EnumPosicao.MC, 28, 10, EnumHabilidade.Armação, EnumHabilidade.Velocidade, EnumStatus.EmAlta, true, this.bd, 5000, false);
         j10.setTime(new Time(img24Time, img32Time, img128Time, "Time 5", 50, new Treinador("Treinador 5", 50, 45), new Estadio("Estadio 10"), Color.CYAN, Color.MAGENTA, this.bd));        
         this.bd.getJogadores().add(j10);
         

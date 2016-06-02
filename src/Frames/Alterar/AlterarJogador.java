@@ -361,6 +361,10 @@ public class AlterarJogador extends javax.swing.JDialog {
                 setImg128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
             }
 
+            this.j.setImage16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/default.png")));
+            this.j.setImage24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
+            this.j.setImage128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
+            
             this.j.setNome(campoNome.getText());
             this.j.setPosicao((EnumPosicao) comboPosicao.getSelectedItem());
             this.j.setIdade(sliderIdade.getValue());
@@ -377,7 +381,9 @@ public class AlterarJogador extends javax.swing.JDialog {
             this.lblNok.setVisible(false);
             campoId.setText(nextId() + "");
             campoNome.setText("");                
-            sliderIdade.setValue(20);            
+            sliderIdade.setValue(20);     
+            
+            this.et.carregarPainelReserva(this.bd.buscarTimeId(((Time)this.et.getListaTimes().getSelectedValue()).getId()));
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 

@@ -145,6 +145,7 @@ public class FotoJogador extends javax.swing.JDialog {
             listModel.addElement(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + i + ".png")));            
             i++;
         }
+        listModel.addElement(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

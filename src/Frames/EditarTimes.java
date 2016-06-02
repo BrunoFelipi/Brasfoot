@@ -13,7 +13,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import src.Jogador;
 import src.Time;
@@ -106,7 +108,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
         btnAlterarTime.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterarTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/change.png"))); // NOI18N
-        btnAlterarTime.setToolTipText("Alterar Time");
+        btnAlterarTime.setToolTipText("Editar Time");
         btnAlterarTime.setBorderPainted(false);
         btnAlterarTime.setContentAreaFilled(false);
         btnAlterarTime.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,7 +124,7 @@ public class EditarTimes extends javax.swing.JDialog {
         jScrollPane1.setViewportView(listaTimes);
 
         painelReserva.setBackground(new java.awt.Color(255, 255, 255));
-        painelReserva.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        painelReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnRemoverJogador.setBackground(new java.awt.Color(255, 255, 255));
         btnRemoverJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/remove-user.png"))); // NOI18N
@@ -130,6 +132,7 @@ public class EditarTimes extends javax.swing.JDialog {
         btnRemoverJogador.setBorderPainted(false);
         btnRemoverJogador.setContentAreaFilled(false);
         btnRemoverJogador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRemoverJogador.setEnabled(false);
 
         btnAddJogador.setBackground(new java.awt.Color(255, 255, 255));
         btnAddJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/new-user.png"))); // NOI18N
@@ -145,10 +148,11 @@ public class EditarTimes extends javax.swing.JDialog {
 
         btnAlterarJogador.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterarJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/change.png"))); // NOI18N
-        btnAlterarJogador.setToolTipText("Alterar Jogador");
+        btnAlterarJogador.setToolTipText("Editar Jogador");
         btnAlterarJogador.setBorderPainted(false);
         btnAlterarJogador.setContentAreaFilled(false);
         btnAlterarJogador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterarJogador.setEnabled(false);
         btnAlterarJogador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarJogadorActionPerformed(evt);
@@ -157,7 +161,9 @@ public class EditarTimes extends javax.swing.JDialog {
 
         painelTitular.setBackground(new java.awt.Color(255, 255, 255));
         painelTitular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        painelTitular.setLayout(null);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("ID:");
 
@@ -258,7 +264,7 @@ public class EditarTimes extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(lblPosicao))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -275,7 +281,7 @@ public class EditarTimes extends javax.swing.JDialog {
                         .addComponent(btnAlterarTime, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverTime, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(18, 54, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAddJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,26 +349,31 @@ public class EditarTimes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRemoverTimeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+                
         if(this.listModel.getSize() > 0){
             this.listaTimes.setSelectedIndex(0);
+            carregarPainelReserva(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
         }        
     }//GEN-LAST:event_formWindowOpened
 
     private void listaTimesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTimesValueChanged
         
-        //carregarPanelTitular(this.bd.buscarTimeId(Integer.parseInt(split[0])));
-        //carregarPainelReserva(this.bd.buscarTimeId(Integer.parseInt((listaTimes.getSelectedValue() + "").split("-")[0].replaceAll(" ", ""))));
-        carregarPanelTitular(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
+        //carregarPanelTitular(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
         carregarPainelReserva(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
+        
+        lblCraque.setIcon(null);
+        lblTituReser.setIcon(null);
+        lblID.setText("");
+        lblNome.setText("");
+        lblPosicao.setText("");
+        lblIdade.setText("");
+        lblHabilidade1.setText("");
+        lblHabilidade2.setText("");
         
     }//GEN-LAST:event_listaTimesValueChanged
 
     private void btnAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJogadorActionPerformed
 
-//        System.out.println("ID: " + (listaTimes.getSelectedValue() + "").split("-")[0]);
-//        System.out.println("Nome: " + (listaTimes.getSelectedValue() + "").split("-")[1].replaceAll(" ", ""));        
-        
         CadastrarJogador cj = new CadastrarJogador(null, this.bd, ((Time)listaTimes.getSelectedValue()), this);
         cj.setVisible(true);
         
@@ -374,7 +385,31 @@ public class EditarTimes extends javax.swing.JDialog {
         aj.setVisible(true);
         
     }//GEN-LAST:event_btnAlterarJogadorActionPerformed
+    
+    public JList getListaTimes() {
+        return listaTimes;
+    }
 
+    public void setListaTimes(JList listaTimes) {
+        this.listaTimes = listaTimes;
+    }
+    
+    public JPanel getPainelReserva() {
+        return painelReserva;
+    }
+
+    public void setPainelReserva(JPanel painelReserva) {
+        this.painelReserva = painelReserva;
+    }
+
+    public JPanel getPainelTitular() {
+        return painelTitular;
+    }
+
+    public void setPainelTitular(JPanel painelTitular) {
+        this.painelTitular = painelTitular;
+    }
+    
     private void removerLabelsPainelTitular(){        
         painelTitular.removeAll();
         painelTitular.repaint();
@@ -390,7 +425,6 @@ public class EditarTimes extends javax.swing.JDialog {
     private void popularLista(){
         
         for(Time t : this.bd.getTimes()){            
-            //this.listModel.addElement(t.getId() + " - " + t.getNome()); 
             this.listModel.addElement(t); 
         }
         
@@ -405,8 +439,9 @@ public class EditarTimes extends javax.swing.JDialog {
     public void carregarPainelReserva(Time t){        
                 
         removerLabelsPainelReserva();
-        
+                
         for(final Jogador jr : t.getJogadoresReserva()){            
+            
             JLabel lbl = new JLabel(jr.getImage24(), JLabel.CENTER); 
                         
             String toolTip = "<html>Posição: " + jr.getPosicao() + "<br>" + "Nome: " + jr.getNome() + "</html>";
@@ -424,6 +459,75 @@ public class EditarTimes extends javax.swing.JDialog {
             lbl.setPreferredSize(dPref);
             lbl.setOpaque(true);
             lbl.setBackground(Color.WHITE);
+            
+            painelReserva.add(lbl);  
+            painelReserva.repaint();
+            painelReserva.validate();
+            
+            lbl.addMouseListener(new MouseAdapter(){  
+                public void mouseClicked(MouseEvent e){
+                    
+                    lblID.setText(jr.getId() + "");
+                    lblNome.setText(jr.getNome());
+                    lblPosicao.setText(jr.getPosicao() + "");
+                    lblIdade.setText(jr.getIdade() + "");
+                    lblHabilidade1.setText(jr.getHabilidade1() + "");
+                    lblHabilidade2.setText(jr.getHabilidade2() + "");
+                    
+                    if(jr.isTitular()){
+                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
+                        lblTituReser.setToolTipText("Titular");
+                    } else {
+                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
+                        lblTituReser.setToolTipText("Reserva");
+                    }
+                    
+                    if(jr.isCraque()){
+                        lblCraque.setIcon(new ImageIcon(getClass().getResource("/resources/diversos/16/star.png")));
+                    } else {
+                        lblCraque.setIcon(null);
+                    }                 
+                    
+                    if(!lblID.getText().isEmpty()){
+                        btnAlterarJogador.setEnabled(true);
+                        btnRemoverJogador.setEnabled(true);
+                    } else {
+                        btnAlterarJogador.setEnabled(false);
+                        btnRemoverJogador.setEnabled(false);
+                    }
+                    
+                }  
+            });             
+        }                
+    }
+
+    private void carregarPanelTitular(Time t){        
+         
+        removerLabelsPainelTitular();
+                
+        for(final Jogador jr : t.getJogadoresTitular()){            
+            
+            JLabel lbl = new JLabel(jr.getImage24(), JLabel.CENTER); 
+                        
+            String toolTip = "<html>Posição: " + jr.getPosicao() + "<br>" + "Nome: " + jr.getNome() + "</html>";
+            
+            lbl.setToolTipText(toolTip);
+            
+            lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+            Dimension dMax = new Dimension(painelTitular.getWidth() -2, 25);
+            Dimension dMin = new Dimension(painelTitular.getWidth() -2, 25);
+            Dimension dPref = new Dimension(painelTitular.getWidth() -2, 25);
+
+            lbl.setMaximumSize(dMax);
+            lbl.setMinimumSize(dMin);
+            lbl.setPreferredSize(dPref);
+            lbl.setOpaque(true);
+            lbl.setBackground(Color.WHITE);
+            
+            painelTitular.add(lbl);  
+            painelTitular.repaint();
+            painelTitular.validate();
             
             lbl.addMouseListener(new MouseAdapter(){  
                 public void mouseClicked(MouseEvent e){
@@ -450,58 +554,7 @@ public class EditarTimes extends javax.swing.JDialog {
                     }                    
                 }  
             });             
-        }
-    }
-    
-    private void carregarPanelTitular(Time t){        
-          
-        removerLabelsPainelTitular();
-        
-        for(final Jogador jt : t.getJogadoresTitular()){            
-            JLabel lbl = new JLabel(jt.getImage24(), JLabel.CENTER); 
-                        
-            String toolTip = "<html>Posição: " + jt.getPosicao() + "<br>" + "Nome: " + jt.getNome() + "</html>";
-            
-            lbl.setToolTipText(toolTip);
-            
-            lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
-            Dimension dMax = new Dimension(painelTitular.getWidth() -2, 25);
-            Dimension dMin = new Dimension(painelTitular.getWidth() -2, 25);
-            Dimension dPref = new Dimension(painelTitular.getWidth() -2, 25);
-
-            lbl.setMaximumSize(dMax);
-            lbl.setMinimumSize(dMin);
-            lbl.setPreferredSize(dPref);
-            lbl.setOpaque(true);
-            lbl.setBackground(Color.WHITE);
-                        
-            lbl.addMouseListener(new MouseAdapter(){  
-                public void mouseClicked(MouseEvent e){
-                    
-                    lblID.setText(jt.getId() + "");
-                    lblNome.setText(jt.getNome());
-                    lblPosicao.setText(jt.getPosicao() + "");
-                    lblIdade.setText(jt.getIdade() + "");
-                    lblHabilidade1.setText(jt.getHabilidade1() + "");
-                    lblHabilidade2.setText(jt.getHabilidade2() + "");
-                    
-                    if(jt.isTitular()){
-                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
-                        lblTituReser.setToolTipText("Titular");
-                    } else {
-                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
-                        lblTituReser.setToolTipText("Reserva");
-                    }
-                    
-                    if(jt.isCraque()){
-                        lblCraque.setIcon(new ImageIcon(getClass().getResource("/resources/diversos/16/star.png")));
-                    } else {
-                        lblCraque.setIcon(null);
-                    }                    
-                }  
-            });             
-        }
+        }                
         
     }
     
