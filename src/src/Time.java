@@ -240,32 +240,14 @@ public class Time implements Serializable {
     }
     
     public void addJogador(Jogador j){
-        
-        if(getJogadores().size() < this.qtdMaxJogadores){
-            getJogadores().add(j);    
-        } else {
-            throw new RuntimeException("");
-        }
-        
+        getJogadores().add(j);            
     }
     
     public void addJogadorTitular(Jogador j){
-        
-        if(getJogadoresTitular().size() < 11){
-            getJogadores().add(j);    
-        } else {
-            throw new RuntimeException("");
-        }        
+        getJogadoresTitular().add(j);            
     }
     
     public void addJogadorReserva(Jogador j){
-        
-        if(getJogadoresReserva().size() <= this.qtdMaxJogadores - 11){
-            getJogadores().add(j);    
-        } else {
-            throw new RuntimeException("");
-        }
-        
         getJogadoresReserva().add(j);
     }
     

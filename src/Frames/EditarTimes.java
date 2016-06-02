@@ -93,11 +93,6 @@ public class EditarTimes extends javax.swing.JDialog {
                 listaTimesValueChanged(evt);
             }
         });
-        listaTimes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                listaTimesKeyPressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(listaTimes);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
@@ -243,15 +238,8 @@ public class EditarTimes extends javax.swing.JDialog {
 
     }//GEN-LAST:event_listaTimesMouseClicked
 
-    private void listaTimesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaTimesKeyPressed
-
-
-        
-    }//GEN-LAST:event_listaTimesKeyPressed
-
     private void listaTimesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTimesValueChanged
         
-        removerLabelsPainelReserva();
         //carregarPanelTitular(this.bd.buscarTimeId(Integer.parseInt(split[0])));
         carregarPainelReserva(this.bd.buscarTimeNome(listaTimes.getSelectedValue() + ""));
         
@@ -259,7 +247,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJogadorActionPerformed
 
-        CadastrarJogador cj = new CadastrarJogador(null, this.bd, this.bd.buscarTimeNome(listaTimes.getSelectedValue() + ""));
+        CadastrarJogador cj = new CadastrarJogador(null, this.bd, this.bd.buscarTimeNome(listaTimes.getSelectedValue() + ""), this);
         cj.setVisible(true);
         
     }//GEN-LAST:event_btnAddJogadorActionPerformed
@@ -277,10 +265,12 @@ public class EditarTimes extends javax.swing.JDialog {
         }
     }
     
-    private void carregarPainelReserva(Time t){        
+    public void carregarPainelReserva(Time t){        
                 
+        removerLabelsPainelReserva();
+        
         for(final Jogador jr : t.getJogadoresReserva()){            
-            JLabel lbl = new JLabel(jr.getImage(), JLabel.CENTER); 
+            JLabel lbl = new JLabel(jr.getImage24(), JLabel.CENTER); 
                         
             String toolTip = "<html>Posição: " + jr.getPosicao() + "<br>" + "Nome: " + jr.getNome() + "</html>";
             

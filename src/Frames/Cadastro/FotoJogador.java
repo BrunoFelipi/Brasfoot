@@ -1,9 +1,9 @@
 package Frames.Cadastro;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -12,12 +12,17 @@ import javax.swing.ImageIcon;
 public class FotoJogador extends javax.swing.JDialog {
 
     private DefaultListModel listModel;
+    private DefaultListCellRenderer listRenderer;
+    private CadastrarJogador cj;
     
-    public FotoJogador(java.awt.Frame parent) {
+    public FotoJogador(java.awt.Frame parent, CadastrarJogador cj) {
         super(parent, true);
         initComponents();
         this.listModel = new DefaultListModel();
-        this.listaImagens.setModel(listModel);
+        this.listaImagens.setModel(listModel);        
+        this.listRenderer = (DefaultListCellRenderer) this.listaImagens.getCellRenderer();
+        this.listRenderer.setHorizontalAlignment(SwingConstants.CENTER);        
+        this.cj = cj;
         popularLista();
     }
 
@@ -25,66 +30,103 @@ public class FotoJogador extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaImagens = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
         lblImagem = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaImagens = new javax.swing.JList();
+        btnConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        listaImagens.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaImagensValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaImagens);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnConfirmar)
+                .addContainerGap())
         );
-
-        jSplitPane1.setRightComponent(jPanel1);
-
-        jScrollPane2.setViewportView(listaImagens);
-
-        jSplitPane1.setLeftComponent(jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jScrollPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void popularLista(){
+    private void listaImagensValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaImagensValueChanged
+
+        lblImagem.setIcon(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/" + (this.listaImagens.getSelectedIndex() + 1) + ".png")));
+                
+    }//GEN-LAST:event_listaImagensValueChanged
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+
         
-        List<ImageIcon> listaImagem = new ArrayList<>();
+        this.cj.getLblFotoJogador128().setIcon(lblImagem.getIcon());
+        this.cj.setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+        this.cj.setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+        this.cj.setImg128((ImageIcon) lblImagem.getIcon());
+        this.dispose();
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void popularLista(){
         
         int i = 1;
         
-        while(i < 30){
-            listaImagem.add(new ImageIcon(getClass().getResource("/resources/escudo/128/" + i + ".png")));
+        while(i < 5){
+            listModel.addElement(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + i + ".png")));            
             i++;
         }
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JList listaImagens;
     // End of variables declaration//GEN-END:variables

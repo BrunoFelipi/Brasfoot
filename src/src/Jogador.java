@@ -15,7 +15,9 @@ public class Jogador implements Serializable{
     
     private int id;
     // Número da camisa
-    private ImageIcon image;
+    private ImageIcon image16;
+    private ImageIcon image24;
+    private ImageIcon image128;
     private int numero; 
     private String nome;    
     // GL - ZG - LT - MC - AT
@@ -39,12 +41,15 @@ public class Jogador implements Serializable{
     private int qtdCartaoVermelho;
     private int jogosDisputados;
     private int valor;    
+    private boolean titular;
     private BancoDeDados bd;
     
-    public Jogador(int numero, ImageIcon image, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, String craque, BancoDeDados bd, int valor) {
+    public Jogador(int numero, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
+            EnumHabilidade habilidade2, EnumStatus status, String craque, BancoDeDados bd, int valor, boolean titular) {
         this.bd = bd;
-        setImage(image);
+        setImage16(image16);
+        setImage24(image24);
+        setImage128(image128);
         setId(nextID());
         setNumero(numero);
         setNome(nome);
@@ -60,11 +65,15 @@ public class Jogador implements Serializable{
         setQtdCartaoVermelho(0);
         setJogosDisputados(0);
         setValor(valor);
+        setTitular(titular);
     }
 
-    public Jogador(int id, ImageIcon image, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, String craque, Time time, BancoDeDados bd) {
+    public Jogador(int id, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, 
+            String craque, Time time, BancoDeDados bd, boolean titular) {
         setId(id);
-        setImage(image);
+        setImage16(image16);
+        setImage24(image24);
+        setImage128(image128);
         setNome(nome);
         setPosicao(posicao);
         setIdade(idade);
@@ -73,16 +82,41 @@ public class Jogador implements Serializable{
         setCraque(craque);
         setTime(time);
         setBd(bd);
+        setTitular(titular);
     }
 
-    public ImageIcon getImage() {
-        return image;
+    public boolean isTitular() {
+        return titular;
     }
 
-    public void setImage(ImageIcon image) {
-        this.image = image;
+    public void setTitular(boolean titular) {
+        this.titular = titular;
     }
 
+    public ImageIcon getImage16() {
+        return image16;
+    }
+
+    public void setImage16(ImageIcon image16) {
+        this.image16 = image16;
+    }
+
+    public ImageIcon getImage24() {
+        return image24;
+    }
+
+    public void setImage24(ImageIcon image24) {
+        this.image24 = image24;
+    }
+
+    public ImageIcon getImage128() {
+        return image128;
+    }
+
+    public void setImage128(ImageIcon image128) {
+        this.image128 = image128;
+    }
+    
     public BancoDeDados getBd() {
         return bd;
     }

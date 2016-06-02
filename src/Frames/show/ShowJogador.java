@@ -17,7 +17,7 @@ public class ShowJogador extends javax.swing.JDialog {
         preencherCampos();
         setTitle(this.j.getId() + " - " + j.getNome());
         this.lblID.setBackground(j.getTime().getCor1());
-        lbl.setIcon(j.getImage());
+        lbl.setIcon(j.getImage128());
     }
 
     @SuppressWarnings("unchecked")
