@@ -35,7 +35,7 @@ public class Jogador implements Serializable{
     // 0 - 100
     private int resistencia;
     // True ou False
-    private String craque;
+    private boolean craque;
     private Time time;
     private int qtdCartaoAmarelo;
     private int qtdCartaoVermelho;
@@ -45,7 +45,7 @@ public class Jogador implements Serializable{
     private BancoDeDados bd;
     
     public Jogador(int numero, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, String craque, BancoDeDados bd, int valor, boolean titular) {
+            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular) {
         this.bd = bd;
         setImage16(image16);
         setImage24(image24);
@@ -69,7 +69,7 @@ public class Jogador implements Serializable{
     }
 
     public Jogador(int id, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, 
-            String craque, Time time, BancoDeDados bd, boolean titular) {
+            boolean craque, Time time, BancoDeDados bd, boolean titular) {
         setId(id);
         setImage16(image16);
         setImage24(image24);
@@ -181,11 +181,11 @@ public class Jogador implements Serializable{
         this.status = status;        
     }
 
-    public String getCraque() {
+    public boolean isCraque() {
         return craque;
     }
 
-    public void setCraque(String craque) {
+    public void setCraque(boolean craque) {
         this.craque = craque;
     }
 

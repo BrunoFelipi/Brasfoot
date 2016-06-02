@@ -260,4 +260,8 @@ public class Time implements Serializable {
         }
     }
     
+    public String toString(){
+        return getNome();
+    }
+    
 }

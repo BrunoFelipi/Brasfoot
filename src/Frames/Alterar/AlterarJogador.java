@@ -1,5 +1,6 @@
-package Frames.Cadastro;
+package Frames.Alterar;
 
+import Frames.Cadastro.*;
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
 import java.awt.Color;
@@ -17,30 +18,36 @@ import src.enumeracao.EnumPosicao;
  *
  * @author bruno.souza
  */
-public class CadastrarJogador extends javax.swing.JDialog {
+public class AlterarJogador extends javax.swing.JDialog {
 
     private BancoDeDados bd;
-    private Border b;
-    private Time t;
+    private Jogador j;
     private ImageIcon img16;
     private ImageIcon img24;
     private ImageIcon img128;
     private EditarTimes et;
     
-    public CadastrarJogador(java.awt.Frame parent, BancoDeDados bd, Time t, EditarTimes et) {
+    public AlterarJogador(java.awt.Frame parent, BancoDeDados bd, Jogador j, EditarTimes et) {
         super(parent, true);
         initComponents();
-        this.t = t;
-        this.et = et;
-        
-        lblNomeTime.setText(t.getNome());
-        lblEscudoTime32.setIcon(t.getEscudo32());
-        lblFotoJogador128.setIcon(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
-        setBd(bd);        
-        campoId.setText(nextId() + "");
+        this.j = j;
+        this.et = et;        
+        setBd(bd);  
         popularComboPosicao();
         popularCombosHabilidade();
-        this.b = campoNome.getBorder();
+                
+        lblNomeTime.setText(j.getTime().getNome());
+        lblEscudoTime32.setIcon(j.getTime().getEscudo32());
+        lblFotoJogador128.setIcon(j.getImage128());
+        campoId.setText(j.getId()+"");
+        campoNome.setText(j.getNome());
+        comboPosicao.setSelectedItem(j.getPosicao());
+        sliderIdade.setValue(j.getIdade());        
+        comboHabilidade1.setSelectedItem(j.getHabilidade1());
+        comboHabilidade2.setSelectedItem(j.getHabilidade2());        
+        checkTitular.setSelected(j.isTitular());
+        checkCraque.setSelected(j.isCraque());
+        
         this.lblOk.setVisible(false);
         this.lblNok.setVisible(false);
     }
@@ -124,11 +131,11 @@ public class CadastrarJogador extends javax.swing.JDialog {
         comboHabilidade1 = new javax.swing.JComboBox();
         comboHabilidade2 = new javax.swing.JComboBox();
         checkCraque = new javax.swing.JCheckBox();
-        slider = new javax.swing.JSlider();
+        sliderIdade = new javax.swing.JSlider();
         campoNome = new javax.swing.JTextField();
         campoId = new javax.swing.JTextField();
         lblValue = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         lblOk = new javax.swing.JLabel();
         lblNok = new javax.swing.JLabel();
         lblFotoJogador128 = new javax.swing.JLabel();
@@ -160,15 +167,15 @@ public class CadastrarJogador extends javax.swing.JDialog {
         checkCraque.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         checkCraque.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        slider.setBackground(new java.awt.Color(255, 255, 255));
-        slider.setMaximum(40);
-        slider.setMinimum(17);
-        slider.setPaintLabels(true);
-        slider.setToolTipText("");
-        slider.setValue(20);
-        slider.addChangeListener(new javax.swing.event.ChangeListener() {
+        sliderIdade.setBackground(new java.awt.Color(255, 255, 255));
+        sliderIdade.setMaximum(40);
+        sliderIdade.setMinimum(17);
+        sliderIdade.setPaintLabels(true);
+        sliderIdade.setToolTipText("");
+        sliderIdade.setValue(20);
+        sliderIdade.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderStateChanged(evt);
+                sliderIdadeStateChanged(evt);
             }
         });
 
@@ -180,10 +187,10 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblValue.setText("20");
 
-        btnCadastrar.setText("Adicionar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -249,7 +256,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                                     .addComponent(campoNome)
                                     .addComponent(campoId)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sliderIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -257,7 +264,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(checkCraque))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNok)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,7 +299,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(slider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sliderIdade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -309,7 +316,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                             .addComponent(checkTitular))))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblNok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -330,17 +337,18 @@ public class CadastrarJogador extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
-        lblValue.setText(slider.getValue() + "");        
-    }//GEN-LAST:event_sliderStateChanged
+    private void sliderIdadeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderIdadeStateChanged
+        lblValue.setText(sliderIdade.getValue() + "");        
+    }//GEN-LAST:event_sliderIdadeStateChanged
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         
         if(campoNome.getText().isEmpty()){            
             this.lblOk.setVisible(false);
             this.lblNok.setVisible(true);
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
+                
             if(getImg16() == null){
                 setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/default.png")));
             }
@@ -353,28 +361,25 @@ public class CadastrarJogador extends javax.swing.JDialog {
                 setImg128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
             }
 
-            Jogador j = new Jogador(Integer.parseInt(campoId.getText()), getImg16(), getImg24(), getImg128(), campoNome.getText(), (EnumPosicao) comboPosicao.getSelectedItem(), 
-                slider.getValue(), (EnumHabilidade) comboHabilidade1.getSelectedItem(), (EnumHabilidade) comboHabilidade2.getSelectedItem(),
-                checkCraque.isSelected(), this.t, getBd(), checkTitular.isSelected());
-
-            this.t.getJogadores().add(j);
-
-            if(checkTitular.isSelected()){
-                this.t.getJogadoresTitular().add(j);    
-            } else {
-                this.t.getJogadoresReserva().add(j);
-            }
-
+            this.j.setNome(campoNome.getText());
+            this.j.setPosicao((EnumPosicao) comboPosicao.getSelectedItem());
+            this.j.setIdade(sliderIdade.getValue());
+            this.j.setHabilidade1((EnumHabilidade) comboHabilidade1.getSelectedItem());
+            this.j.setHabilidade2((EnumHabilidade) comboHabilidade2.getSelectedItem());
+            this.j.setCraque(checkCraque.isSelected());
+            this.j.setTitular(checkTitular.isSelected());
+            
+            removerJogadorListaTitularReserva(this.j);
+            adicionarJogadorListaTitularReserva(this.j);
+            
             getBd().getJogadores().add(j);
             this.lblOk.setVisible(true);
-            this.lblOk.setToolTipText("Jogador \"" + j.getNome() + "\" cadastrado com sucesso!");
             this.lblNok.setVisible(false);
             campoId.setText(nextId() + "");
             campoNome.setText("");                
-            slider.setValue(20); 
-            this.et.carregarPainelReserva(this.t);
+            sliderIdade.setValue(20);            
         }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnFotoJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoJogadorActionPerformed
 
@@ -383,8 +388,24 @@ public class CadastrarJogador extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnFotoJogadorActionPerformed
 
+    private void removerJogadorListaTitularReserva(Jogador j){        
+        if(j.isTitular()){
+            j.getTime().getJogadoresTitular().remove(j);
+        } else {
+            j.getTime().getJogadoresReserva().remove(j);
+        }
+    }
+    
+    private void adicionarJogadorListaTitularReserva(Jogador j){        
+        if(j.isTitular()){
+            j.getTime().getJogadoresTitular().add(j);
+        } else {
+            j.getTime().getJogadoresReserva().add(j);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnFotoJogador;
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNome;
@@ -407,6 +428,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
     private javax.swing.JLabel lblNomeTime;
     private javax.swing.JLabel lblOk;
     private javax.swing.JLabel lblValue;
-    private javax.swing.JSlider slider;
+    private javax.swing.JSlider sliderIdade;
     // End of variables declaration//GEN-END:variables
 }

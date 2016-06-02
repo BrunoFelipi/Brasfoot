@@ -521,7 +521,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
             this.model.setValueAt(lista.get(i).getStatus(), i, 9);            
             this.model.setValueAt(lista.get(i).getValor(), i, 10);
             
-            if(lista.get(i).getCraque().equals("Sim")){
+            if(lista.get(i).isCraque()){
                 this.model.setValueAt(true, i, 11);
             } else {
                 this.model.setValueAt(false, i, 11);

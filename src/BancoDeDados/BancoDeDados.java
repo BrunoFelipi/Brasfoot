@@ -106,7 +106,7 @@ public class BancoDeDados implements Serializable{
         String sTime = time + "";
         String sHabilidade = habilidade + "";
         String sStatus = status + "";
-        String sCraque = craque + "";        
+        String sCraque = craque + "";
         
         for(Jogador j : getJogadores()){        
             if(j.getId() >= idMin && j.getId() <= idMax){
@@ -115,10 +115,16 @@ public class BancoDeDados implements Serializable{
                         if(j.getForca() >= forcaMin && j.getForca() <= forcaMax){
                             if(j.getValor() >= valorMin && j.getValor() <= valorMax){
                                 
-                                if(!filtro(sCraque, j.getCraque())){
-                                    continue;
+                                if(!sCraque.equals("Ambos")){
+                                    if(!sCraque.equals("Sim") && j.isCraque()){
+                                        continue;
+                                    }
+                                
+                                    if(!sCraque.equals("Não") && !j.isCraque()){
+                                        continue;
+                                    }
                                 } 
-
+                                
                                 if(!filtro(sNome, j.getNome() + "")){
                                     continue;
                                 } 

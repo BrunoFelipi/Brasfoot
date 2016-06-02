@@ -255,7 +255,7 @@ public class ShowJogador extends javax.swing.JDialog {
         campoIdade.setText(j.getIdade() + "");
         campoForca.setText(j.getForca() + "");
         campoStatus.setText(j.getStatus().name());
-        campoCraque.setText(j.getCraque());    
+        campoCraque.setText(j.isCraque() + "");    
         campoValor.setText("R$ " + j.getValor());
     }
     

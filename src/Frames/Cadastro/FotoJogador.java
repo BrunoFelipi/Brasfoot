@@ -1,5 +1,7 @@
 package Frames.Cadastro;
 
+import Frames.Alterar.AlterarJogador;
+import java.awt.Color;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ public class FotoJogador extends javax.swing.JDialog {
     private DefaultListModel listModel;
     private DefaultListCellRenderer listRenderer;
     private CadastrarJogador cj;
+    private AlterarJogador aj;
     
     public FotoJogador(java.awt.Frame parent, CadastrarJogador cj) {
         super(parent, true);
@@ -23,6 +26,19 @@ public class FotoJogador extends javax.swing.JDialog {
         this.listRenderer = (DefaultListCellRenderer) this.listaImagens.getCellRenderer();
         this.listRenderer.setHorizontalAlignment(SwingConstants.CENTER);        
         this.cj = cj;
+        getContentPane().setBackground(Color.WHITE);
+        popularLista();
+    }
+    
+    public FotoJogador(java.awt.Frame parent, AlterarJogador aj) {
+        super(parent, true);
+        initComponents();
+        this.listModel = new DefaultListModel();
+        this.listaImagens.setModel(listModel);        
+        this.listRenderer = (DefaultListCellRenderer) this.listaImagens.getCellRenderer();
+        this.listRenderer.setHorizontalAlignment(SwingConstants.CENTER);        
+        this.aj = aj;
+        getContentPane().setBackground(Color.WHITE);
         popularLista();
     }
 
@@ -38,6 +54,7 @@ public class FotoJogador extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        listaImagens.setSelectionBackground(new java.awt.Color(204, 204, 204));
         listaImagens.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listaImagensValueChanged(evt);
@@ -104,11 +121,18 @@ public class FotoJogador extends javax.swing.JDialog {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
 
+        if(this.cj != null){
+            this.cj.getLblFotoJogador128().setIcon(lblImagem.getIcon());
+            this.cj.setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+            this.cj.setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+            this.cj.setImg128((ImageIcon) lblImagem.getIcon());        
+        } else if(this.aj != null){
+            this.aj.getLblFotoJogador128().setIcon(lblImagem.getIcon());
+            this.aj.setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+            this.aj.setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + (listaImagens.getSelectedIndex()+1) + ".png")));
+            this.aj.setImg128((ImageIcon) lblImagem.getIcon());        
+        }
         
-        this.cj.getLblFotoJogador128().setIcon(lblImagem.getIcon());
-        this.cj.setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/" + (listaImagens.getSelectedIndex()+1) + ".png")));
-        this.cj.setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + (listaImagens.getSelectedIndex()+1) + ".png")));
-        this.cj.setImg128((ImageIcon) lblImagem.getIcon());
         this.dispose();
         
     }//GEN-LAST:event_btnConfirmarActionPerformed

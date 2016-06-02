@@ -80,7 +80,7 @@
                                       <Component id="campoNome" max="32767" attributes="0"/>
                                       <Component id="campoId" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="slider" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="sliderIdade" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="lblValue" min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
@@ -92,7 +92,7 @@
                                   <Component id="checkCraque" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnCadastrar" min="-2" pref="162" max="-2" attributes="0"/>
+                                  <Component id="btnAlterar" min="-2" pref="162" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblNok" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -137,7 +137,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblValue" max="32767" attributes="0"/>
-                              <Component id="slider" max="32767" attributes="0"/>
+                              <Component id="sliderIdade" max="32767" attributes="0"/>
                               <Component id="jLabel5" min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="btnCadastrar" max="32767" attributes="0"/>
+                      <Component id="btnAlterar" max="32767" attributes="0"/>
                       <Component id="lblOk" alignment="1" max="32767" attributes="0"/>
                       <Component id="lblNok" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -231,7 +231,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSlider" name="slider">
+        <Component class="javax.swing.JSlider" name="sliderIdade">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -243,7 +243,7 @@
             <Property name="value" type="int" value="20"/>
           </Properties>
           <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderStateChanged"/>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderIdadeStateChanged"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="campoNome">
@@ -266,12 +266,12 @@
             <Property name="text" type="java.lang.String" value="20"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCadastrar">
+        <Component class="javax.swing.JButton" name="btnAlterar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Adicionar"/>
+            <Property name="text" type="java.lang.String" value="Alterar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblOk">
