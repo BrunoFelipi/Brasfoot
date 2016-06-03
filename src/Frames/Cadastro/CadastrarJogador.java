@@ -20,29 +20,30 @@ import src.enumeracao.EnumPosicao;
 public class CadastrarJogador extends javax.swing.JDialog {
 
     private BancoDeDados bd;
-    private Border b;
     private Time t;
+    private EditarTimes et;
     private ImageIcon img16;
     private ImageIcon img24;
     private ImageIcon img128;
-    private EditarTimes et;
     
     public CadastrarJogador(java.awt.Frame parent, BancoDeDados bd, Time t, EditarTimes et) {
         super(parent, true);
         initComponents();
+        setBd(bd);        
         this.t = t;
         this.et = et;
-        
-        lblNomeTime.setText(t.getNome());
-        lblEscudoTime32.setIcon(t.getEscudo32());
-        lblFotoJogador128.setIcon(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
-        setBd(bd);        
-        campoId.setText(nextId() + "");
+        this.img16 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/8.png"));
+        this.img24 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/8.png"));
+        this.img128 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/8.png"));
+        this.lblNomeTime.setText(t.getNome());
+        this.lblEscudoTime32.setIcon(t.getEscudo32());
+        this.lblFotoJogador128.setIcon(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/8.png")));
+        this.lblOk.setVisible(false);
+        this.lblNok.setVisible(false);        
+        this.campoId.setText(nextId() + "");                        
         popularComboPosicao();
         popularCombosHabilidade();
-        this.b = campoNome.getBorder();
-        this.lblOk.setVisible(false);
-        this.lblNok.setVisible(false);
+        validaAdicionarJogadorReserva();
     }
 
     public ImageIcon getImg16() {
@@ -68,7 +69,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
     public void setImg128(ImageIcon img128) {
         this.img128 = img128;
     }
-    
+        
     private int nextId(){
         return (getBd().getJogadores().get(getBd().getJogadores().size()-1).getId()+1);
     }
@@ -123,7 +124,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         comboHabilidade1 = new javax.swing.JComboBox();
         comboHabilidade2 = new javax.swing.JComboBox();
-        checkCraque = new javax.swing.JCheckBox();
         slider = new javax.swing.JSlider();
         campoNome = new javax.swing.JTextField();
         campoId = new javax.swing.JTextField();
@@ -136,7 +136,8 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblEscudoTime32 = new javax.swing.JLabel();
         btnFotoJogador = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        checkTitular = new javax.swing.JCheckBox();
+        lblIconCraque = new javax.swing.JLabel();
+        lblIconTitu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Jogador");
@@ -154,11 +155,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
         jLabel3.setText("Habilidade 1:");
 
         jLabel7.setText("Habilidade 2:");
-
-        checkCraque.setBackground(new java.awt.Color(255, 255, 255));
-        checkCraque.setText("Craque:");
-        checkCraque.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        checkCraque.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         slider.setBackground(new java.awt.Color(255, 255, 255));
         slider.setMaximum(40);
@@ -208,10 +204,26 @@ public class CadastrarJogador extends javax.swing.JDialog {
             }
         });
 
-        checkTitular.setBackground(new java.awt.Color(255, 255, 255));
-        checkTitular.setText("Titular:");
-        checkTitular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        checkTitular.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblIconCraque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconCraque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/16/star.png"))); // NOI18N
+        lblIconCraque.setToolTipText("Craque");
+        lblIconCraque.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblIconCraque.setPreferredSize(new java.awt.Dimension(16, 16));
+        lblIconCraque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIconCraqueMouseClicked(evt);
+            }
+        });
+
+        lblIconTitu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconTitu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png"))); // NOI18N
+        lblIconTitu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblIconTitu.setPreferredSize(new java.awt.Dimension(16, 16));
+        lblIconTitu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIconTituMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,7 +242,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                             .addComponent(lblFotoJogador128, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                             .addComponent(btnFotoJogador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -253,9 +265,9 @@ public class CadastrarJogador extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(checkTitular)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(checkCraque))
+                                .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89)
+                                .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,8 +317,8 @@ public class CadastrarJogador extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnFotoJogador)
-                            .addComponent(checkCraque)
-                            .addComponent(checkTitular))))
+                            .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,22 +353,11 @@ public class CadastrarJogador extends javax.swing.JDialog {
             this.lblNok.setVisible(true);
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
-            if(getImg16() == null){
-                setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/default.png")));
-            }
-
-            if(getImg24() == null){
-                setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
-            }
-
-            if(getImg128() == null){
-                setImg128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
-            }
-
+            /*
             Jogador j = new Jogador(Integer.parseInt(campoId.getText()), getImg16(), getImg24(), getImg128(), campoNome.getText(), (EnumPosicao) comboPosicao.getSelectedItem(), 
                 slider.getValue(), (EnumHabilidade) comboHabilidade1.getSelectedItem(), (EnumHabilidade) comboHabilidade2.getSelectedItem(),
-                checkCraque.isSelected(), this.t, getBd(), checkTitular.isSelected());
-
+                lblIconCraque.isEnabled(), this.t, getBd(), checkTitular.isSelected());
+            
             this.t.getJogadores().add(j);
 
             if(checkTitular.isSelected()){
@@ -373,6 +374,9 @@ public class CadastrarJogador extends javax.swing.JDialog {
             campoNome.setText("");                
             slider.setValue(20); 
             this.et.carregarPainelReserva(this.t);
+            
+            validaAdicionarJogadorReserva();
+                    */
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -383,13 +387,42 @@ public class CadastrarJogador extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnFotoJogadorActionPerformed
 
+    private void lblIconCraqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconCraqueMouseClicked
+
+        if(lblIconCraque.isEnabled()){
+            lblIconCraque.setEnabled(false);  
+        } else {
+            lblIconCraque.setEnabled(true);    
+        }
+        
+    }//GEN-LAST:event_lblIconCraqueMouseClicked
+
+    private void lblIconTituMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconTituMouseClicked
+
+        if(lblIconTitu.getIcon().equals(getClass().getResource("/resources/camisa/16/camisa-reserva.png"))){
+            System.out.println("reserva");
+        } else {
+            System.out.println("titular");
+        }
+        
+    }//GEN-LAST:event_lblIconTituMouseClicked
+
+    private void validaAdicionarJogadorReserva(){
+        
+        if(this.bd.buscarTimeId(((Time)this.et.getListaTimes().getSelectedValue()).getId()).getJogadoresReserva().size() >= 12){
+            btnCadastrar.setEnabled(false);
+            btnCadastrar.setToolTipText("Foi atingido o número máximo de jogadores reserva!");
+        } else {
+            btnCadastrar.setEnabled(true);
+            btnCadastrar.setToolTipText(null);
+        }               
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnFotoJogador;
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JCheckBox checkCraque;
-    private javax.swing.JCheckBox checkTitular;
     private javax.swing.JComboBox comboHabilidade1;
     private javax.swing.JComboBox comboHabilidade2;
     private javax.swing.JComboBox comboPosicao;
@@ -403,6 +436,8 @@ public class CadastrarJogador extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblEscudoTime32;
     private javax.swing.JLabel lblFotoJogador128;
+    private javax.swing.JLabel lblIconCraque;
+    private javax.swing.JLabel lblIconTitu;
     private javax.swing.JLabel lblNok;
     private javax.swing.JLabel lblNomeTime;
     private javax.swing.JLabel lblOk;

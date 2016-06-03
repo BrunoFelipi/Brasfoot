@@ -26,7 +26,7 @@ public class FotoJogador extends javax.swing.JDialog {
         this.listRenderer = (DefaultListCellRenderer) this.listaImagens.getCellRenderer();
         this.listRenderer.setHorizontalAlignment(SwingConstants.CENTER);        
         this.cj = cj;
-        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.WHITE);        
         popularLista();
     }
     
@@ -54,7 +54,7 @@ public class FotoJogador extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        listaImagens.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        listaImagens.setSelectionBackground(new java.awt.Color(235, 235, 235));
         listaImagens.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listaImagensValueChanged(evt);
@@ -141,11 +141,12 @@ public class FotoJogador extends javax.swing.JDialog {
         
         int i = 1;
         
-        while(i < 5){
+        while(i < 9){
             listModel.addElement(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/" + i + ".png")));            
             i++;
-        }
-        listModel.addElement(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
+        }        
+        
+        this.listaImagens.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

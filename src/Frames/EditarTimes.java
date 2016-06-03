@@ -4,6 +4,7 @@ import BancoDeDados.BancoDeDados;
 import Frames.Alterar.AlterarJogador;
 import Frames.Cadastro.CadastrarJogador;
 import Frames.Cadastro.CadastrarTime;
+import Frames.Cadastro.FotoJogador;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -34,7 +35,7 @@ public class EditarTimes extends javax.swing.JDialog {
         initComponents();
         this.bd = bd;
         this.listModel = new DefaultListModel();
-        this.listaTimes.setModel(this.listModel); 
+        this.listaTimes.setModel(this.listModel);         
         popularLista();
     }
     
@@ -116,6 +117,8 @@ public class EditarTimes extends javax.swing.JDialog {
         btnAlterarTime.setOpaque(true);
 
         listaTimes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaTimes.setSelectionBackground(new Color(235, 235, 235));
+        listaTimes.setSelectionForeground(new java.awt.Color(0, 0, 0));
         listaTimes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listaTimesValueChanged(evt);
@@ -133,6 +136,11 @@ public class EditarTimes extends javax.swing.JDialog {
         btnRemoverJogador.setContentAreaFilled(false);
         btnRemoverJogador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRemoverJogador.setEnabled(false);
+        btnRemoverJogador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverJogadorActionPerformed(evt);
+            }
+        });
 
         btnAddJogador.setBackground(new java.awt.Color(255, 255, 255));
         btnAddJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/new-user.png"))); // NOI18N
@@ -341,7 +349,6 @@ public class EditarTimes extends javax.swing.JDialog {
         CadastrarTime ct = new CadastrarTime(null);
         ct.setVisible(true);
         
-        
     }//GEN-LAST:event_btnAddTimeActionPerformed
 
     private void btnRemoverTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTimeActionPerformed
@@ -352,14 +359,14 @@ public class EditarTimes extends javax.swing.JDialog {
                 
         if(this.listModel.getSize() > 0){
             this.listaTimes.setSelectedIndex(0);
-            carregarPainelReserva(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
+            carregarPainelReserva(getTime());
         }        
     }//GEN-LAST:event_formWindowOpened
 
     private void listaTimesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTimesValueChanged
         
         //carregarPanelTitular(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
-        carregarPainelReserva(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
+        carregarPainelReserva(getTime());
         
         lblCraque.setIcon(null);
         lblTituReser.setIcon(null);
@@ -374,7 +381,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJogadorActionPerformed
 
-        CadastrarJogador cj = new CadastrarJogador(null, this.bd, ((Time)listaTimes.getSelectedValue()), this);
+        CadastrarJogador cj = new CadastrarJogador(null, this.bd, getTime(), this);
         cj.setVisible(true);
         
     }//GEN-LAST:event_btnAddJogadorActionPerformed
@@ -385,6 +392,38 @@ public class EditarTimes extends javax.swing.JDialog {
         aj.setVisible(true);
         
     }//GEN-LAST:event_btnAlterarJogadorActionPerformed
+
+    private void btnRemoverJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverJogadorActionPerformed
+
+        if(lblID.getText() != null){
+            
+            getTime().getJogadores().remove(getJogador());
+        
+            if(getJogador().isTitular()){
+                getTime().getJogadoresTitular().remove(getJogador());    
+            } else {
+                getTime().getJogadoresReserva().remove(getJogador());
+            }
+
+            carregarPainelReserva(getTime());            
+            preencherInfoJogador(getJogador());
+        }        
+    }//GEN-LAST:event_btnRemoverJogadorActionPerformed
+
+    public EditarTimes getEditarTime() {
+        return this;
+    }
+    
+    public BancoDeDados getBd() {
+        return bd;
+    }
+    public Time getTime(){
+        return (Time)listaTimes.getSelectedValue();
+    }
+    
+    public Jogador getJogador(){
+        return this.bd.buscarJogadorId(Integer.parseInt(lblID.getText()));
+    }
     
     public JList getListaTimes() {
         return listaTimes;
@@ -442,7 +481,7 @@ public class EditarTimes extends javax.swing.JDialog {
                 
         for(final Jogador jr : t.getJogadoresReserva()){            
             
-            JLabel lbl = new JLabel(jr.getImage24(), JLabel.CENTER); 
+            final JLabel lbl = new JLabel(jr.getImage24(), JLabel.CENTER); 
                         
             String toolTip = "<html>Posição: " + jr.getPosicao() + "<br>" + "Nome: " + jr.getNome() + "</html>";
             
@@ -466,27 +505,15 @@ public class EditarTimes extends javax.swing.JDialog {
             
             lbl.addMouseListener(new MouseAdapter(){  
                 public void mouseClicked(MouseEvent e){
-                    
-                    lblID.setText(jr.getId() + "");
-                    lblNome.setText(jr.getNome());
-                    lblPosicao.setText(jr.getPosicao() + "");
-                    lblIdade.setText(jr.getIdade() + "");
-                    lblHabilidade1.setText(jr.getHabilidade1() + "");
-                    lblHabilidade2.setText(jr.getHabilidade2() + "");
-                    
-                    if(jr.isTitular()){
-                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
-                        lblTituReser.setToolTipText("Titular");
-                    } else {
-                        lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
-                        lblTituReser.setToolTipText("Reserva");
+                   
+                    if(e.getClickCount() == 2){
+                        AlterarJogador aj = new AlterarJogador(null, getBd(), jr, getEditarTime());
+                        aj.setVisible(true);
                     }
                     
-                    if(jr.isCraque()){
-                        lblCraque.setIcon(new ImageIcon(getClass().getResource("/resources/diversos/16/star.png")));
-                    } else {
-                        lblCraque.setIcon(null);
-                    }                 
+                    resetBackgroundColorReserva();
+                    lbl.setBackground(new Color(235, 235, 235));
+                    preencherInfoJogador(jr);
                     
                     if(!lblID.getText().isEmpty()){
                         btnAlterarJogador.setEnabled(true);
@@ -496,11 +523,50 @@ public class EditarTimes extends javax.swing.JDialog {
                         btnRemoverJogador.setEnabled(false);
                     }
                     
-                }  
+                }
+                
             });             
         }                
     }
 
+    private void preencherInfoJogador(Jogador j){
+          
+        
+        
+        lblID.setText(j.getId() + "");
+        lblNome.setText(j.getNome());
+        lblPosicao.setText(j.getPosicao() + "");
+        lblIdade.setText(j.getIdade() + "");
+        lblHabilidade1.setText(j.getHabilidade1() + "");
+        lblHabilidade2.setText(j.getHabilidade2() + "");
+
+        if(j.isTitular()){
+            lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
+            lblTituReser.setToolTipText("Titular");
+        } else {
+            lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
+            lblTituReser.setToolTipText("Reserva");
+        }
+
+        if(j.isCraque()){
+            lblCraque.setIcon(new ImageIcon(getClass().getResource("/resources/diversos/16/star.png")));
+        } else {
+            lblCraque.setIcon(null);
+        }
+    }
+    
+    private void resetBackgroundColorReserva(){
+        
+        Component[] comp = painelReserva.getComponents();
+        
+        for(int i=0; i < comp.length; i++){            
+            if(comp[i] instanceof JLabel){                
+                JLabel label = (JLabel) comp[i];
+                label.setBackground(Color.white);
+            }            
+        }
+    }
+    
     private void carregarPanelTitular(Time t){        
          
         removerLabelsPainelTitular();

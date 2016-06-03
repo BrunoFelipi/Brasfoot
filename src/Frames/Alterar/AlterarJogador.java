@@ -3,12 +3,8 @@ package Frames.Alterar;
 import Frames.Cadastro.*;
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
-import java.awt.Color;
-import java.awt.Image;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
 import src.Jogador;
 import src.Time;
 import src.enumeracao.EnumHabilidade;
@@ -22,62 +18,34 @@ public class AlterarJogador extends javax.swing.JDialog {
 
     private BancoDeDados bd;
     private Jogador j;
+    private EditarTimes et;
+    private FotoJogador fj;
     private ImageIcon img16;
     private ImageIcon img24;
     private ImageIcon img128;
-    private EditarTimes et;
     
     public AlterarJogador(java.awt.Frame parent, BancoDeDados bd, Jogador j, EditarTimes et) {
         super(parent, true);
         initComponents();
+        setBd(bd);         
+        this.fj = new FotoJogador(null, this);
         this.j = j;
         this.et = et;        
-        setBd(bd);  
-        popularComboPosicao();
-        popularCombosHabilidade();
-                
-        lblNomeTime.setText(j.getTime().getNome());
-        lblEscudoTime32.setIcon(j.getTime().getEscudo32());
-        lblFotoJogador128.setIcon(j.getImage128());
-        campoId.setText(j.getId()+"");
-        campoNome.setText(j.getNome());
-        comboPosicao.setSelectedItem(j.getPosicao());
-        sliderIdade.setValue(j.getIdade());        
-        comboHabilidade1.setSelectedItem(j.getHabilidade1());
-        comboHabilidade2.setSelectedItem(j.getHabilidade2());        
-        checkTitular.setSelected(j.isTitular());
-        checkCraque.setSelected(j.isCraque());
-        
+        this.lblNomeTime.setText(j.getTime().getNome());
+        this.lblEscudoTime32.setIcon(j.getTime().getEscudo32());
+        this.lblFotoJogador128.setIcon(j.getImage128());
+        this.campoId.setText(j.getId()+"");
+        this.campoNome.setText(j.getNome());
+        this.comboPosicao.setSelectedItem(j.getPosicao());
+        this.sliderIdade.setValue(j.getIdade());        
+        this.comboHabilidade1.setSelectedItem(j.getHabilidade1());
+        this.comboHabilidade2.setSelectedItem(j.getHabilidade2());        
+        this.checkTitular.setSelected(j.isTitular());
+        this.checkCraque.setSelected(j.isCraque());
         this.lblOk.setVisible(false);
         this.lblNok.setVisible(false);
-    }
-
-    public ImageIcon getImg16() {
-        return img16;
-    }
-
-    public void setImg16(ImageIcon img16) {
-        this.img16 = img16;
-    }
-
-    public ImageIcon getImg24() {
-        return img24;
-    }
-
-    public void setImg24(ImageIcon img24) {
-        this.img24 = img24;
-    }
-
-    public ImageIcon getImg128() {
-        return img128;
-    }
-
-    public void setImg128(ImageIcon img128) {
-        this.img128 = img128;
-    }
-    
-    private int nextId(){
-        return (getBd().getJogadores().get(getBd().getJogadores().size()-1).getId()+1);
+        popularComboPosicao();
+        popularCombosHabilidade();
     }
     
     private void popularComboPosicao(){
@@ -114,6 +82,30 @@ public class AlterarJogador extends javax.swing.JDialog {
 
     public void setBd(BancoDeDados bd) {
         this.bd = bd;
+    }
+
+    public ImageIcon getImg16() {
+        return img16;
+    }
+
+    public void setImg16(ImageIcon img16) {
+        this.img16 = img16;
+    }
+
+    public ImageIcon getImg24() {
+        return img24;
+    }
+
+    public void setImg24(ImageIcon img24) {
+        this.img24 = img24;
+    }
+
+    public ImageIcon getImg128() {
+        return img128;
+    }
+
+    public void setImg128(ImageIcon img128) {
+        this.img128 = img128;
     }
     
     @SuppressWarnings("unchecked")
@@ -348,23 +340,25 @@ public class AlterarJogador extends javax.swing.JDialog {
             this.lblNok.setVisible(true);
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
-                
-            if(getImg16() == null){
-                setImg16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/default.png")));
-            }
-
-            if(getImg24() == null){
-                setImg24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
-            }
-
-            if(getImg128() == null){
-                setImg128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
-            }
-
-            this.j.setImage16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/default.png")));
-            this.j.setImage24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/default.png")));
-            this.j.setImage128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/default.png")));
             
+//            if(this.j.getImage16() == null){
+//                this.j.setImage16(new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/8.png")));
+//            } else {
+                this.j.setImage16(getImg16());
+//            }
+
+//            if(this.j.getImage24() == null){
+//                this.j.setImage24(new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/8.png")));
+//            } else {
+                this.j.setImage24(getImg24());
+//            }
+
+//            if(this.j.getImage128() == null){
+//                this.j.setImage128(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/8.png")));
+//            } else {
+                this.j.setImage128(getImg128());
+//            }
+           
             this.j.setNome(campoNome.getText());
             this.j.setPosicao((EnumPosicao) comboPosicao.getSelectedItem());
             this.j.setIdade(sliderIdade.getValue());
@@ -379,21 +373,18 @@ public class AlterarJogador extends javax.swing.JDialog {
             getBd().getJogadores().add(j);
             this.lblOk.setVisible(true);
             this.lblNok.setVisible(false);
-            campoId.setText(nextId() + "");
-            campoNome.setText("");                
-            sliderIdade.setValue(20);     
-            
+                        
             this.et.carregarPainelReserva(this.bd.buscarTimeId(((Time)this.et.getListaTimes().getSelectedValue()).getId()));
+                   
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnFotoJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoJogadorActionPerformed
 
-        FotoJogador fj = new FotoJogador(null, this);
-        fj.setVisible(true);
+        this.fj.setVisible(true);
         
     }//GEN-LAST:event_btnFotoJogadorActionPerformed
-
+    
     private void removerJogadorListaTitularReserva(Jogador j){        
         if(j.isTitular()){
             j.getTime().getJogadoresTitular().remove(j);
