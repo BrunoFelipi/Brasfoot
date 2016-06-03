@@ -138,6 +138,8 @@ public class CadastrarJogador extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         lblIconCraque = new javax.swing.JLabel();
         lblIconTitu = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        comboLado = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Jogador");
@@ -208,7 +210,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblIconCraque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/16/star.png"))); // NOI18N
         lblIconCraque.setToolTipText("Craque");
         lblIconCraque.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblIconCraque.setPreferredSize(new java.awt.Dimension(16, 16));
         lblIconCraque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblIconCraqueMouseClicked(evt);
@@ -218,12 +219,15 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblIconTitu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconTitu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png"))); // NOI18N
         lblIconTitu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblIconTitu.setPreferredSize(new java.awt.Dimension(16, 16));
         lblIconTitu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblIconTituMouseClicked(evt);
             }
         });
+
+        jLabel6.setText("Lado:");
+
+        comboLado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ambos", "Direita", "Esquerda" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,7 +238,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                        .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNomeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -243,10 +247,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
                             .addComponent(btnFotoJogador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboHabilidade2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -264,16 +264,24 @@ public class CadastrarJogador extends javax.swing.JDialog {
                                         .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
-                                .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNok)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblOk)))
+                                .addComponent(lblOk))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboHabilidade2, 0, 142, Short.MAX_VALUE)
+                                    .addComponent(comboLado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -314,12 +322,19 @@ public class CadastrarJogador extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(comboHabilidade2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnFotoJogador)
-                            .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnFotoJogador)
+                                    .addComponent(jLabel6)
+                                    .addComponent(comboLado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIconCraque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -353,14 +368,24 @@ public class CadastrarJogador extends javax.swing.JDialog {
             this.lblNok.setVisible(true);
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
-            /*
+            
+            char slado = ' ';
+            
+            if((comboLado.getSelectedItem()+"").equals("Ambos")){
+                slado = 'A';
+            } else if((comboLado.getSelectedItem()+"").equals("Esquerda")){
+                slado = 'E';
+            } else if((comboLado.getSelectedItem()+"").equals("Direita")){
+                slado = 'D';
+            } 
+            
             Jogador j = new Jogador(Integer.parseInt(campoId.getText()), getImg16(), getImg24(), getImg128(), campoNome.getText(), (EnumPosicao) comboPosicao.getSelectedItem(), 
                 slider.getValue(), (EnumHabilidade) comboHabilidade1.getSelectedItem(), (EnumHabilidade) comboHabilidade2.getSelectedItem(),
-                lblIconCraque.isEnabled(), this.t, getBd(), checkTitular.isSelected());
+                lblIconCraque.isEnabled(), this.t, getBd(), lblIconTitu.isEnabled(), slado);
             
             this.t.getJogadores().add(j);
 
-            if(checkTitular.isSelected()){
+            if(lblIconTitu.isEnabled()){
                 this.t.getJogadoresTitular().add(j);    
             } else {
                 this.t.getJogadoresReserva().add(j);
@@ -376,7 +401,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
             this.et.carregarPainelReserva(this.t);
             
             validaAdicionarJogadorReserva();
-                    */
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -400,9 +424,11 @@ public class CadastrarJogador extends javax.swing.JDialog {
     private void lblIconTituMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconTituMouseClicked
 
         if(lblIconTitu.getIcon().equals(getClass().getResource("/resources/camisa/16/camisa-reserva.png"))){
-            System.out.println("reserva");
-        } else {
-            System.out.println("titular");
+            lblIconTitu.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
+            lblIconTitu.setToolTipText("Titular");
+        } else {            
+            lblIconTitu.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
+            lblIconTitu.setToolTipText("Reserva");
         }
         
     }//GEN-LAST:event_lblIconTituMouseClicked
@@ -425,12 +451,14 @@ public class CadastrarJogador extends javax.swing.JDialog {
     private javax.swing.JTextField campoNome;
     private javax.swing.JComboBox comboHabilidade1;
     private javax.swing.JComboBox comboHabilidade2;
+    private javax.swing.JComboBox comboLado;
     private javax.swing.JComboBox comboPosicao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

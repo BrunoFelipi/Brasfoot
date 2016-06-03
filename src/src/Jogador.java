@@ -43,9 +43,10 @@ public class Jogador implements Serializable{
     private int valor;    
     private boolean titular;
     private BancoDeDados bd;
+    private char lado;
     
     public Jogador(int numero, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular) {
+            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular, char lado) {
         this.bd = bd;
         setImage16(image16);
         setImage24(image24);
@@ -66,10 +67,11 @@ public class Jogador implements Serializable{
         setJogosDisputados(0);
         setValor(valor);
         setTitular(titular);
+        setLado(lado);
     }
 
     public Jogador(int id, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, 
-            boolean craque, Time time, BancoDeDados bd, boolean titular) {
+            boolean craque, Time time, BancoDeDados bd, boolean titular, char lado) {
         setId(id);
         setImage16(image16);
         setImage24(image24);
@@ -83,6 +85,15 @@ public class Jogador implements Serializable{
         setTime(time);
         setBd(bd);
         setTitular(titular);
+        setLado(lado);
+    }
+
+    public char getLado() {
+        return lado;
+    }
+
+    public void setLado(char lado) {
+        this.lado = lado;
     }
 
     public boolean isTitular() {
