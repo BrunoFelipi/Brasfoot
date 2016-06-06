@@ -154,7 +154,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuSalvarJogoActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;

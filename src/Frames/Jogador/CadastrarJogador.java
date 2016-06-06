@@ -214,6 +214,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
 
         lblIconTitu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconTitu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png"))); // NOI18N
+        lblIconTitu.setToolTipText("Titular");
         lblIconTitu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblIconTitu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,7 +235,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNomeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -270,14 +271,14 @@ public class CadastrarJogador extends javax.swing.JDialog {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(lblValue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(comboHabilidade2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,11 +328,11 @@ public class CadastrarJogador extends javax.swing.JDialog {
                             .addComponent(btnFotoJogador)
                             .addComponent(jLabel6)
                             .addComponent(comboLado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -382,7 +383,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
             
             this.t.getJogadores().add(j);
 
-            if(lblIconTitu.getIcon().equals(getClass().getResource("/resources/camisa/16/camisa-titular.png"))){
+            if(lblIconTitu.isEnabled()){
                 this.t.getJogadoresTitular().add(j);    
             } else {
                 this.t.getJogadoresReserva().add(j);
@@ -421,12 +422,12 @@ public class CadastrarJogador extends javax.swing.JDialog {
 
     private void lblIconTituMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconTituMouseClicked
 
-        if(lblIconTitu.getIcon().equals(getClass().getResource("/resources/camisa/16/camisa-reserva.png"))){
-            lblIconTitu.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
-            lblIconTitu.setToolTipText("Titular");
-        } else {            
-            lblIconTitu.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-reserva.png")));
+        if(lblIconTitu.isEnabled()){
+            lblIconTitu.setEnabled(false);
             lblIconTitu.setToolTipText("Reserva");
+        } else {            
+            lblIconTitu.setEnabled(true);
+            lblIconTitu.setToolTipText("Titular");
         }
         
     }//GEN-LAST:event_lblIconTituMouseClicked
