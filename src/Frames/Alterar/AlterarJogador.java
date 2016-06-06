@@ -30,7 +30,11 @@ public class AlterarJogador extends javax.swing.JDialog {
         setBd(bd);         
         this.fj = new FotoJogador(null, this);
         this.j = j;
-        this.et = et;        
+        this.et = et; 
+        this.img16 = j.getImage16();
+        this.img24 = j.getImage24();
+        this.img128 = j.getImage128();
+        this.j.getTime().getJogadoresReserva().remove(this.j);
         this.lblNomeTime.setText(j.getTime().getNome());
         this.lblEscudoTime32.setIcon(j.getTime().getEscudo32());
         this.lblFotoJogador128.setIcon(j.getImage128());
@@ -367,8 +371,15 @@ public class AlterarJogador extends javax.swing.JDialog {
             this.j.setCraque(checkCraque.isSelected());
             this.j.setTitular(checkTitular.isSelected());
             
-            removerJogadorListaTitularReserva(this.j);
-            adicionarJogadorListaTitularReserva(this.j);
+            if(checkTitular.isSelected()){
+                this.j.getTime().getJogadoresTitular().remove(this.j);
+                this.j.getTime().getJogadoresReserva().remove(this.j);
+                this.j.getTime().getJogadoresTitular().add(this.j);                
+            } else {
+                this.j.getTime().getJogadoresTitular().remove(this.j);
+                this.j.getTime().getJogadoresReserva().remove(this.j);
+                this.j.getTime().getJogadoresReserva().add(this.j);
+            }
             
             getBd().getJogadores().add(j);
             this.lblOk.setVisible(true);
@@ -384,23 +395,7 @@ public class AlterarJogador extends javax.swing.JDialog {
         this.fj.setVisible(true);
         
     }//GEN-LAST:event_btnFotoJogadorActionPerformed
-    
-    private void removerJogadorListaTitularReserva(Jogador j){        
-        if(j.isTitular()){
-            j.getTime().getJogadoresTitular().remove(j);
-        } else {
-            j.getTime().getJogadoresReserva().remove(j);
-        }
-    }
-    
-    private void adicionarJogadorListaTitularReserva(Jogador j){        
-        if(j.isTitular()){
-            j.getTime().getJogadoresTitular().add(j);
-        } else {
-            j.getTime().getJogadoresReserva().add(j);
-        }
-    }
-    
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnFotoJogador;

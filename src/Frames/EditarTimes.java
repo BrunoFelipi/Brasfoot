@@ -4,22 +4,23 @@ import BancoDeDados.BancoDeDados;
 import Frames.Alterar.AlterarJogador;
 import Frames.Cadastro.CadastrarJogador;
 import Frames.Cadastro.CadastrarTime;
-import Frames.Cadastro.FotoJogador;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import src.Jogador;
 import src.Time;
+import src.serializable.Jogo;
 
 /**
  *
@@ -69,6 +70,7 @@ public class EditarTimes extends javax.swing.JDialog {
         lblHabilidade2 = new javax.swing.JLabel();
         lblCraque = new javax.swing.JLabel();
         lblTituReser = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -275,6 +277,13 @@ public class EditarTimes extends javax.swing.JDialog {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -290,8 +299,10 @@ public class EditarTimes extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverTime, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAlterarJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,7 +336,8 @@ public class EditarTimes extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnRemoverJogador, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnAlterarJogador, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnAddJogador, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(btnAddJogador, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -367,7 +379,7 @@ public class EditarTimes extends javax.swing.JDialog {
         
         //carregarPanelTitular(this.bd.buscarTimeId(((Time)listaTimes.getSelectedValue()).getId()));
         carregarPainelReserva(getTime());
-        
+                
         lblCraque.setIcon(null);
         lblTituReser.setIcon(null);
         lblID.setText("");
@@ -395,7 +407,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnRemoverJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverJogadorActionPerformed
 
-        if(lblID.getText() != null){
+        if(!lblID.getText().isEmpty()){
             
             getTime().getJogadores().remove(getJogador());
         
@@ -409,6 +421,19 @@ public class EditarTimes extends javax.swing.JDialog {
             preencherInfoJogador(getJogador());
         }        
     }//GEN-LAST:event_btnRemoverJogadorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        //Jogo.salvar("C:\\jogo.dat", this.bd);
+        
+        Date data = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy_HH-mm");
+        
+        String localSalvamento = System.getProperty("user.home") + "\\Documents\\Fussball\\Fussball-" + df.format(data) + ".dat";
+                
+        Jogo.salvar(localSalvamento, this.bd);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public EditarTimes getEditarTime() {
         return this;
@@ -509,6 +534,7 @@ public class EditarTimes extends javax.swing.JDialog {
                     if(e.getClickCount() == 2){
                         AlterarJogador aj = new AlterarJogador(null, getBd(), jr, getEditarTime());
                         aj.setVisible(true);
+                        return;
                     }
                     
                     resetBackgroundColorReserva();
@@ -530,9 +556,7 @@ public class EditarTimes extends javax.swing.JDialog {
     }
 
     private void preencherInfoJogador(Jogador j){
-          
-        
-        
+                  
         lblID.setText(j.getId() + "");
         lblNome.setText(j.getNome());
         lblPosicao.setText(j.getPosicao() + "");
@@ -631,6 +655,7 @@ public class EditarTimes extends javax.swing.JDialog {
     private javax.swing.JButton btnAlterarTime;
     private javax.swing.JButton btnRemoverJogador;
     private javax.swing.JButton btnRemoverTime;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

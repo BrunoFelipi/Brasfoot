@@ -1,6 +1,8 @@
 package Frames;
 
 import BancoDeDados.BancoDeDados;
+import teste.CargaJogadores;
+import teste.CargaTimes;
 
 /**
  *
@@ -29,6 +31,7 @@ public class Entrada extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -39,6 +42,11 @@ public class Entrada extends javax.swing.JFrame {
         btnNovo.setBorderPainted(false);
         btnNovo.setContentAreaFilled(false);
         btnNovo.setOpaque(true);
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnCarregar.setBackground(new java.awt.Color(102, 102, 102));
         btnCarregar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -114,10 +122,23 @@ public class Entrada extends javax.swing.JFrame {
 
     private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
 
-        CarregarJogo cj = new CarregarJogo(this, bd);
+        CarregarJogo cj = new CarregarJogo(null, this);
         cj.setVisible(true);
         
     }//GEN-LAST:event_btnCarregarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        
+        BancoDeDados bd = new BancoDeDados();
+        
+        CargaTimes t = new CargaTimes(bd);
+        t.inserirTimes();
+        CargaJogadores c = new CargaJogadores(bd);
+        c.inserirJogadores();
+        
+        new EditarTimes(null, bd).setVisible(true);
+        
+    }//GEN-LAST:event_btnNovoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

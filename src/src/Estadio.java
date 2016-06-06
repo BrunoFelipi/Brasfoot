@@ -1,10 +1,12 @@
 package src;
 
+import java.io.Serializable;
+
 /**
  *
  * @author bruno.souza
  */
-public class Estadio {
+public class Estadio implements Serializable{
 
     private String nome;
     private int qtdGeral;
