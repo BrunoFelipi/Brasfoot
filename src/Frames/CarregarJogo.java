@@ -10,11 +10,10 @@ import src.serializable.Jogo;
  *
  * @author bruno.souza
  */
-public class CarregarJogo extends javax.swing.JDialog implements Runnable{
+public class CarregarJogo extends javax.swing.JDialog{
 
     private DefaultListModel listModel;
     private Entrada e;
-//    private Thread t;
     
     public CarregarJogo(java.awt.Frame parent, Entrada e) {
         super(parent, true);
@@ -22,8 +21,6 @@ public class CarregarJogo extends javax.swing.JDialog implements Runnable{
         this.listModel = new DefaultListModel();
         this.listaArquivos.setModel(listModel);
         this.e = e;
-//        this.t = new Thread(this);
-//        this.t.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -120,10 +117,11 @@ public class CarregarJogo extends javax.swing.JDialog implements Runnable{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCarregar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnExcluir)
-                            .addComponent(f5))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnCarregar)
+                                .addComponent(f5)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,9 +152,7 @@ public class CarregarJogo extends javax.swing.JDialog implements Runnable{
             f.mkdirs();            
         }
         
-        carregarArquivos();        
-        
-        
+        carregarArquivos(); 
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -234,13 +230,4 @@ public class CarregarJogo extends javax.swing.JDialog implements Runnable{
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JList listaArquivos;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void run() {
-        
-        while(true){
-            carregarArquivos();
-        }
-        
-    }
 }

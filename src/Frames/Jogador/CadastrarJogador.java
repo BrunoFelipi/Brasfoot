@@ -1,13 +1,9 @@
-package Frames.Cadastro;
+package Frames.Jogador;
 
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
-import java.awt.Color;
-import java.awt.Image;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
 import src.Jogador;
 import src.Time;
 import src.enumeracao.EnumHabilidade;
@@ -402,6 +398,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
             this.et.carregarPainelReserva(this.t);
             
             validaAdicionarJogadorReserva();
+            this.et.salvarJogo();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

@@ -1,16 +1,15 @@
 package Frames;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Alterar.AlterarJogador;
-import Frames.Cadastro.CadastrarJogador;
-import Frames.Cadastro.CadastrarTime;
+import Frames.Jogador.AlterarJogador;
+import Frames.Jogador.CadastrarJogador;
+import Frames.Time.CadastrarTime;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -30,6 +29,9 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private BancoDeDados bd;
     private DefaultListModel listModel;
+    private Date data;
+    private SimpleDateFormat df;
+    private String localSalvamento;
     
     public EditarTimes(java.awt.Frame parent, BancoDeDados bd) {
         super(parent, true);
@@ -37,6 +39,9 @@ public class EditarTimes extends javax.swing.JDialog {
         this.bd = bd;
         this.listModel = new DefaultListModel();
         this.listaTimes.setModel(this.listModel);         
+        this.data = new Date();
+        this.df = new SimpleDateFormat("dd-MM-yyyy_HH-mm");
+        this.localSalvamento = System.getProperty("user.home") + "\\Documents\\Fussball\\Fussball-" + df.format(data) + ".dat";
         popularLista();
     }
     
@@ -70,7 +75,7 @@ public class EditarTimes extends javax.swing.JDialog {
         lblHabilidade2 = new javax.swing.JLabel();
         lblCraque = new javax.swing.JLabel();
         lblTituReser = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSalvarJogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -277,10 +282,10 @@ public class EditarTimes extends javax.swing.JDialog {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarJogo.setText("Salvar");
+        btnSalvarJogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarJogoActionPerformed(evt);
             }
         });
 
@@ -301,7 +306,7 @@ public class EditarTimes extends javax.swing.JDialog {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnSalvarJogo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -337,7 +342,7 @@ public class EditarTimes extends javax.swing.JDialog {
                         .addComponent(btnRemoverJogador, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnAlterarJogador, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnAddJogador, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jButton1))
+                    .addComponent(btnSalvarJogo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -422,19 +427,14 @@ public class EditarTimes extends javax.swing.JDialog {
         }        
     }//GEN-LAST:event_btnRemoverJogadorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarJogoActionPerformed
+        salvarJogo();
+    }//GEN-LAST:event_btnSalvarJogoActionPerformed
 
-        //Jogo.salvar("C:\\jogo.dat", this.bd);
-        
-        Date data = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy_HH-mm");
-        
-        String localSalvamento = System.getProperty("user.home") + "\\Documents\\Fussball\\Fussball-" + df.format(data) + ".dat";
-                
-        Jogo.salvar(localSalvamento, this.bd);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void salvarJogo(){
+        Jogo.salvar(this.localSalvamento, this.bd); 
+    }
+    
     public EditarTimes getEditarTime() {
         return this;
     }
@@ -655,7 +655,7 @@ public class EditarTimes extends javax.swing.JDialog {
     private javax.swing.JButton btnAlterarTime;
     private javax.swing.JButton btnRemoverJogador;
     private javax.swing.JButton btnRemoverTime;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSalvarJogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

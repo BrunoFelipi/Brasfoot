@@ -1,6 +1,5 @@
-package Frames.Alterar;
+package Frames.Jogador;
 
-import Frames.Cadastro.*;
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
 import javax.swing.ImageIcon;

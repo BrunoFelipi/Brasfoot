@@ -1,7 +1,7 @@
 package Main;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Cadastro.CadastrarJogador;
+import Frames.Jogador.CadastrarJogador;
 import Frames.EditarTimes;
 import Frames.Entrada;
 import Frames.Pesquisa.PesquisarJogador;

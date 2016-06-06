@@ -1,7 +1,7 @@
 package Frames.Pesquisa;
 
 import BancoDeDados.BancoDeDados;
-import Frames.Show.ShowJogador;
+import Frames.Jogador.ShowJogador;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.List;

@@ -1,6 +1,7 @@
-package Frames.Cadastro;
+package Frames.Jogador;
 
-import Frames.Alterar.AlterarJogador;
+import Frames.Jogador.CadastrarJogador;
+import Frames.Jogador.AlterarJogador;
 import java.awt.Color;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
