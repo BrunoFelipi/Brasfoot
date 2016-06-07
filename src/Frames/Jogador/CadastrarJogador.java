@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import src.Jogador;
 import src.Time;
 import src.enumeracao.EnumHabilidade;
+import src.enumeracao.EnumLado;
 import src.enumeracao.EnumPosicao;
 
 /**
@@ -36,7 +37,8 @@ public class CadastrarJogador extends javax.swing.JDialog {
         this.lblFotoJogador128.setIcon(new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/8.png")));
         this.lblOk.setVisible(false);
         this.lblNok.setVisible(false);        
-        this.campoId.setText(nextId() + "");                        
+        this.campoId.setText(nextId() + "");   
+        popularComboLado();
         popularComboPosicao();
         popularCombosHabilidade();
         validaAdicionarJogadorReserva();
@@ -68,6 +70,15 @@ public class CadastrarJogador extends javax.swing.JDialog {
         
     private int nextId(){
         return (getBd().getJogadores().get(getBd().getJogadores().size()-1).getId()+1);
+    }
+    
+    private void popularComboLado(){
+     
+        EnumLado [] enumLado = EnumLado.values();
+        
+        for(int i=0; i < enumLado.length; i++){
+            comboLado.addItem(enumLado[i]);
+        }
     }
     
     private void popularComboPosicao(){
@@ -187,7 +198,9 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblNok.setBackground(new java.awt.Color(255, 255, 255));
         lblNok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/16/fail.png"))); // NOI18N
 
+        lblFotoJogador128.setBackground(new java.awt.Color(204, 204, 204));
         lblFotoJogador128.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFotoJogador128.setOpaque(true);
 
         lblNomeTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblNomeTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -195,7 +208,10 @@ public class CadastrarJogador extends javax.swing.JDialog {
         lblEscudoTime32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEscudoTime32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        btnFotoJogador.setText("Foto");
+        btnFotoJogador.setBackground(new java.awt.Color(255, 255, 255));
+        btnFotoJogador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/24/camera.png"))); // NOI18N
+        btnFotoJogador.setBorderPainted(false);
+        btnFotoJogador.setContentAreaFilled(false);
         btnFotoJogador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFotoJogadorActionPerformed(evt);
@@ -224,8 +240,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
 
         jLabel6.setText("Lado:");
 
-        comboLado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ambos", "Direita", "Esquerda" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -241,15 +255,16 @@ public class CadastrarJogador extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblFotoJogador128, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnFotoJogador, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                                .addComponent(lblFotoJogador128, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblNok)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblOk)
-                                .addGap(6, 6, 6)))
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnFotoJogador)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +312,10 @@ public class CadastrarJogador extends javax.swing.JDialog {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFotoJogador128, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblFotoJogador128, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnFotoJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -325,14 +343,13 @@ public class CadastrarJogador extends javax.swing.JDialog {
                             .addComponent(comboHabilidade2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnFotoJogador)
                             .addComponent(jLabel6)
                             .addComponent(comboLado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIconTitu, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIconCraque, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -367,19 +384,9 @@ public class CadastrarJogador extends javax.swing.JDialog {
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
             
-            char slado = ' ';
-            
-            if((comboLado.getSelectedItem()+"").equals("Ambos")){
-                slado = 'A';
-            } else if((comboLado.getSelectedItem()+"").equals("Esquerda")){
-                slado = 'E';
-            } else if((comboLado.getSelectedItem()+"").equals("Direita")){
-                slado = 'D';
-            } 
-            
             Jogador j = new Jogador(Integer.parseInt(campoId.getText()), getImg16(), getImg24(), getImg128(), campoNome.getText(), (EnumPosicao) comboPosicao.getSelectedItem(), 
                 slider.getValue(), (EnumHabilidade) comboHabilidade1.getSelectedItem(), (EnumHabilidade) comboHabilidade2.getSelectedItem(),
-                lblIconCraque.isEnabled(), this.t, getBd(), lblIconTitu.isEnabled(), slado);
+                lblIconCraque.isEnabled(), this.t, getBd(), lblIconTitu.isEnabled(), (EnumLado) comboLado.getSelectedItem());
             
             this.t.getJogadores().add(j);
 
@@ -397,7 +404,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
             campoNome.setText("");                
             slider.setValue(20); 
             this.et.carregarPainelReserva(this.t);
-            
             validaAdicionarJogadorReserva();
             this.et.salvarJogo();
         }

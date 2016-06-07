@@ -4,7 +4,7 @@ import BancoDeDados.BancoDeDados;
 import Frames.Jogador.CadastrarJogador;
 import Frames.EditarTimes;
 import Frames.Entrada;
-import Frames.Pesquisa.PesquisarJogador;
+import Frames.Jogador.PesquisarJogador;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
@@ -36,11 +36,11 @@ public class Brasfoot {
 //        
 //        PesquisarJogador p = new PesquisarJogador(null, bd);
 //        p.setVisible(true);
-//        EditarTimes et = new EditarTimes(null, bd);
-//        et.setVisible(true);
+        EditarTimes et = new EditarTimes(null, bd);
+        et.setVisible(true);
                 
-        Entrada e = new Entrada(bd);
-        e.setVisible(true);
+//        Entrada e = new Entrada(bd);
+//        e.setVisible(true);
     }
     
 }

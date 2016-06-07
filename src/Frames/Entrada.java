@@ -136,7 +136,9 @@ public class Entrada extends javax.swing.JFrame {
         CargaJogadores c = new CargaJogadores(bd);
         c.inserirJogadores();
         
-        new EditarTimes(null, bd).setVisible(true);
+        this.dispose();
+        new JanelaPrincipal(bd).setVisible(true);
+//        new EditarTimes(null, bd).setVisible(true);
         
     }//GEN-LAST:event_btnNovoActionPerformed
 

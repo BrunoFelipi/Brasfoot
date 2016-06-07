@@ -5,6 +5,7 @@ import src.enumeracao.EnumPosicao;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 import src.enumeracao.EnumHabilidade;
+import src.enumeracao.EnumLado;
 import src.enumeracao.EnumStatus;
 
 /**
@@ -43,10 +44,10 @@ public class Jogador implements Serializable{
     private int valor;    
     private boolean titular;
     private BancoDeDados bd;
-    private char lado;
+    private EnumLado lado;
     
     public Jogador(int numero, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular, char lado) {
+            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular, EnumLado lado) {
         this.bd = bd;
         setImage16(image16);
         setImage24(image24);
@@ -71,7 +72,7 @@ public class Jogador implements Serializable{
     }
 
     public Jogador(int id, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, 
-            boolean craque, Time time, BancoDeDados bd, boolean titular, char lado) {
+            boolean craque, Time time, BancoDeDados bd, boolean titular, EnumLado lado) {
         setId(id);
         setImage16(image16);
         setImage24(image24);
@@ -88,11 +89,11 @@ public class Jogador implements Serializable{
         setLado(lado);
     }
 
-    public char getLado() {
+    public EnumLado getLado() {
         return lado;
     }
 
-    public void setLado(char lado) {
+    public void setLado(EnumLado lado) {
         this.lado = lado;
     }
 

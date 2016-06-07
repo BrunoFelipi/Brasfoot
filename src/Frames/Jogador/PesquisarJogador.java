@@ -1,4 +1,4 @@
-package Frames.Pesquisa;
+package Frames.Jogador;
 
 import BancoDeDados.BancoDeDados;
 import Frames.Jogador.ShowJogador;
@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import src.Jogador;
 import src.Time;
 import src.enumeracao.EnumHabilidade;
+import src.enumeracao.EnumLado;
 import src.enumeracao.EnumPosicao;
 import src.enumeracao.EnumStatus;
 
@@ -40,7 +41,8 @@ public class PesquisarJogador extends javax.swing.JDialog {
         popularComboPosicao();
         popularComboTime();
         popularComboHabilidade();
-        popularComboStatus();        
+        popularComboStatus();  
+        popularComboLado();
         
         comboCraque.setRenderer(this.listRenderer);
         this.spinIdMax.setValue(bd.getJogadores().get(bd.getJogadores().size() -1).getId());
@@ -94,6 +96,8 @@ public class PesquisarJogador extends javax.swing.JDialog {
         spinValorMin = new javax.swing.JSpinner();
         spinValorMax = new javax.swing.JSpinner();
         jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        comboLado = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Jogadores");
@@ -124,7 +128,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("até");
 
-        spinNumeroMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spinNumeroMax.setModel(new javax.swing.SpinnerNumberModel(99, 1, 99, 1));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("até");
@@ -210,14 +214,14 @@ public class PesquisarJogador extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Nome", "Posição", "Número", "Time", "Habilidade 1", "Habilidade 2", "Idade", "Força", "Status", "Valor R$", "Craque"
+                "ID", "Nome", "Posição", "Lado", "Número", "Time", "Habilidade 1", "Habilidade 2", "Idade", "Força", "Status", "Valor R$", "Craque"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -241,9 +245,9 @@ public class PesquisarJogador extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tabela.getColumnModel().getColumn(3).setPreferredWidth(30);
-            tabela.getColumnModel().getColumn(7).setPreferredWidth(20);
-            tabela.getColumnModel().getColumn(11).setPreferredWidth(20);
+            tabela.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tabela.getColumnModel().getColumn(8).setPreferredWidth(20);
+            tabela.getColumnModel().getColumn(12).setPreferredWidth(20);
         }
 
         btnPesquisar.setText("Pesquisar >>");
@@ -258,9 +262,9 @@ public class PesquisarJogador extends javax.swing.JDialog {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("até");
 
-        spinIdadeMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spinIdadeMax.setModel(new javax.swing.SpinnerNumberModel(45, 1, 45, 1));
 
-        spinForcaMax.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        spinForcaMax.setModel(new javax.swing.SpinnerNumberModel(100, 1, 100, 1));
 
         comboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos" }));
 
@@ -295,10 +299,12 @@ public class PesquisarJogador extends javax.swing.JDialog {
 
         spinValorMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1000), Integer.valueOf(0), null, Integer.valueOf(100)));
 
-        spinValorMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1000), Integer.valueOf(0), null, Integer.valueOf(100)));
+        spinValorMax.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(7000), Integer.valueOf(100), null, Integer.valueOf(100)));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("até");
+
+        jLabel17.setText("Lado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -335,21 +341,25 @@ public class PesquisarJogador extends javax.swing.JDialog {
                                             .addComponent(spinForcaMax)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(spinValorMin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(spinValorMax, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
                                             .addComponent(comboCraque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(comboStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(checkTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(comboStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(comboLado, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 2, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinValorMin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinValorMax, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(checkTodos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(436, 436, 436)))
                 .addContainerGap())
         );
@@ -357,8 +367,10 @@ public class PesquisarJogador extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -382,17 +394,20 @@ public class PesquisarJogador extends javax.swing.JDialog {
                             .addComponent(comboCraque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(comboLado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(spinValorMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
                             .addComponent(spinValorMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnPesquisar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -418,7 +433,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
                 comboTime.getSelectedItem() + "", comboHabilidade.getSelectedItem() + "", (int) spinIdadeMin.getValue(), 
                 (int) spinIdadeMax.getValue(), (int) spinForcaMin.getValue(), (int) spinForcaMax.getValue(), 
                 comboStatus.getSelectedItem() + "", (int) spinValorMin.getValue(), (int) spinValorMax.getValue(),
-                comboCraque.getSelectedItem() + "", checkTodos.isSelected()));
+                comboCraque.getSelectedItem() + "", checkTodos.isSelected(), comboLado.getSelectedItem() + ""));
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -459,6 +474,18 @@ public class PesquisarJogador extends javax.swing.JDialog {
         comboCraque.setEnabled(enable);   
         spinValorMin.setEnabled(enable);
         spinValorMax.setEnabled(enable);
+        comboLado.setEnabled(enable);
+    }
+    
+    private void popularComboLado(){
+        
+        comboLado.setRenderer(this.listRenderer); 
+        
+        EnumLado[] enumLado = EnumLado.values();
+        
+        for(int i=0; i < enumLado.length; i++){
+            comboLado.addItem(enumLado[i]);            
+        }        
     }
     
     private void popularComboPosicao(){
@@ -512,19 +539,20 @@ public class PesquisarJogador extends javax.swing.JDialog {
             this.model.setValueAt(lista.get(i).getId(), i, 0);
             this.model.setValueAt(lista.get(i).getNome(), i, 1);
             this.model.setValueAt(lista.get(i).getPosicao(), i, 2);
-            this.model.setValueAt(lista.get(i).getNumero(), i, 3);
-            this.model.setValueAt(lista.get(i).getTime().getNome(), i, 4);
-            this.model.setValueAt(lista.get(i).getHabilidade1(), i, 5);
-            this.model.setValueAt(lista.get(i).getHabilidade2(), i, 6);
-            this.model.setValueAt(lista.get(i).getIdade(), i, 7);
-            this.model.setValueAt(lista.get(i).getForca(), i, 8);
-            this.model.setValueAt(lista.get(i).getStatus(), i, 9);            
-            this.model.setValueAt(lista.get(i).getValor(), i, 10);
+            this.model.setValueAt(lista.get(i).getLado(), i, 3);
+            this.model.setValueAt(lista.get(i).getNumero(), i, 4);            
+            this.model.setValueAt(lista.get(i).getTime().getNome(), i, 5);
+            this.model.setValueAt(lista.get(i).getHabilidade1(), i, 6);
+            this.model.setValueAt(lista.get(i).getHabilidade2(), i, 7);
+            this.model.setValueAt(lista.get(i).getIdade(), i, 8);
+            this.model.setValueAt(lista.get(i).getForca(), i, 9);
+            this.model.setValueAt(lista.get(i).getStatus(), i, 10);            
+            this.model.setValueAt(lista.get(i).getValor(), i, 11);
             
             if(lista.get(i).isCraque()){
-                this.model.setValueAt(true, i, 11);
+                this.model.setValueAt(true, i, 12);
             } else {
-                this.model.setValueAt(false, i, 11);
+                this.model.setValueAt(false, i, 12);
             }
         }        
     }
@@ -546,6 +574,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkTodos;
     private javax.swing.JComboBox comboCraque;
     private javax.swing.JComboBox comboHabilidade;
+    private javax.swing.JComboBox comboLado;
     private javax.swing.JComboBox comboPosicao;
     private javax.swing.JComboBox comboStatus;
     private javax.swing.JComboBox comboTime;
@@ -557,6 +586,7 @@ public class PesquisarJogador extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

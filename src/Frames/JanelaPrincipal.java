@@ -1,8 +1,14 @@
 package Frames;
 
 import BancoDeDados.BancoDeDados;
+import Frames.Jogador.PesquisarJogador;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import src.serializable.Jogo;
 
 /**
@@ -21,7 +27,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         this.bd = bd;
         this.data = new Date();
         this.df = new SimpleDateFormat("dd-MM-yyyy_HH-mm");
-        this.localSalvamento = System.getProperty("user.home") + "\\Documents\\Fussball\\Fussball-" + df.format(data) + ".dat";
+        this.localSalvamento = System.getProperty("user.home") + "\\Documents\\Fussball\\Fussball-" + df.format(data) + ".dat";        
     }
 
     public BancoDeDados getBd() {
@@ -36,8 +42,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSalvarJogo = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuPesquisarJogador = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -78,6 +85,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuSalvarJogo);
 
+        menuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuSair);
+
         jMenuBar1.add(jMenu1);
 
         jMenu4.setBackground(new java.awt.Color(255, 255, 255));
@@ -85,13 +101,28 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Pesquisar");
         jMenu4.setOpaque(true);
 
-        jMenuItem1.setText("Jogador");
-        jMenu4.add(jMenuItem1);
+        menuPesquisarJogador.setText("Jogador");
+        menuPesquisarJogador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPesquisarJogadorActionPerformed(evt);
+            }
+        });
+        jMenu4.add(menuPesquisarJogador);
 
         jMenuItem2.setText("Treinador");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem2);
 
         jMenuItem3.setText("Juíz");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
@@ -102,9 +133,19 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu5.setOpaque(true);
 
         jMenuItem6.setText("Reformar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem6);
 
         jMenuItem7.setText("Bilheteria");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem7);
 
         jMenuBar1.add(jMenu5);
@@ -115,9 +156,19 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu6.setOpaque(true);
 
         jMenuItem4.setText("Visualizar Torcedores");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
 
         jMenuItem5.setText("Configurações");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem5);
 
         jMenuBar1.add(jMenu6);
@@ -147,13 +198,58 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void menuSalvarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalvarJogoActionPerformed
 
         Jogo.salvar(this.localSalvamento, this.bd); 
         
     }//GEN-LAST:event_menuSalvarJogoActionPerformed
 
+    private void menuPesquisarJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPesquisarJogadorActionPerformed
+
+        PesquisarJogador pj = new PesquisarJogador(this, this.bd);
+        pj.setVisible(true);
+        
+    }//GEN-LAST:event_menuPesquisarJogadorActionPerformed
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+
+        Object[] options = {"Sim", "Não"};
+        int i = JOptionPane.showOptionDialog(null, "Deseja salvar o jogo antes de sair?", "Alerta", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+        if(i == JOptionPane.YES_OPTION){
+            Jogo.salvar(this.localSalvamento, this.bd);
+        }
+        
+        System.exit(0);
+        
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        JOptionPane.showMessageDialog(null, "Seu time não tem torcida, parece até o Metropolitano...");        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        JOptionPane.showMessageDialog(null, "Seu time não tem estádio...até o Flamengo não tem estádio...");        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JOptionPane.showMessageDialog(null, "Isso non ecxist!");        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JOptionPane.showMessageDialog(null, "Isso non ecxist!");        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JOptionPane.showMessageDialog(null, "Não se faz treinador que nem antigamente...");        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JOptionPane.showMessageDialog(null, "Foi dar uma cagada...");    
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
@@ -161,13 +257,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem menuPesquisarJogador;
+    private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenuItem menuSalvarJogo;
     private javax.swing.JPanel painelFundo;
     // End of variables declaration//GEN-END:variables

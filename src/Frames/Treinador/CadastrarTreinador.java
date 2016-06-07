@@ -1,12 +1,12 @@
-package Frames.Pesquisa;
+package Frames.Treinador;
 
 /**
  *
  * @author Bruno
  */
-public class AdicionarTreinador extends javax.swing.JDialog {
+public class CadastrarTreinador extends javax.swing.JDialog {
 
-    public AdicionarTreinador(java.awt.Frame parent, boolean modal) {
+    public CadastrarTreinador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

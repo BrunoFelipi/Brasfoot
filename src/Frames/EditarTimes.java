@@ -3,6 +3,7 @@ package Frames;
 import BancoDeDados.BancoDeDados;
 import Frames.Jogador.AlterarJogador;
 import Frames.Jogador.CadastrarJogador;
+import Frames.Time.AlterarTime;
 import Frames.Time.CadastrarTime;
 import java.awt.Color;
 import java.awt.Component;
@@ -124,6 +125,11 @@ public class EditarTimes extends javax.swing.JDialog {
         btnAlterarTime.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterarTime.setEnabled(false);
         btnAlterarTime.setOpaque(true);
+        btnAlterarTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarTimeActionPerformed(evt);
+            }
+        });
 
         listaTimes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaTimes.setSelectionBackground(new Color(235, 235, 235));
@@ -366,7 +372,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
 
-        CadastrarTime ct = new CadastrarTime(null);
+        CadastrarTime ct = new CadastrarTime(null, getBd(), this);
         ct.setVisible(true);
         
     }//GEN-LAST:event_btnAddTimeActionPerformed
@@ -433,6 +439,13 @@ public class EditarTimes extends javax.swing.JDialog {
     private void btnSalvarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarJogoActionPerformed
         salvarJogo();
     }//GEN-LAST:event_btnSalvarJogoActionPerformed
+
+    private void btnAlterarTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarTimeActionPerformed
+
+        AlterarTime at = new AlterarTime(null, this.bd, (Time)this.listaTimes.getSelectedValue(), this);
+        at.setVisible(true);
+        
+    }//GEN-LAST:event_btnAlterarTimeActionPerformed
 
     public void salvarJogo(){
         Jogo.salvar(this.localSalvamento, this.bd); 
@@ -566,7 +579,8 @@ public class EditarTimes extends javax.swing.JDialog {
         lblIdade.setText(j.getIdade() + "");
         lblHabilidade1.setText(j.getHabilidade1() + "");
         lblHabilidade2.setText(j.getHabilidade2() + "");
-
+        lblLado.setText(j.getLado() + "");
+        
         if(j.isTitular()){
             lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
             lblTituReser.setToolTipText("Titular");
@@ -623,8 +637,8 @@ public class EditarTimes extends javax.swing.JDialog {
             painelTitular.validate();
             
             lbl.addMouseListener(new MouseAdapter(){  
+                @Override
                 public void mouseClicked(MouseEvent e){
-                    
                     lblID.setText(jr.getId() + "");
                     lblNome.setText(jr.getNome());
                     lblPosicao.setText(jr.getPosicao() + "");
@@ -632,6 +646,7 @@ public class EditarTimes extends javax.swing.JDialog {
                     lblHabilidade1.setText(jr.getHabilidade1() + "");
                     lblHabilidade2.setText(jr.getHabilidade2() + "");
                     lblLado.setText(jr.getLado() + "");
+                    
                     if(jr.isTitular()){
                         lblTituReser.setIcon(new ImageIcon(getClass().getResource("/resources/camisa/16/camisa-titular.png")));
                         lblTituReser.setToolTipText("Titular");
@@ -644,7 +659,7 @@ public class EditarTimes extends javax.swing.JDialog {
                         lblCraque.setIcon(new ImageIcon(getClass().getResource("/resources/diversos/16/star.png")));
                     } else {
                         lblCraque.setIcon(null);
-                    }                    
+                    }    
                 }  
             });             
         }                

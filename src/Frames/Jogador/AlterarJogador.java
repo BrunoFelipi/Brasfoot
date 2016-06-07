@@ -51,7 +51,8 @@ public class AlterarJogador extends javax.swing.JDialog {
         this.sliderIdade.setValue(this.j.getIdade());        
         this.comboHabilidade1.setSelectedItem(this.j.getHabilidade1());
         this.comboHabilidade2.setSelectedItem(this.j.getHabilidade2());        
-                
+        this.comboLado.setSelectedItem(et);
+        
         if(this.j.isCraque()){
             lblIconCraque.setEnabled(true);
         } else {

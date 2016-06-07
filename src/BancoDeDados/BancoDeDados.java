@@ -93,7 +93,7 @@ public class BancoDeDados implements Serializable{
     public List<Jogador> pesquisaJogador(int idMin, int idMax, String nome, 
             String posicao, int numMin, int numMax, String time, 
             String habilidade, int idadeMin, int idadeMax, int forcaMin,
-            int forcaMax, String status, int valorMin, int valorMax, String craque, boolean todos){
+            int forcaMax, String status, int valorMin, int valorMax, String craque, boolean todos, String lado){
         
         List<Jogador> jogador = new ArrayList<>();
         
@@ -107,6 +107,7 @@ public class BancoDeDados implements Serializable{
         String sHabilidade = habilidade + "";
         String sStatus = status + "";
         String sCraque = craque + "";
+        String sLado = lado + "";
         
         for(Jogador j : getJogadores()){        
             if(j.getId() >= idMin && j.getId() <= idMax){
@@ -124,6 +125,10 @@ public class BancoDeDados implements Serializable{
                                         continue;
                                     }
                                 } 
+                                                                
+                                if(!filtro(sLado, j.getLado() + "")){
+                                    continue;
+                                }
                                 
                                 if(!filtro(sNome, j.getNome() + "")){
                                     continue;

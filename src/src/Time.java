@@ -22,7 +22,6 @@ public class Time implements Serializable {
     private int forca;
     private int nivel;
     private float caixa;
-    private String estado;
     private List<Jogador> jogadores;
     private List<Jogador> jogadoresTitular;
     private List<Jogador> jogadoresReserva;
@@ -39,7 +38,8 @@ public class Time implements Serializable {
         this.nome = nome;
     }
         
-    public Time(String nome, int nivel, BancoDeDados bd) {
+    public Time(int id, String nome, int nivel, BancoDeDados bd) {
+        setId(id);
         setNome(nome);
         setNivel(nivel);
         setBd(bd);
@@ -169,14 +169,6 @@ public class Time implements Serializable {
 
     public void setForca(int forca) {
         this.forca = forca;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public List<Titulo> getTitulos() {
