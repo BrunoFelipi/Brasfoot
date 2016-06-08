@@ -3,11 +3,15 @@ package Frames.Time;
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
 import Frames.EscolherCor;
+import Frames.Jogador.CadastrarJogador;
+import Frames.Treinador.CadastrarTreinador;
+import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import src.Estadio;
 import src.Time;
-import src.enumeracao.EnumHabilidade;
+import src.Treinador;
 import src.enumeracao.EnumNivel;
 
 /**
@@ -22,8 +26,8 @@ public class CadastrarTime extends javax.swing.JDialog {
     private ImageIcon img32;
     private ImageIcon img128;
     
-    public CadastrarTime(java.awt.Frame parent, BancoDeDados bd, EditarTimes et) {
-        super(parent, true);
+    public CadastrarTime(BancoDeDados bd, EditarTimes et) {
+        super(new JFrame(), true);
         initComponents();
         
         setBd(bd); 
@@ -69,6 +73,7 @@ public class CadastrarTime extends javax.swing.JDialog {
         btnAddEstadio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Novo Time");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -98,7 +103,7 @@ public class CadastrarTime extends javax.swing.JDialog {
             }
         });
 
-        lblFotoTime128.setBackground(new java.awt.Color(204, 204, 204));
+        lblFotoTime128.setBackground(new java.awt.Color(255, 255, 255));
         lblFotoTime128.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFotoTime128.setOpaque(true);
 
@@ -143,6 +148,8 @@ public class CadastrarTime extends javax.swing.JDialog {
             }
         });
 
+        comboTreinador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sem Treinador" }));
+
         comboEstadio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sem Estádio" }));
 
         btnAddTreinador.setBackground(new java.awt.Color(255, 255, 255));
@@ -150,6 +157,11 @@ public class CadastrarTime extends javax.swing.JDialog {
         btnAddTreinador.setBorderPainted(false);
         btnAddTreinador.setContentAreaFilled(false);
         btnAddTreinador.setOpaque(true);
+        btnAddTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTreinadorActionPerformed(evt);
+            }
+        });
 
         btnAddEstadio.setBackground(new java.awt.Color(255, 255, 255));
         btnAddEstadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diversos/16/add-team.png"))); // NOI18N
@@ -165,17 +177,7 @@ public class CadastrarTime extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblFotoTime128, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblNok)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,7 +185,10 @@ public class CadastrarTime extends javax.swing.JDialog {
                                 .addGap(6, 6, 6))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnFotoTime)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(83, 83, 83))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblFotoTime128, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -203,13 +208,13 @@ public class CadastrarTime extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(comboTreinador, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(comboEstadio, javax.swing.GroupLayout.Alignment.LEADING, 0, 129, Short.MAX_VALUE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(comboEstadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(comboTreinador, 0, 150, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(btnAddTreinador)
-                                                    .addComponent(btnAddEstadio)))
+                                                    .addComponent(btnAddEstadio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnAddTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addComponent(comboNivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGap(0, 18, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -223,15 +228,23 @@ public class CadastrarTime extends javax.swing.JDialog {
                                 .addGap(17, 17, 17))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))))
+                                .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblEscudoTime32, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNomeTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(lblNomeTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblNomeTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lblEscudoTime32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -370,7 +383,12 @@ public class CadastrarTime extends javax.swing.JDialog {
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
 
+            Time t = new Time(getImg24(), getImg32(), getImg128(), Integer.parseInt(campoId.getText()),
+                    campoNome.getText() + "", (EnumNivel) comboNivel.getSelectedItem(), 
+                    (Treinador) comboTreinador.getSelectedItem(), (Estadio)comboEstadio.getSelectedItem(),
+                    campoCor1.getBackground(), campoCor2.getBackground(), getBd());
             
+            getBd().getTimes().add(t);
             
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -382,6 +400,12 @@ public class CadastrarTime extends javax.swing.JDialog {
     private void campoCor2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoCor2MouseClicked
         new EscolherCor(campoCor2).setVisible(true);
     }//GEN-LAST:event_campoCor2MouseClicked
+
+    private void btnAddTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTreinadorActionPerformed
+
+        new CadastrarTreinador().setVisible(true);
+        
+    }//GEN-LAST:event_btnAddTreinadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEstadio;

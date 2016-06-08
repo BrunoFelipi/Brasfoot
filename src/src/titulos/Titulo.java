@@ -7,14 +7,14 @@ import src.Time;
  * 
  * @author Bruno
  */
-public class Titulo implements Serializable {
+public class Titulo <T> implements Serializable {
     
-    private String nome;
+    private Enum<T> nome;
     private Time time;
     private float premiacao;
     private int ano;
 
-    public Titulo(String nome, Time time, float premiacao, int ano) {
+    public Titulo(Enum<T> nome, Time time, float premiacao, int ano) {
         setNome(nome);
         setTime(time);
         setPremiacao(premiacao);

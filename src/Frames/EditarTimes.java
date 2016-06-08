@@ -372,7 +372,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
 
-        CadastrarTime ct = new CadastrarTime(null, getBd(), this);
+        CadastrarTime ct = new CadastrarTime(getBd(), this);
         ct.setVisible(true);
         
     }//GEN-LAST:event_btnAddTimeActionPerformed
@@ -407,14 +407,14 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAddJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddJogadorActionPerformed
 
-        CadastrarJogador cj = new CadastrarJogador(null, this.bd, getTime(), this);
+        CadastrarJogador cj = new CadastrarJogador(this.bd, getTime(), this);
         cj.setVisible(true);
         
     }//GEN-LAST:event_btnAddJogadorActionPerformed
 
     private void btnAlterarJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarJogadorActionPerformed
 
-        AlterarJogador aj = new AlterarJogador(null, this.bd, this.bd.buscarJogadorId(Integer.parseInt(lblID.getText())), this);
+        AlterarJogador aj = new AlterarJogador(this.bd, this.bd.buscarJogadorId(Integer.parseInt(lblID.getText())), this);
         aj.setVisible(true);
         
     }//GEN-LAST:event_btnAlterarJogadorActionPerformed
@@ -442,7 +442,7 @@ public class EditarTimes extends javax.swing.JDialog {
 
     private void btnAlterarTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarTimeActionPerformed
 
-        AlterarTime at = new AlterarTime(null, this.bd, (Time)this.listaTimes.getSelectedValue(), this);
+        AlterarTime at = new AlterarTime(this.bd, (Time)this.listaTimes.getSelectedValue(), this);
         at.setVisible(true);
         
     }//GEN-LAST:event_btnAlterarTimeActionPerformed
@@ -548,7 +548,7 @@ public class EditarTimes extends javax.swing.JDialog {
                 public void mouseClicked(MouseEvent e){
                    
                     if(e.getClickCount() == 2){
-                        AlterarJogador aj = new AlterarJogador(null, getBd(), jr, getEditarTime());
+                        AlterarJogador aj = new AlterarJogador(getBd(), jr, getEditarTime());
                         aj.setVisible(true);
                         return;
                     }

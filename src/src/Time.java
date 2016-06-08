@@ -2,11 +2,13 @@ package src;
 
 import BancoDeDados.BancoDeDados;
 import java.awt.Color;
-import src.titulos.Titulo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import src.enumeracao.EnumEstado;
+import src.enumeracao.EnumNivel;
+import src.titulos.Titulo;
 
 /**
  *
@@ -18,9 +20,10 @@ public class Time implements Serializable {
     private ImageIcon escudo24;
     private ImageIcon escudo32;
     private ImageIcon escudo128;
+    private EnumEstado estado;
     private String nome;
     private int forca;
-    private int nivel;
+    private EnumNivel nivel;
     private float caixa;
     private List<Jogador> jogadores;
     private List<Jogador> jogadoresTitular;
@@ -38,7 +41,7 @@ public class Time implements Serializable {
         this.nome = nome;
     }
         
-    public Time(int id, String nome, int nivel, BancoDeDados bd) {
+    public Time(int id, String nome, EnumNivel nivel, BancoDeDados bd) {
         setId(id);
         setNome(nome);
         setNivel(nivel);
@@ -53,18 +56,20 @@ public class Time implements Serializable {
         setCaixa(0);
     }
         
-    public Time(ImageIcon escudo24, ImageIcon escudo32, ImageIcon escudo128, String nome, int nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, 
-            BancoDeDados bd) {
+    public Time(ImageIcon escudo24, ImageIcon escudo32, ImageIcon escudo128, int id, String nome, EnumNivel nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, 
+            BancoDeDados bd, EnumEstado estado) {
         setEscudo24(escudo24);
         setEscudo32(escudo32);
         setEscudo128(escudo128);
         setNome(nome);
         setNivel(nivel);
         setTreinador(treinador);
+        setEstado(estado);
         this.jogadores = new ArrayList<>();
         this.jogadoresReserva = new ArrayList<>();
         this.jogadoresTitular = new ArrayList<>();        
         this.titulos = new ArrayList<>();
+        setId(id);
         setCaixa(0);
         setEstadio(estadio);
         setBd(bd);
@@ -75,6 +80,14 @@ public class Time implements Serializable {
         setQtdMaxJogadores(25);
     }
 
+    public EnumEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EnumEstado estado) {
+        this.estado = estado;
+    }
+    
     public ImageIcon getEscudo24() {
         return escudo24;
     }
@@ -139,11 +152,11 @@ public class Time implements Serializable {
         this.cor2 = cor2;
     }
 
-    public int getNivel() {
+    public EnumNivel getNivel() {
         return nivel;
     }
 
-    public void setNivel(int nivel) {
+    public void setNivel(EnumNivel nivel) {
         this.nivel = nivel;
     }
     

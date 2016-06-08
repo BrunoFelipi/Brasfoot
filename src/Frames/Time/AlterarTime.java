@@ -2,10 +2,9 @@ package Frames.Time;
 
 import BancoDeDados.BancoDeDados;
 import Frames.EditarTimes;
-import Frames.Jogador.FotoJogador;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import src.Jogador;
 import src.Time;
 
 /**
@@ -22,8 +21,8 @@ public class AlterarTime extends javax.swing.JDialog {
     private ImageIcon img32;
     private ImageIcon img128;
     
-    public AlterarTime(java.awt.Frame parent, BancoDeDados bd, Time t, EditarTimes et) {
-        super(parent, true);
+    public AlterarTime(BancoDeDados bd, Time t, EditarTimes et) {
+        super(new JFrame(), true);
         initComponents();
         this.ft = new FotoTime(null, this);
         this.t = t;
@@ -72,7 +71,11 @@ public class AlterarTime extends javax.swing.JDialog {
         campoId.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         campoId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        btnFotoTime.setText("Foto");
+        btnFotoTime.setBackground(new java.awt.Color(255, 255, 255));
+        btnFotoTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/diversos/24/camera.png"))); // NOI18N
+        btnFotoTime.setBorderPainted(false);
+        btnFotoTime.setContentAreaFilled(false);
+        btnFotoTime.setOpaque(true);
         btnFotoTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFotoTimeActionPerformed(evt);
@@ -108,16 +111,16 @@ public class AlterarTime extends javax.swing.JDialog {
                         .addComponent(lblNomeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblFotoTime128, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnFotoTime, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                                .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblNok)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblOk)
-                                .addGap(6, 6, 6)))
+                                .addGap(6, 6, 6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFotoTime128, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnFotoTime))
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -150,10 +153,10 @@ public class AlterarTime extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(113, 113, 113)
-                        .addComponent(btnFotoTime)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                            .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(25, 25, 25)
+                .addComponent(btnFotoTime)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
