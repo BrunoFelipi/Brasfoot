@@ -2,33 +2,34 @@ package src.titulos;
 
 import java.io.Serializable;
 import src.Time;
+import src.enumeracao.EnumTitulo;
 
 /**
  * 
  * @author Bruno
  */
-public class Titulo <T> implements Serializable {
+public class Titulo implements Serializable {
     
-    private Enum<T> nome;
+    private EnumTitulo enumTitulo;
     private Time time;
     private float premiacao;
     private int ano;
 
-    public Titulo(Enum<T> nome, Time time, float premiacao, int ano) {
-        setNome(nome);
+    public Titulo(EnumTitulo enumTitulo, Time time, float premiacao, int ano) {
+        setEnumTitulo(enumTitulo);
         setTime(time);
         setPremiacao(premiacao);
         setAno(ano);
     }
 
-    public String getNome() {
-        return nome;
+    public EnumTitulo getEnumTitulo() {
+        return enumTitulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEnumTitulo(EnumTitulo enumTitulo) {
+        this.enumTitulo = enumTitulo;
     }
-
+    
     public Time getTime() {
         return time;
     }

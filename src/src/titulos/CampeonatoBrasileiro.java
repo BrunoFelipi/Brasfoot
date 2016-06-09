@@ -1,6 +1,7 @@
 package src.titulos;
 
 import src.Time;
+import src.enumeracao.EnumTitulo;
 
 /**
  *
@@ -9,6 +10,6 @@ import src.Time;
 public class CampeonatoBrasileiro extends Titulo{
 
     public CampeonatoBrasileiro(Time time, int ano) {
-        super("Campeonato Brasileiro", time, 1000, ano);
+        super(EnumTitulo.CampeonatoBrasileiro, time, 1000, ano);
     }
 }

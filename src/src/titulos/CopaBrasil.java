@@ -1,6 +1,7 @@
 package src.titulos;
 
 import src.Time;
+import src.enumeracao.EnumTitulo;
 
 /**
  *
@@ -10,6 +11,6 @@ import src.Time;
 public class CopaBrasil extends Titulo{
 
     public CopaBrasil(Time time, int ano) {
-        super("Copa do Brasil", time, 100, ano);
+        super(EnumTitulo.CopaDoBrasil, time, 100, ano);
     }
 }

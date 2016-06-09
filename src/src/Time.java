@@ -36,26 +36,7 @@ public class Time implements Serializable {
     private int qtdTorcedores;    
     private BancoDeDados bd;
     private int qtdMaxJogadores;
-
-    public Time(String nome) {
-        this.nome = nome;
-    }
-        
-    public Time(int id, String nome, EnumNivel nivel, BancoDeDados bd) {
-        setId(id);
-        setNome(nome);
-        setNivel(nivel);
-        setBd(bd);
-        setId(nextID());
-        setQtdTorcedores(0);
-        setQtdMaxJogadores(25);
-        this.jogadores = new ArrayList<>();
-        this.jogadoresReserva = new ArrayList<>();
-        this.jogadoresTitular = new ArrayList<>();        
-        this.titulos = new ArrayList<>();
-        setCaixa(0);
-    }
-        
+    
     public Time(ImageIcon escudo24, ImageIcon escudo32, ImageIcon escudo128, int id, String nome, EnumNivel nivel, Treinador treinador, Estadio estadio, Color cor1, Color cor2, 
             BancoDeDados bd, EnumEstado estado) {
         setEscudo24(escudo24);

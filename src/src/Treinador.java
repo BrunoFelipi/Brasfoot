@@ -15,13 +15,23 @@ public class Treinador implements Serializable {
     private String nome;
     private int forca;
     private int idade;
+    private Pais pais;
     private List<Titulo> titulos;
 
-    public Treinador(String nome, int forca, int idade) {
+    public Treinador(String nome, int forca, int idade, Pais pais) {
         setNome(nome);
         setForca(forca);
         setIdade(idade);
+        setPais(pais);
         this.titulos = new ArrayList<>();
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
     public int getId() {

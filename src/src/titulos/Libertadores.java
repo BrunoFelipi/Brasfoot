@@ -1,6 +1,7 @@
 package src.titulos;
 
 import src.Time;
+import src.enumeracao.EnumTitulo;
 
 /**
  *
@@ -9,7 +10,7 @@ import src.Time;
 public class Libertadores extends Titulo{
 
     public Libertadores(Time time, int ano) {
-        super("Libertadores", time, 100, ano);
+        super(EnumTitulo.Libertadores, time, 100, ano);
     }
 
     

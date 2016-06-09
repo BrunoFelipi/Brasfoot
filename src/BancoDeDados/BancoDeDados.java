@@ -1,10 +1,13 @@
 package BancoDeDados;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import src.Jogador;
 import src.Juiz;
+import src.Pais;
 import src.Partida;
 import src.Time;
 import src.Treinador;
@@ -17,6 +20,10 @@ import src.titulos.Libertadores;
  * @author Bruno
  */
 public class BancoDeDados implements Serializable{
+
+    public BancoDeDados() {
+        carregarPaises();
+    }
     
     //Lista de Jogadores
     private List<Jogador> jogadores = new ArrayList<>();
@@ -38,6 +45,9 @@ public class BancoDeDados implements Serializable{
     //Lista de Partidas
     private List<Partida> partidas = new ArrayList<>();
 
+    //Lista de países
+    private List<Pais> paises = new ArrayList<Pais>();
+    
     public List<Jogador> getJogadores() {
         return jogadores;
     }
@@ -88,6 +98,68 @@ public class BancoDeDados implements Serializable{
 
     public void setPartidas(List<Partida> partidas) {
         this.partidas = partidas;    
+    }
+
+    public List<Pais> getPaises() {
+        return paises;
+    }
+
+    public void setPaises(List<Pais> paises) {
+        this.paises = paises;
+    }
+    
+    private void carregarPaises(){        
+        getPaises().add(new Pais("Alemanha"));
+        getPaises().add(new Pais("Argentina"));
+        getPaises().add(new Pais("Austrália"));
+        getPaises().add(new Pais("Bélgica"));
+        getPaises().add(new Pais("Bolívia"));     
+        getPaises().add(new Pais("Brasil"));
+        getPaises().add(new Pais("Canadá"));
+        getPaises().add(new Pais("Camarões"));             
+        getPaises().add(new Pais("Chile"));
+        getPaises().add(new Pais("China"));
+        getPaises().add(new Pais("Colômbia"));        
+        getPaises().add(new Pais("Coréia do Norte"));     
+        getPaises().add(new Pais("Coréia do Sul"));     
+        getPaises().add(new Pais("Croácia"));         
+        getPaises().add(new Pais("Dinamarca"));     
+        getPaises().add(new Pais("Estados Unidos"));     
+        getPaises().add(new Pais("Equador")); 
+        getPaises().add(new Pais("Espanha")); 
+        getPaises().add(new Pais("Finlândia")); 
+        getPaises().add(new Pais("França"));
+        getPaises().add(new Pais("Grécia"));  
+        getPaises().add(new Pais("Holanda"));
+        getPaises().add(new Pais("Israel"));     
+        getPaises().add(new Pais("Itália"));     
+        getPaises().add(new Pais("Jamaica"));     
+        getPaises().add(new Pais("Japão"));             
+        getPaises().add(new Pais("Líbano"));     
+        getPaises().add(new Pais("México"));     
+        getPaises().add(new Pais("Nigéria"));     
+        getPaises().add(new Pais("Noruega"));     
+        getPaises().add(new Pais("Nova Zelândia"));     
+        getPaises().add(new Pais("Panamá"));     
+        getPaises().add(new Pais("Peru"));  
+        getPaises().add(new Pais("Polônia"));     
+        getPaises().add(new Pais("Portugal"));    
+        getPaises().add(new Pais("República Tcheca"));
+        getPaises().add(new Pais("Rússia"));  
+        getPaises().add(new Pais("Suíça"));     
+        getPaises().add(new Pais("Trindade e Tobago"));     
+        getPaises().add(new Pais("Uruguai"));     
+        getPaises().add(new Pais("Venezuela"));     
+    }
+    
+    public ImageIcon getImagePais(Pais p){
+        
+        for(Pais pa : getPaises()){
+            if(pa.equals(p)){
+                return pa.getBandeira();
+            }
+        }
+        return null;
     }
     
     public List<Jogador> pesquisaJogador(int idMin, int idMax, String nome, 
