@@ -33,15 +33,17 @@ public class CadastrarTime extends javax.swing.JDialog {
         
         setBd(bd); 
         setEt(et);
-        this.img24 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/16/8.png"));
-        this.img32 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/24/8.png"));
-        this.img128 = new ImageIcon(getClass().getResource("/resources/rostos/jogador/128/8.png"));
+        this.img24 = new ImageIcon(getClass().getResource("/resources/escudo/24/7.png"));
+        this.img32 = new ImageIcon(getClass().getResource("/resources/escudo/32/7.png"));
+        this.img128 = new ImageIcon(getClass().getResource("/resources/escudo/128/7.png"));
         
         this.lblOk.setVisible(false);
         this.lblNok.setVisible(false);        
         this.campoId.setText(nextId() + "");
+        this.lblNomeTime.setText("Novo Time");
         popularComboNivel();
         popularComboEstado();
+        popularComboTreinador();
     }
 
     @SuppressWarnings("unchecked")
@@ -75,9 +77,9 @@ public class CadastrarTime extends javax.swing.JDialog {
         btnAddEstadio = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         comboEstado = new javax.swing.JComboBox();
+        lblPais = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Time");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -153,6 +155,11 @@ public class CadastrarTime extends javax.swing.JDialog {
         });
 
         comboTreinador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sem Treinador" }));
+        comboTreinador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboTreinadorFocusLost(evt);
+            }
+        });
 
         comboEstadio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sem Estádio" }));
 
@@ -174,6 +181,8 @@ public class CadastrarTime extends javax.swing.JDialog {
         btnAddEstadio.setOpaque(true);
 
         jLabel8.setText("Estado:");
+
+        lblPais.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,8 +226,10 @@ public class CadastrarTime extends javax.swing.JDialog {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(comboEstadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(comboTreinador, 0, 150, Short.MAX_VALUE))
+                                                    .addComponent(comboTreinador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(comboEstadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblPais, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(btnAddEstadio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,10 +291,12 @@ public class CadastrarTime extends javax.swing.JDialog {
                             .addComponent(jLabel8)
                             .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(comboTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddTreinador))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(comboTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAddTreinador))
+                            .addComponent(lblPais))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -321,6 +334,13 @@ public class CadastrarTime extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void popularComboTreinador(){
+        
+        for(Treinador t : getBd().getTreinadores()){
+            comboTreinador.addItem(t);
+        }
+    }
+    
     private void popularComboNivel(){
         
         EnumNivel[] enumNivel = EnumNivel.values();
@@ -391,6 +411,18 @@ public class CadastrarTime extends javax.swing.JDialog {
         this.lblFotoTime128 = lblFotoTime128;
     }
         
+    private void limparCampos(){      
+        lblFotoTime128.setIcon(getImg128());
+        campoId.setText(nextId() + "");
+        campoNome.setText("");
+        comboNivel.setSelectedIndex(0);
+        comboEstado.setSelectedIndex(0);
+        comboTreinador.setSelectedIndex(0);
+        comboEstadio.setSelectedIndex(0);
+        campoCor1.setBackground(Color.white);
+        campoCor2.setBackground(Color.white);
+    }
+    
     private void btnFotoTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoTimeActionPerformed
 
         FotoTime ft = new FotoTime(null, this);
@@ -413,7 +445,10 @@ public class CadastrarTime extends javax.swing.JDialog {
                     (EnumEstado) comboEstado.getSelectedItem());
             
             getBd().getTimes().add(t);
-            
+            this.lblOk.setVisible(true);
+            this.lblNok.setVisible(false);
+            this.lblNok.setToolTipText("Time \"" + campoNome.getText() + "\" cadastrado com sucesso!");
+            limparCampos();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -426,10 +461,14 @@ public class CadastrarTime extends javax.swing.JDialog {
     }//GEN-LAST:event_campoCor2MouseClicked
 
     private void btnAddTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTreinadorActionPerformed
-
-        new CadastrarTreinador(getBd()).setVisible(true);
-        
+        new CadastrarTreinador(getBd()).setVisible(true);        
     }//GEN-LAST:event_btnAddTreinadorActionPerformed
+
+    private void comboTreinadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTreinadorFocusLost
+
+        lblPais.setIcon(((Treinador)comboTreinador.getSelectedItem()).getPais().getBandeira());
+        
+    }//GEN-LAST:event_comboTreinadorFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEstadio;
@@ -459,5 +498,6 @@ public class CadastrarTime extends javax.swing.JDialog {
     private javax.swing.JLabel lblNok;
     private javax.swing.JLabel lblNomeTime;
     private javax.swing.JLabel lblOk;
+    private javax.swing.JLabel lblPais;
     // End of variables declaration//GEN-END:variables
 }

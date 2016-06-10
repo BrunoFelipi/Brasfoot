@@ -13,14 +13,14 @@ public class Treinador implements Serializable {
     
     private int id;
     private String nome;
-    private int forca;
+    private int nivel;
     private int idade;
     private Pais pais;
     private List<Titulo> titulos;
 
-    public Treinador(String nome, int forca, int idade, Pais pais) {
+    public Treinador(String nome, int nivel, int idade, Pais pais) {
         setNome(nome);
-        setForca(forca);
+        setNivel(nivel);
         setIdade(idade);
         setPais(pais);
         this.titulos = new ArrayList<>();
@@ -50,12 +50,12 @@ public class Treinador implements Serializable {
         this.nome = nome;
     }
 
-    public int getForca() {
-        return forca;
+    public int getNivel() {
+        return nivel;
     }
 
-    public void setForca(int forca) {
-        this.forca = forca;
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
     public int getIdade() {
@@ -76,5 +76,9 @@ public class Treinador implements Serializable {
         
     public void addTitulo(Titulo t){
         getTitulos().add(t);
+    }
+    
+    public String toString(){
+        return getNome();
     }
 }
