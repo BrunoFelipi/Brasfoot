@@ -80,6 +80,11 @@ public class CadastrarTime extends javax.swing.JDialog {
         lblPais = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -155,9 +160,9 @@ public class CadastrarTime extends javax.swing.JDialog {
         });
 
         comboTreinador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sem Treinador" }));
-        comboTreinador.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                comboTreinadorFocusLost(evt);
+        comboTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTreinadorActionPerformed(evt);
             }
         });
 
@@ -181,8 +186,6 @@ public class CadastrarTime extends javax.swing.JDialog {
         btnAddEstadio.setOpaque(true);
 
         jLabel8.setText("Estado:");
-
-        lblPais.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -336,6 +339,9 @@ public class CadastrarTime extends javax.swing.JDialog {
 
     private void popularComboTreinador(){
         
+        comboTreinador.removeAllItems();
+        comboTreinador.addItem("Sem Treinador");
+        
         for(Treinador t : getBd().getTreinadores()){
             comboTreinador.addItem(t);
         }
@@ -464,11 +470,20 @@ public class CadastrarTime extends javax.swing.JDialog {
         new CadastrarTreinador(getBd()).setVisible(true);        
     }//GEN-LAST:event_btnAddTreinadorActionPerformed
 
-    private void comboTreinadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTreinadorFocusLost
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
-        lblPais.setIcon(((Treinador)comboTreinador.getSelectedItem()).getPais().getBandeira());
+        popularComboTreinador();
         
-    }//GEN-LAST:event_comboTreinadorFocusLost
+    }//GEN-LAST:event_formWindowActivated
+
+    private void comboTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTreinadorActionPerformed
+        
+        
+        if(!comboTreinador.getSelectedItem().equals("Sem Treinador")){
+            lblPais.setIcon(((Treinador)comboTreinador.getSelectedItem()).getPais().getBandeira());
+        }
+        
+    }//GEN-LAST:event_comboTreinadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEstadio;

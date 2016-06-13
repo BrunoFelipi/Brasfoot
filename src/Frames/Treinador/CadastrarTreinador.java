@@ -18,7 +18,8 @@ public class CadastrarTreinador extends javax.swing.JDialog {
         super(new JFrame(), true);
         initComponents();
         this.bd = bd;
-        popularComboPais();        
+        popularComboPais();   
+        this.campoId.setText(nextId() + "");
     }
 
     public BancoDeDados getBd() {
@@ -242,6 +243,8 @@ public class CadastrarTreinador extends javax.swing.JDialog {
 
     private void popularComboPais(){        
                 
+        comboPais.removeAllItems();
+                
         for(Pais p : this.bd.getPaises()){
             comboPais.addItem(p);
         }        
@@ -271,7 +274,7 @@ public class CadastrarTreinador extends javax.swing.JDialog {
             this.lblNok.setToolTipText("Campo 'Nome' não pode ser vazio!");
         } else {
 
-            Treinador t = new Treinador(campoNome.getText(), sliderNivel.getValue(), sliderIdade.getValue(),
+            Treinador t = new Treinador(Integer.parseInt(campoId.getText()), campoNome.getText(), sliderNivel.getValue(), sliderIdade.getValue(),
                     (Pais)comboPais.getSelectedItem());
 
             getBd().getTreinadores().add(t);
@@ -284,13 +287,18 @@ public class CadastrarTreinador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private int nextId(){
-        return (getBd().getTreinadores().get(getBd().getTreinadores().size()-1).getId()+1);
+        
+        if(getBd().getTreinadores().isEmpty()){
+            return 1;
+        } else {
+            return (getBd().getTreinadores().get(getBd().getTreinadores().size()-1).getId()+1);            
+        }
     }
     
     private void limparCampos(){
 //        lblFotoTime128.setIcon(getImg128());
-//        campoId.setText(nextId() + "");
-//        campoNome.setText("");
+        campoId.setText(nextId() + "");
+        campoNome.setText("");
 //        comboNivel.setSelectedIndex(0);
 //        comboEstado.setSelectedIndex(0);
 //        comboTreinador.setSelectedIndex(0);

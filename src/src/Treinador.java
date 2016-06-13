@@ -18,7 +18,8 @@ public class Treinador implements Serializable {
     private Pais pais;
     private List<Titulo> titulos;
 
-    public Treinador(String nome, int nivel, int idade, Pais pais) {
+    public Treinador(int id, String nome, int nivel, int idade, Pais pais) {
+        setId(id);
         setNome(nome);
         setNivel(nivel);
         setIdade(idade);
