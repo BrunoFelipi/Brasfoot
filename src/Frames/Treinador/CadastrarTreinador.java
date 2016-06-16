@@ -1,7 +1,6 @@
 package Frames.Treinador;
 
 import BancoDeDados.BancoDeDados;
-import java.awt.Color;
 import javax.swing.JFrame;
 import src.Pais;
 import src.Treinador;
@@ -20,6 +19,8 @@ public class CadastrarTreinador extends javax.swing.JDialog {
         this.bd = bd;
         popularComboPais();   
         this.campoId.setText(nextId() + "");
+        this.lblOk.setVisible(false);
+        this.lblNok.setVisible(false);
     }
 
     public BancoDeDados getBd() {

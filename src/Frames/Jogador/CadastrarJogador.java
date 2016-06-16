@@ -121,6 +121,7 @@ public class CadastrarJogador extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -184,7 +185,9 @@ public class CadastrarJogador extends javax.swing.JDialog {
 
         lblValue.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         lblValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblValue.setText("20");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, slider, org.jdesktop.beansbinding.ELProperty.create("${value}"), lblValue, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         btnCadastrar.setText("Adicionar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -369,12 +372,14 @@ public class CadastrarJogador extends javax.swing.JDialog {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        bindingGroup.bind();
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
-        lblValue.setText(slider.getValue() + "");        
+        //lblValue.setText(slider.getValue() + "");        
     }//GEN-LAST:event_sliderStateChanged
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -477,5 +482,6 @@ public class CadastrarJogador extends javax.swing.JDialog {
     private javax.swing.JLabel lblOk;
     private javax.swing.JLabel lblValue;
     private javax.swing.JSlider slider;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@ import BancoDeDados.BancoDeDados;
 import src.enumeracao.EnumPosicao;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
+import src.enumeracao.EnumCaracteristica;
 import src.enumeracao.EnumHabilidade;
 import src.enumeracao.EnumLado;
 import src.enumeracao.EnumStatus;
@@ -31,6 +32,7 @@ public class Jogador implements Serializable{
     // - Saida Gol - Elasticidade
     private EnumHabilidade habilidade1; 
     private EnumHabilidade habilidade2;
+    private EnumCaracteristica caracteristica;
     // Departamento Médico (DM), Levemente Lesionado, Suspenso, Em alta 
     private EnumStatus status;    
     // 0 - 100
@@ -47,7 +49,7 @@ public class Jogador implements Serializable{
     private EnumLado lado;
     
     public Jogador(int numero, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, int forca, EnumHabilidade habilidade1, 
-            EnumHabilidade habilidade2, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular, EnumLado lado) {
+            EnumHabilidade habilidade2, EnumCaracteristica caracteristica, EnumStatus status, boolean craque, BancoDeDados bd, int valor, boolean titular, EnumLado lado) {
         this.bd = bd;
         setImage16(image16);
         setImage24(image24);
@@ -62,6 +64,7 @@ public class Jogador implements Serializable{
         setCraque(craque);        
         setHabilidade1(habilidade1);
         setHabilidade2(habilidade2);
+        setCaracteristica(caracteristica);
         setResistencia(100);
         setQtdCartaoAmarelo(0);
         setQtdCartaoVermelho(0);
@@ -72,7 +75,7 @@ public class Jogador implements Serializable{
     }
 
     public Jogador(int id, ImageIcon image16, ImageIcon image24, ImageIcon image128, String nome, EnumPosicao posicao, int idade, EnumHabilidade habilidade1, EnumHabilidade habilidade2, 
-            boolean craque, Time time, BancoDeDados bd, boolean titular, EnumLado lado) {
+            EnumCaracteristica caracteristica, boolean craque, Time time, BancoDeDados bd, boolean titular, EnumLado lado) {
         setId(id);
         setImage16(image16);
         setImage24(image24);
@@ -82,11 +85,20 @@ public class Jogador implements Serializable{
         setIdade(idade);
         setHabilidade1(habilidade1);
         setHabilidade2(habilidade2);
+        setCaracteristica(caracteristica);
         setCraque(craque);
         setTime(time);
         setBd(bd);
         setTitular(titular);
         setLado(lado);
+    }
+
+    public EnumCaracteristica getCaracteristica() {
+        return caracteristica;
+    }
+
+    public void setCaracteristica(EnumCaracteristica caracteristica) {
+        this.caracteristica = caracteristica;
     }
 
     public EnumLado getLado() {
